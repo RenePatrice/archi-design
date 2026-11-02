@@ -71,6 +71,10 @@ export interface Config {
     'contact-messages': ContactMessage;
     'order-files': OrderFile;
     'email-templates': EmailTemplate;
+    'client-projects': ClientProject;
+    'project-updates': ProjectUpdate;
+    'client-files': ClientFile;
+    'project-messages': ProjectMessage;
     poles: Pole;
     projects: Project;
     testimonials: Testimonial;
@@ -88,12 +92,22 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'client-projects': {
+      updates: 'project-updates';
+      files: 'client-files';
+      messages: 'project-messages';
+    };
+  };
   collectionsSelect: {
     orders: OrdersSelect<false> | OrdersSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     'order-files': OrderFilesSelect<false> | OrderFilesSelect<true>;
     'email-templates': EmailTemplatesSelect<false> | EmailTemplatesSelect<true>;
+    'client-projects': ClientProjectsSelect<false> | ClientProjectsSelect<true>;
+    'project-updates': ProjectUpdatesSelect<false> | ProjectUpdatesSelect<true>;
+    'client-files': ClientFilesSelect<false> | ClientFilesSelect<true>;
+    'project-messages': ProjectMessagesSelect<false> | ProjectMessagesSelect<true>;
     poles: PolesSelect<false> | PolesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
@@ -511,6 +525,88 @@ export interface EmailTemplate {
   createdAt: string;
 }
 /**
+ * Each tracked project appears in the client area of the selected clients.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-projects".
+ */
+export interface ClientProject {
+  id: number;
+  title: string;
+  /**
+   * Client accounts.
+   */
+  clients: (number | User)[];
+  status?: ('etude' | 'enCours' | 'pause' | 'livre') | null;
+  progress?: number | null;
+  location?: string | null;
+  startDate?: string | null;
+  expectedEndDate?: string | null;
+  manager?: (number | null) | User;
+  order?: (number | null) | Order;
+  project?: (number | null) | Project;
+  summary?: string | null;
+  stages?:
+    | {
+        title: string;
+        status?: ('aVenir' | 'enCours' | 'termine') | null;
+        date?: string | null;
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updates?: {
+    docs?: (number | ProjectUpdate)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  files?: {
+    docs?: (number | ClientFile)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  messages?: {
+    docs?: (number | ProjectMessage)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  name: string;
+  /**
+   * International format
+   */
+  phone?: string | null;
+  locale?: ('fr' | 'en') | null;
+  role: 'admin' | 'equipe' | 'client';
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
@@ -612,6 +708,84 @@ export interface Model {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-updates".
+ */
+export interface ProjectUpdate {
+  id: number;
+  clientProject: number | ClientProject;
+  title: string;
+  date: string;
+  text: string;
+  /**
+   * Dated site photos.
+   */
+  photos?: (number | ClientFile)[] | null;
+  notifyClient?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-files".
+ */
+export interface ClientFile {
+  id: number;
+  title: string;
+  clientProject: number | ClientProject;
+  kind: 'photo' | 'plan' | 'devis' | 'facture' | 'contrat' | 'autre';
+  visibleToClient?: boolean | null;
+  /**
+   * For important documents.
+   */
+  notifyClient?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-messages".
+ */
+export interface ProjectMessage {
+  id: number;
+  clientProject: number | ClientProject;
+  body: string;
+  excerpt?: string | null;
+  author?: (number | null) | User;
+  fromStaff?: boolean | null;
+  readByClient?: boolean | null;
+  readByStaff?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
  */
 export interface Testimonial {
@@ -689,38 +863,6 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  name: string;
-  /**
-   * International format
-   */
-  phone?: string | null;
-  role: 'admin' | 'equipe' | 'client';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -758,6 +900,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'email-templates';
         value: number | EmailTemplate;
+      } | null)
+    | ({
+        relationTo: 'client-projects';
+        value: number | ClientProject;
+      } | null)
+    | ({
+        relationTo: 'project-updates';
+        value: number | ProjectUpdate;
+      } | null)
+    | ({
+        relationTo: 'client-files';
+        value: number | ClientFile;
+      } | null)
+    | ({
+        relationTo: 'project-messages';
+        value: number | ProjectMessage;
       } | null)
     | ({
         relationTo: 'poles';
@@ -954,6 +1112,112 @@ export interface EmailTemplatesSelect<T extends boolean = true> {
   ackIntro?: T;
   ackDelay?: T;
   ackOutro?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-projects_select".
+ */
+export interface ClientProjectsSelect<T extends boolean = true> {
+  title?: T;
+  clients?: T;
+  status?: T;
+  progress?: T;
+  location?: T;
+  startDate?: T;
+  expectedEndDate?: T;
+  manager?: T;
+  order?: T;
+  project?: T;
+  summary?: T;
+  stages?:
+    | T
+    | {
+        title?: T;
+        status?: T;
+        date?: T;
+        note?: T;
+        id?: T;
+      };
+  updates?: T;
+  files?: T;
+  messages?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-updates_select".
+ */
+export interface ProjectUpdatesSelect<T extends boolean = true> {
+  clientProject?: T;
+  title?: T;
+  date?: T;
+  text?: T;
+  photos?: T;
+  notifyClient?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "client-files_select".
+ */
+export interface ClientFilesSelect<T extends boolean = true> {
+  title?: T;
+  clientProject?: T;
+  kind?: T;
+  visibleToClient?: T;
+  notifyClient?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-messages_select".
+ */
+export interface ProjectMessagesSelect<T extends boolean = true> {
+  clientProject?: T;
+  body?: T;
+  excerpt?: T;
+  author?: T;
+  fromStaff?: T;
+  readByClient?: T;
+  readByStaff?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1216,6 +1480,7 @@ export interface TrainingSessionsSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   phone?: T;
+  locale?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;

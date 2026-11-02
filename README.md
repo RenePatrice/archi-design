@@ -147,6 +147,22 @@ Port 587 : mettre `SMTP_SECURE=false`. Pour éviter les spams, vérifier dans la
 
 **Carte** : le « worker » de MapLibre est copié dans `public/vendor/` par `npm install` (script `postinstall`).
 
+## Espace client (phase 5)
+
+Le client suit son projet sur `/espace-client` : avancement, étapes, actualités et photos de chantier datées, documents (plans, devis, factures), messages avec l’équipe.
+
+**Ouvrir l’espace d’un client** (back-office) :
+
+1. *Utilisateurs* › créer le compte (rôle « Client », langue des e-mails) et lui communiquer son e-mail ; il choisit son mot de passe via « Mot de passe oublié ? » ;
+2. *Projets suivis* › créer le projet, choisir le ou les clients, le responsable, les étapes et l’avancement ;
+3. au fil du chantier : *Actualités de chantier* (texte + photos), *Documents clients* (plans, factures…), et réponses dans *Messages clients*.
+
+Le client est prévenu par e-mail d’une nouvelle actualité, d’un document marqué « Prévenir le client » ou d’une réponse ; l’équipe (responsable du projet, sinon la boîte par défaut) est prévenue de chaque message du client.
+
+**Sécurité** : un client ne voit que ses projets ; les fichiers sont privés (`private-uploads/client`) et vérifiés à chaque téléchargement ; un document peut rester interne (« Visible par le client » décoché) ; les pages de l’espace client ne sont jamais gardées en cache sur l’appareil.
+
+Le seed crée un client de démonstration si `SEED_CLIENT_EMAIL` et `SEED_CLIENT_PASSWORD` sont renseignés dans `.env`.
+
 ## Charte graphique
 
 Palette « Latérite & Leppi » et typographies (Archivo, Manrope, IBM Plex Mono), centralisées dans

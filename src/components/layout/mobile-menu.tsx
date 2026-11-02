@@ -61,6 +61,9 @@ export function MobileMenu() {
                 {t(item.key)}
               </Link>
             ))}
+            <Link href="/espace-client" className="flex min-h-13 items-center border-b border-line font-display text-xl font-bold text-accent">
+              {t('clientArea')}
+            </Link>
             <LanguageSwitcher className="mt-4" />
           </nav>
         </div>

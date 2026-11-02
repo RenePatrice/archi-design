@@ -1,8 +1,9 @@
+import { UserRound } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 
+import { CartButton } from '@/components/shop/cart-button'
 import { buttonVariants } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
-import { CartButton } from '@/components/shop/cart-button'
 import { mainNav } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -39,6 +40,15 @@ export async function SiteHeader() {
           <LanguageSwitcher className="hidden lg:flex" />
           <ThemeToggle />
           <CartButton />
+          {/* Sur téléphone, l'espace client est dans le menu (place limitée dans l'en-tête) */}
+          <Link
+            href="/espace-client"
+            aria-label={t('clientArea')}
+            title={t('clientArea')}
+            className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'hidden sm:inline-flex')}
+          >
+            <UserRound aria-hidden />
+          </Link>
           <Link href="/devis" className={cn(buttonVariants({ size: 'sm' }), 'hidden sm:inline-flex')}>
             {common('requestQuote')}
           </Link>

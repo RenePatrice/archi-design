@@ -11,6 +11,7 @@ import { getPayload } from 'payload'
 import { aboutSeed, figureSeeds, pageSeeds, partnerSeeds, poleSeeds, projectSeeds, teamSeeds, testimonialSeeds } from './data'
 import { emailTemplateSeeds, printPricingSeed, productSeeds, trainingSeeds } from './data-phase3'
 import { impactSeed, simulatorEmailTemplate, simulatorPricingSeed } from './data-phase4'
+import { buildDemoPlanPdf } from './demo-pdf'
 import { buildDemoVillaGlb } from './glb'
 import { demoImage } from './images'
 import { richText } from './lexical'
@@ -456,6 +457,77 @@ if (villa && !villa.model) {
   await payload.update({ collection: 'models', id: model.id, locale: 'en', data: { title: 'Bioclimatic villa in Kipé (demo model)' } })
   await payload.update({ collection: 'projects', id: villa.id, data: { model: model.id, _status: 'published' } })
   log(`Maquette 3D créée (${Math.round(glb.length / 1024)} Ko) et reliée à la villa de Kipé.`)
+}
+
+/* ───────────── 14. Espace client de démonstration ───────────── */
+const clientEmail = process.env.SEED_CLIENT_EMAIL
+const clientPassword = process.env.SEED_CLIENT_PASSWORD
+if (clientEmail && clientPassword) {
+  // Les notifications e-mail sont coupées pour les données de démonstration
+  const quiet = { skipNotify: true }
+  let client = (await payload.find({ collection: 'users', where: { email: { equals: clientEmail } }, limit: 1 })).docs[0]
+  if (!client) {
+    client = await payload.create({
+      collection: 'users',
+      data: { email: clientEmail, password: clientPassword, name: 'Mariama Diallo (démo)', role: 'client', phone: '+33 6 00 00 00 00', locale: 'fr' },
+    })
+    log(`Client de démonstration créé : ${clientEmail} (mot de passe dans .env, SEED_CLIENT_PASSWORD)`)
+  }
+  const existing = await payload.find({ collection: 'client-projects', where: { clients: { equals: client.id } }, limit: 1 })
+  if (!existing.docs[0]) {
+    const adminUser = (await payload.find({ collection: 'users', where: { role: { equals: 'admin' } }, limit: 1 })).docs[0]
+    const day = (offset: number) => new Date(Date.now() + offset * 86_400_000).toISOString()
+    const tracked = await payload.create({
+      collection: 'client-projects',
+      context: quiet,
+      data: {
+        title: 'Villa R+1 à Kipé',
+        clients: [client.id],
+        manager: adminUser?.id,
+        status: 'enCours',
+        progress: 62,
+        location: 'Kipé, Conakry',
+        startDate: day(-150),
+        expectedEndDate: day(120),
+        project: villa?.id,
+        summary: 'Construction d’une villa bioclimatique R+1 de 240 m², suivie à distance depuis la France.',
+        stages: [
+          { title: 'Études et plans', status: 'termine', date: day(-150), note: 'Plans validés, maquette 3D remise.' },
+          { title: 'Permis de construire', status: 'termine', date: day(-110) },
+          { title: 'Fondations', status: 'termine', date: day(-80) },
+          { title: 'Élévation des murs et dalle', status: 'termine', date: day(-30) },
+          { title: 'Toiture et menuiseries', status: 'enCours', date: day(-5), note: 'Charpente posée, couverture en cours.' },
+          { title: 'Finitions et peinture', status: 'aVenir', date: day(60) },
+          { title: 'Réception et remise des clés', status: 'aVenir', date: day(120) },
+        ],
+      },
+    })
+
+    const photo = async (seed: number, title: string) => {
+      const img = await demoImage(seed, `chantier-${seed}`)
+      return payload.create({ collection: 'client-files', context: quiet, data: { title, clientProject: tracked.id, kind: 'photo', visibleToClient: true }, file: img })
+    }
+    const p1 = await photo(701, 'Dalle de l’étage coulée')
+    const p2 = await photo(702, 'Murs de l’étage')
+    const p3 = await photo(703, 'Charpente de la double toiture')
+    const p4 = await photo(704, 'Vue depuis la rue')
+
+    await payload.create({ collection: 'project-updates', context: quiet, data: { clientProject: tracked.id, date: day(-30), title: 'Dalle de l’étage coulée', text: 'La dalle de l’étage a été coulée et a séché 21 jours avant de reprendre les travaux. Les réservations pour l’électricité et la plomberie sont en place.', photos: [p1.id, p2.id], notifyClient: false } })
+    await payload.create({ collection: 'project-updates', context: quiet, data: { clientProject: tracked.id, date: day(-5), title: 'Pose de la charpente', text: 'La charpente métallique de la double toiture est posée. La couverture en tôle latérite sera terminée avant les premières pluies.', photos: [p3.id, p4.id], notifyClient: false } })
+
+    const plan = await buildDemoPlanPdf('Plan du rez-de-chaussée (démonstration)')
+    await payload.create({ collection: 'client-files', context: quiet, data: { title: 'Plan du rez-de-chaussée', clientProject: tracked.id, kind: 'plan', visibleToClient: true }, file: { data: plan, mimetype: 'application/pdf', name: 'plan-rdc-demo.pdf', size: plan.length } })
+    const invoice = await buildDemoPlanPdf('Facture d’acompte n° 2 (démonstration)')
+    await payload.create({ collection: 'client-files', context: quiet, data: { title: 'Facture d’acompte n° 2', clientProject: tracked.id, kind: 'facture', visibleToClient: true }, file: { data: invoice, mimetype: 'application/pdf', name: 'facture-acompte-2-demo.pdf', size: invoice.length } })
+    const internal = await buildDemoPlanPdf('Note interne (non visible du client)')
+    await payload.create({ collection: 'client-files', context: quiet, data: { title: 'Note interne de chantier', clientProject: tracked.id, kind: 'autre', visibleToClient: false }, file: { data: internal, mimetype: 'application/pdf', name: 'note-interne-demo.pdf', size: internal.length } })
+
+    await payload.create({ collection: 'project-messages', context: quiet, overrideAccess: true, data: { clientProject: tracked.id, body: 'Bonjour, pouvez-vous me confirmer la teinte prévue pour la façade ?', author: client.id, fromStaff: false } })
+    await payload.create({ collection: 'project-messages', context: quiet, overrideAccess: true, data: { clientProject: tracked.id, body: 'Bonjour Madame Diallo, nous partons sur l’ocre latérite validé ensemble. Nous vous enverrons une photo de l’échantillon sur le mur la semaine prochaine.', author: adminUser?.id, fromStaff: true } })
+    log('Projet suivi de démonstration créé (étapes, actualités, photos, documents, messages).')
+  }
+} else {
+  log('Espace client de démonstration ignoré : renseignez SEED_CLIENT_EMAIL et SEED_CLIENT_PASSWORD dans .env.')
 }
 
 log('Seed terminé.')

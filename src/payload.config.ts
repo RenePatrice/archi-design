@@ -8,6 +8,8 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { ClientFiles } from './collections/ClientFiles'
+import { ClientProjects } from './collections/ClientProjects'
 import { ContactMessages } from './collections/ContactMessages'
 import { EmailTemplates } from './collections/EmailTemplates'
 import { Media } from './collections/Media'
@@ -18,7 +20,9 @@ import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
 import { Poles } from './collections/Poles'
 import { Products } from './collections/Products'
+import { ProjectMessages } from './collections/ProjectMessages'
 import { Projects } from './collections/Projects'
+import { ProjectUpdates } from './collections/ProjectUpdates'
 import { TeamMembers } from './collections/TeamMembers'
 import { Testimonials } from './collections/Testimonials'
 import { Trainings } from './collections/Trainings'
@@ -66,6 +70,10 @@ export default buildConfig({
     ContactMessages,
     OrderFiles,
     EmailTemplates,
+    ClientProjects,
+    ProjectUpdates,
+    ClientFiles,
+    ProjectMessages,
     Poles,
     Projects,
     Testimonials,

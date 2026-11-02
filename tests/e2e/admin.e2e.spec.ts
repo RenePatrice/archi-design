@@ -34,4 +34,14 @@ test.describe('Back-office', () => {
     await expect(page).toHaveURL(/\/admin\/collections\/users\/[a-zA-Z0-9-_]+/)
     await expect(page.locator('input[name="email"]')).toBeVisible()
   })
+
+  test('ouvre un projet suivi de l’espace client avec ses onglets', async () => {
+    await page.goto('/admin/collections/client-projects')
+    await page.getByRole('link', { name: 'Villa R+1 à Kipé' }).first().click()
+    // Les onglets du back-office Payload sont des boutons
+    await expect(page.getByRole('button', { name: 'Documents', exact: true })).toBeVisible({ timeout: 30_000 })
+    await expect(page.getByRole('button', { name: 'Actualités', exact: true })).toBeVisible()
+    await page.getByRole('button', { name: 'Messages', exact: true }).click()
+    await expect(page.getByText('pouvez-vous me confirmer la teinte').first()).toBeVisible()
+  })
 })

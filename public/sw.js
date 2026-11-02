@@ -5,11 +5,11 @@
  * - pages HTML     : réseau d'abord, puis copie en cache, puis page « hors ligne »
  * - fichiers /_next/static, polices, icônes : cache d'abord (ils ne changent jamais d'URL)
  * - images /api/media : cache d'abord avec mise à jour en arrière-plan
- * - back-office (/admin) et API : jamais mis en cache
+ * - back-office (/admin), API et espace client (données privées) : jamais mis en cache
  *
  * Changer VERSION force le renouvellement des caches chez tous les visiteurs.
  */
-const VERSION = 'v1'
+const VERSION = 'v2'
 const PAGES = `ad-pages-${VERSION}`
 const STATIC = `ad-static-${VERSION}`
 const IMAGES = `ad-images-${VERSION}`
@@ -92,6 +92,9 @@ self.addEventListener('fetch', (event) => {
     return
   }
   if (url.pathname.startsWith('/api')) return
+
+  // Espace client : pages personnelles, jamais gardées sur l'appareil (téléphone partagé…)
+  if (url.pathname.includes('/espace-client')) return
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request))
