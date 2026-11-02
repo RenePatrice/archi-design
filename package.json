@@ -23,7 +23,9 @@
     "icons": "node scripts/generate-icons.mjs",
     "format": "prettier --write .",
     "postinstall": "node scripts/copy-vendor.mjs",
-    "vercel-build": "npm run migrate && npm run build"
+    "vercel-build": "npm run migrate && npm run build",
+    "seed:production": "cross-env NODE_ENV=production NODE_OPTIONS=--no-deprecation payload run src/seed/index.ts",
+    "migrate:production": "cross-env NODE_ENV=production NODE_OPTIONS=--no-deprecation payload migrate"
   },
   "dependencies": {
     "@google/model-viewer": "4.4.0",

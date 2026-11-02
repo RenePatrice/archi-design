@@ -1,6 +1,10 @@
 /**
  * Données initiales et de démonstration.
- * Usage : npm run seed
+ * Usage : npm run seed              (base de développement)
+ *         npm run seed:production   (base Neon + stockage Vercel Blob, voir docs/DEPLOIEMENT.md)
+ *
+ * En production, aucun compte n'est créé : l'administrateur se crée sur /admin
+ * (écran « Créer le premier utilisateur »).
  *
  * Relançable sans risque : un élément déjà présent (même adresse/slug) n'est ni recréé
  * ni écrasé, pour ne jamais effacer ce que l'équipe a saisi dans le back-office.
@@ -16,20 +20,46 @@ import { buildDemoVillaGlb } from './glb'
 import { demoImage } from './images'
 import { richText } from './lexical'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+/* ───────────── 0. Garde-fous du mode production ───────────── */
+if (isProduction) {
+  const db = process.env.DATABASE_URL || process.env.POSTGRES_URL || ''
+  if (!db || /@(localhost|127\.0\.0\.1)[:/]/.test(db)) {
+    console.error(
+      '\n✖ Base de production introuvable : renseignez DATABASE_URL (adresse Neon) dans .env.production.local.\n' +
+        '  Le remplissage est arrêté pour ne pas viser la base de votre ordinateur par erreur.\n',
+    )
+    process.exit(1)
+  }
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.error(
+      '\n✖ BLOB_READ_WRITE_TOKEN manquant dans .env.production.local.\n' +
+        '  Sans lui, les photos et la maquette 3D resteraient sur votre disque et seraient invisibles en ligne.\n',
+    )
+    process.exit(1)
+  }
+}
+
 const payload = await getPayload({ config })
 const log = (message: string) => payload.logger.info(message)
+if (isProduction) log(`Remplissage de la base de production (${new URL(process.env.DATABASE_URL || process.env.POSTGRES_URL!).host})…`)
 
-/* ───────────── 1. Compte administrateur ───────────── */
-const email = process.env.SEED_ADMIN_EMAIL
-const password = process.env.SEED_ADMIN_PASSWORD
-if (!email || !password || password === 'CHANGE_ME') {
-  payload.logger.error('Renseignez SEED_ADMIN_EMAIL et SEED_ADMIN_PASSWORD dans .env avant de lancer le seed.')
-  process.exit(1)
-}
-const admins = await payload.find({ collection: 'users', where: { email: { equals: email } }, limit: 1 })
-if (admins.totalDocs === 0) {
-  await payload.create({ collection: 'users', data: { email, password, name: 'Administrateur', role: 'admin' } })
-  log(`Administrateur créé : ${email}`)
+/* ───────────── 1. Compte administrateur (développement uniquement) ───────────── */
+// En production, aucun compte n'est créé ici : sinon l'écran « Créer le premier utilisateur »
+// de /admin ne s'afficherait plus.
+if (!isProduction) {
+  const email = process.env.SEED_ADMIN_EMAIL
+  const password = process.env.SEED_ADMIN_PASSWORD
+  if (!email || !password || password === 'CHANGE_ME') {
+    payload.logger.error('Renseignez SEED_ADMIN_EMAIL et SEED_ADMIN_PASSWORD dans .env avant de lancer le seed.')
+    process.exit(1)
+  }
+  const admins = await payload.find({ collection: 'users', where: { email: { equals: email } }, limit: 1 })
+  if (admins.totalDocs === 0) {
+    await payload.create({ collection: 'users', data: { email, password, name: 'Administrateur', role: 'admin' } })
+    log(`Administrateur créé : ${email}`)
+  }
 }
 
 /* ───────────── Outils ───────────── */
@@ -460,7 +490,8 @@ if (villa && !villa.model) {
 }
 
 /* ───────────── 14. Espace client de démonstration ───────────── */
-const clientEmail = process.env.SEED_CLIENT_EMAIL
+// Jamais en production : un compte client de démonstration n'a rien à faire sur le site en ligne
+const clientEmail = isProduction ? undefined : process.env.SEED_CLIENT_EMAIL
 const clientPassword = process.env.SEED_CLIENT_PASSWORD
 if (clientEmail && clientPassword) {
   // Les notifications e-mail sont coupées pour les données de démonstration

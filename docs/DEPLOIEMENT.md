@@ -55,16 +55,23 @@ Le code est le même dans les deux cas : seules les variables d’environnement 
 3. Back-office › *Réglages du site* : coordonnées, WhatsApp, boîte de réception par défaut, position GPS, RCCM, NIF.
 4. Vérifier `https://…vercel.app/health` → `{"status":"ok","database":"ok"}`.
 
-### 1.7 (Facultatif) Charger le contenu de démonstration
+### 1.7 Remplir la base (contenu de départ)
 
-Pour présenter le site avant la saisie du vrai contenu, depuis votre ordinateur :
+La base Neon est vide après le premier déploiement. Pour y charger les modèles d’e-mail, les 8 pôles, la page À propos, les grilles du simulateur et de l’impression, les pages légales et **des exemples de chaque type de contenu** (réalisations, produits, formations, témoignages, équipe, partenaires, maquette 3D) :
+
+1. Ouvrir le fichier **`.env.production.local`** à la racine du projet (il n’est jamais envoyé sur GitHub).
+2. Y coller, depuis Vercel › *Settings › Environment Variables* (icône œil) : `DATABASE_URL`, `BLOB_READ_WRITE_TOKEN`, et l’adresse du site dans `NEXT_PUBLIC_SITE_URL`.
+3. Dans un terminal, à la racine du projet :
 
 ```bash
-# PowerShell : copier les deux valeurs depuis Vercel (Settings › Environment Variables)
-$env:DATABASE_URL="postgres://…neon…"; $env:BLOB_READ_WRITE_TOKEN="vercel_blob_rw_…"; $env:NODE_ENV="production"; npm run seed
+npm run seed:production
 ```
 
-`NODE_ENV=production` est indispensable : il empêche la synchronisation automatique du schéma de développement sur la base de production.
+Le script refuse de démarrer s’il vise la base de votre ordinateur ou si le jeton Blob manque. Il ne crée **aucun compte** : l’administrateur se crée ensuite sur `/admin`. Il est relançable sans créer de doublons.
+
+Si le script signale des tables absentes (premier déploiement non terminé) : `npm run migrate:production`, puis relancer le remplissage.
+
+Les réalisations, produits, prix, témoignages, membres d’équipe et chiffres sont des **exemples fictifs** à remplacer avant l’ouverture au public (voir `docs/RECETTE.md`).
 
 ### 1.8 Nom de domaine
 
