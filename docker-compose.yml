@@ -1,0 +1,23 @@
+# PostgreSQL en conteneur : alternative à l'installation Windows de PostgreSQL.
+# Usage : docker compose up -d
+# Puis dans .env : DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5433/archi_design
+# (port 5433 pour ne pas entrer en conflit avec un PostgreSQL déjà installé sur 5432)
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: archi_design
+    ports:
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      retries: 10
+
+volumes:
+  pgdata:

@@ -1,0 +1,587 @@
+{
+  "Metadata": {
+    "title": "ARCHI-DESIGN Guinea · Architecture, design and creative trades",
+    "titleTemplate": "%s · ARCHI-DESIGN Guinea",
+    "description": "Architects in Conakry: design, construction, building painting, calligraphy, screen printing and training. From design to the visual identity of your spaces."
+  },
+  "Common": {
+    "skipToContent": "Skip to content",
+    "requestQuote": "Request a quote",
+    "learnMore": "Learn more",
+    "comingSoon": "Coming soon",
+    "seeProjects": "See our projects",
+    "writeWhatsApp": "Message us on WhatsApp",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home"
+  },
+  "Nav": {
+    "label": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "training": "Training",
+    "shop": "Shop",
+    "contact": "Contact",
+    "quote": "Quote"
+  },
+  "Theme": {
+    "label": "Display theme",
+    "system": "Auto",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "Language": {
+    "label": "Language",
+    "fr": "Français",
+    "en": "English"
+  },
+  "WhatsApp": {
+    "button": "Message us on WhatsApp",
+    "defaultMessage": "Hello ARCHI-DESIGN, I am contacting you from your website."
+  },
+  "Footer": {
+    "rights": "All rights reserved.",
+    "poles": "Our divisions",
+    "contact": "Get in touch",
+    "legal": "Information"
+  },
+  "Poles": {
+    "architecture": "Architecture and design",
+    "peinture": "Painting",
+    "calligraphie": "Calligraphy",
+    "serigraphie": "Screen printing and print",
+    "dessin": "Fine art drawing",
+    "formation": "Training",
+    "commerce": "General trade",
+    "prestation": "Consulting services"
+  },
+  "Home": {
+    "eyebrow": "Conakry · Guinea",
+    "title": "From design to the visual identity of your spaces",
+    "intro": "Architecture, construction, painting, calligraphy, screen printing and training: eight crafts in a single team, rooted in the materials and culture of Guinea.",
+    "figuresTitle": "ARCHI-DESIGN in figures",
+    "polesEyebrow": "Eight divisions",
+    "polesTitle": "One contact for your whole project",
+    "chainEyebrow": "Value chain",
+    "chainTitle": "One team, the whole chain",
+    "chainIntro": "Each step builds on the previous one. Choose a step to see what we do and what you gain by linking it to the next.",
+    "featuredEyebrow": "Projects",
+    "featuredTitle": "Featured projects",
+    "allProjects": "All projects",
+    "testimonialsTitle": "They trusted us with their project",
+    "partnersTitle": "They trust us",
+    "ctaTitle": "Have a project in mind?",
+    "ctaText": "Describe it in a few lines: we reply within 2 working days, by phone or on WhatsApp."
+  },
+  "Chain": {
+    "label": "Value chain steps",
+    "pack": "Integrated package",
+    "open": "Explore this division",
+    "steps": {
+      "architecture": {
+        "name": "Architecture",
+        "text": "Plans, permits, 3D model: we design buildings suited to the climate, naturally ventilated and shaded from the sun.",
+        "pack": "Design + site supervision: one person in charge from the first sketch to handover."
+      },
+      "interieur": {
+        "name": "Interior design",
+        "text": "Layout, circulation, light and materials, planned from the drawings to avoid rework.",
+        "pack": "Plans and interior drawn together: sockets, lighting and furniture placed before the concrete is poured."
+      },
+      "peinture": {
+        "name": "Painting",
+        "text": "Interior and exterior building paint, renders, finishes and decorative painting.",
+        "pack": "Colours chosen with the architect, products supplied by our shop: one price, one guarantee."
+      },
+      "signaletique": {
+        "name": "Signage",
+        "text": "Shop signs, plaques, indoor wayfinding: your building is easy to find and carries your identity.",
+        "pack": "Signage designed with the façade: fixings planned, consistent result."
+      },
+      "decoration": {
+        "name": "Decoration",
+        "text": "Murals, wall calligraphy, commissioned works: walls that tell a story.",
+        "pack": "Calligraphers and painters work on walls already prepared by our teams."
+      },
+      "mobilier": {
+        "name": "Furniture",
+        "text": "Custom furniture, designed for the space and built with local craftsmen.",
+        "pack": "Furniture sized on the real plans, delivered and installed by the same team."
+      },
+      "communication": {
+        "name": "Visual communication",
+        "text": "Visual identity, printed media, banners and site hoardings.",
+        "pack": "Your identity carried from the shop sign to business cards, with one provider."
+      },
+      "serigraphie": {
+        "name": "Screen printing",
+        "text": "Textiles, promotional items, stamps and seals to equip your teams.",
+        "pack": "Uniforms and items in the colours of the place, ready for the opening."
+      }
+    }
+  },
+  "Services": {
+    "metaTitle": "Our services",
+    "metaDescription": "Architecture, painting, calligraphy, screen printing, fine art drawing and project consulting in Conakry and Guinea.",
+    "eyebrow": "Services",
+    "title": "Our service divisions",
+    "intro": "Each division has its specialists. Together they cover the whole life of a space, from design to visual identity.",
+    "whatWeDo": "What we do",
+    "relatedProjects": "Projects from this division",
+    "next": "Next step",
+    "askQuote": "Request a {pole} quote",
+    "askWhatsApp": "Discuss it on WhatsApp"
+  },
+  "Projects": {
+    "metaTitle": "Projects",
+    "metaDescription": "ARCHI-DESIGN Guinea portfolio: villas, offices, shops, renovations, decorative painting and signage in Conakry and Guinea.",
+    "eyebrow": "Portfolio",
+    "title": "Our projects",
+    "intro": "Filter by division, type, city or year. Each sheet details the area, duration, materials and indicative budget.",
+    "filters": "Filters",
+    "allPoles": "All divisions",
+    "allTypes": "All types",
+    "allCities": "All cities",
+    "allYears": "All years",
+    "pole": "Division",
+    "type": "Type",
+    "city": "City",
+    "year": "Year",
+    "reset": "Clear filters",
+    "count": "{count, plural, =0 {No projects} one {# project} other {# projects}}",
+    "empty": "No project matches these filters. Try removing one.",
+    "sheet": "Technical sheet",
+    "location": "Location",
+    "surface": "Area",
+    "duration": "Duration",
+    "budget": "Indicative budget",
+    "materials": "Materials",
+    "gallery": "Gallery",
+    "openImage": "Enlarge image {index}",
+    "close": "Close",
+    "previous": "Previous image",
+    "nextImage": "Next image",
+    "imageOf": "Image {index} of {total}",
+    "beforeAfter": "Before / after",
+    "before": "Before",
+    "after": "After",
+    "sliderLabel": "Compare before and after",
+    "related": "Other projects",
+    "similarQuote": "A similar project?",
+    "clientWord": "From the client"
+  },
+  "ProjectTypes": {
+    "residentiel": "Residential",
+    "commercial": "Commercial",
+    "institutionnel": "Institutional",
+    "renovation": "Renovation",
+    "interieur": "Interior",
+    "mobilier": "Furniture",
+    "decoratif": "Decoration and art",
+    "signaletique": "Signage"
+  },
+  "About": {
+    "metaTitle": "About",
+    "metaDescription": "ARCHI-DESIGN Guinea SARL: vision, mission, values and team of a Guinean architecture, construction and creative trades company.",
+    "eyebrow": "About",
+    "title": "Building better with the resources and realities of our land",
+    "vision": "Vision",
+    "mission": "Mission",
+    "values": "Our values",
+    "history": "Our story",
+    "team": "The team",
+    "commitments": "Local and sustainable commitment"
+  },
+  "Contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contact ARCHI-DESIGN Guinea in Conakry: form, WhatsApp, phone, address and opening hours.",
+    "eyebrow": "Contact",
+    "title": "Let’s talk about your project",
+    "intro": "Fastest: WhatsApp. Otherwise leave us a message and we will call you back within 2 working days.",
+    "formTitle": "Send a message",
+    "details": "Contact details",
+    "hours": "Opening hours",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "E-mail",
+    "map": "Getting here",
+    "openMap": "Open in OpenStreetMap",
+    "loadMap": "Show the map",
+    "mapNotice": "The map loads data from OpenStreetMap.",
+    "fields": {
+      "name": "Full name",
+      "phone": "Phone / WhatsApp",
+      "phoneHint": "International format, e.g. +224 620 00 00 00",
+      "email": "E-mail",
+      "city": "City",
+      "pole": "Your request is about",
+      "polePlaceholder": "Choose a division",
+      "preferredContact": "How should we get back to you?",
+      "subject": "Subject",
+      "message": "Message",
+      "consent": "I agree that ARCHI-DESIGN may use this information to answer my request.",
+      "privacyLink": "Privacy policy",
+      "website": "Leave this field empty"
+    },
+    "contactOptions": {
+      "whatsapp": "WhatsApp",
+      "appel": "Phone call",
+      "email": "E-mail"
+    },
+    "submit": "Send message",
+    "sending": "Sending…",
+    "draftRestored": "Your draft has been restored.",
+    "success": "Message received. We will reply within 2 working days.",
+    "successWhatsApp": "Also send on WhatsApp",
+    "errors": {
+      "name": "Enter your name (at least 2 characters).",
+      "phone": "Enter a valid number with country code (8 to 15 digits).",
+      "email": "This e-mail address is not valid.",
+      "subject": "Enter the subject of your message.",
+      "message": "Your message must be at least 10 characters long.",
+      "consent": "Your consent is needed to process the request.",
+      "rateLimit": "Too many messages in a short time. Try again in a few minutes.",
+      "server": "The message could not be saved. Try again or write to us on WhatsApp.",
+      "invalid": "Some fields need correcting."
+    }
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "text": "This page does not exist or has moved.",
+    "back": "Back to home"
+  },
+  "Offline": {
+    "title": "You are offline",
+    "text": "The connection is down. Pages you already visited are still available."
+  },
+  "Form": {
+    "required": "Required",
+    "optional": "Optional"
+  },
+  "DesignSystem": {
+    "title": "Design system",
+    "intro": "Colours, typefaces and base components of the site. Internal page, not indexed."
+  },
+  "Requests": {
+    "metaTitle": "Request a quote",
+    "metaDescription": "Describe your architecture, painting, calligraphy, printing, drawing or consulting project: reply within 2 working days.",
+    "eyebrow": "Free quote",
+    "title": "Request a quote",
+    "intro": "Choose the service. The form takes only a few minutes and no online payment is required.",
+    "choose": "Choose this service",
+    "services": {
+      "architecture": {
+        "title": "Architecture or construction project",
+        "intro": "Villa, building, shop, renovation or interior: describe your project and attach plans or photos."
+      },
+      "peinture": {
+        "title": "Painting quote",
+        "intro": "Interior or exterior, give the area and wall condition. Photos help us price accurately."
+      },
+      "calligraphie": {
+        "title": "Calligraphy order",
+        "intro": "Artwork, sign, mural or ceremony: give the text and desired size."
+      },
+      "serigraphie": {
+        "title": "Print order",
+        "intro": "Textiles, posters, banners, cards, stickers or stamps. The indicative price is calculated live."
+      },
+      "dessin": {
+        "title": "Drawing order",
+        "intro": "Portrait, illustration or architectural drawing, from your reference photos."
+      },
+      "formation": {
+        "title": "Training enrolment",
+        "intro": "Choose a session. Payment is made directly with us, on site or in instalments."
+      },
+      "boutique": {
+        "title": "Shop order",
+        "intro": "Check your cart and choose how to receive your products."
+      },
+      "prestation": {
+        "title": "Consulting request",
+        "intro": "Study, site supervision, advice or assistance, including remotely for the diaspora."
+      },
+      "contact": {
+        "title": "Contact",
+        "intro": ""
+      }
+    },
+    "sections": {
+      "request": "Your request",
+      "customer": "Your details",
+      "reception": "Delivery and payment"
+    },
+    "common": {
+      "name": "Full name",
+      "phone": "Phone / WhatsApp",
+      "phoneHint": "International format, e.g. +224 620 00 00 00",
+      "email": "E-mail",
+      "emailHint": "To receive the acknowledgement. Optional.",
+      "city": "City",
+      "address": "Address or district",
+      "preferredContact": "How should we get back to you?",
+      "receptionMode": "Preferred delivery",
+      "paymentMode": "Planned payment method (indicative)",
+      "message": "Further details",
+      "consent": "I agree that ARCHI-DESIGN may use this information to process my request.",
+      "privacyLink": "Privacy policy",
+      "website": "Leave this field empty",
+      "choose": "Choose…"
+    },
+    "fields": {
+      "projectType": "Project type",
+      "location": "Project location",
+      "surface": "Approximate area (m²)",
+      "budget": "Estimated budget",
+      "deadline": "Desired timeframe",
+      "deliverables": "Services wanted",
+      "files": "Attachments",
+      "surfaceType": "Type of work",
+      "area": "Area to paint (m²)",
+      "rooms": "Number of rooms",
+      "wallCondition": "Wall condition",
+      "products": "Products and colours wanted",
+      "startDate": "Desired start date",
+      "kind": "Type",
+      "script": "Script",
+      "text": "Text to write",
+      "dimensions": "Dimensions",
+      "support": "Medium",
+      "style": "Style",
+      "deliveryDate": "Desired delivery date",
+      "width": "Width (cm)",
+      "height": "Height (cm)",
+      "quantity": "Quantity",
+      "colors": "Colours",
+      "proof": "I want to approve a proof before printing",
+      "format": "Size",
+      "technique": "Technique",
+      "usage": "Use",
+      "session": "Session",
+      "level": "Your level",
+      "profession": "Occupation",
+      "goal": "Training goal",
+      "paymentPlan": "Payment plan",
+      "nature": "Type of service",
+      "description": "Description",
+      "urgency": "Urgency"
+    },
+    "fileHint": "{max, plural, one {# file} other {up to # files}}, 10 MB max each (JPG, PNG, PDF).",
+    "printFileHint": "PDF, AI, SVG, PNG, JPG or ZIP, 10 MB max each.",
+    "options": {
+      "projectType": {
+        "villa": "Villa / house",
+        "immeuble": "Apartment building",
+        "commerce": "Shop",
+        "institutionnel": "Institutional building",
+        "renovation": "Renovation",
+        "interieur": "Interior design",
+        "mobilier": "Furniture"
+      },
+      "deliverables": {
+        "plans": "Plans",
+        "modele3d": "3D model",
+        "suivi": "Site supervision",
+        "realisation": "Construction works"
+      },
+      "surfaceType": {
+        "interieur": "Interior",
+        "exterieur": "Exterior",
+        "interieurExterieur": "Interior and exterior"
+      },
+      "wallCondition": {
+        "bon": "Good",
+        "moyen": "Some cracks or stains",
+        "degrade": "Damaged (damp, peeling)"
+      },
+      "kind": {
+        "tableau": "Artwork",
+        "enseigne": "Sign",
+        "mural": "Wall decoration",
+        "ceremonie": "Ceremony",
+        "portrait": "Portrait",
+        "illustration": "Illustration",
+        "architecture": "Architectural drawing"
+      },
+      "script": {
+        "arabe": "Arabic",
+        "latin": "Latin"
+      },
+      "support": {
+        "textile": "Textile (T-shirt, polo…)",
+        "affiche": "Poster",
+        "bache": "Banner",
+        "carte": "Business cards",
+        "autocollant": "Stickers",
+        "cachet": "Stamp / seal"
+      },
+      "technique": {
+        "fusain": "Charcoal",
+        "crayon": "Pencil",
+        "aquarelle": "Watercolour",
+        "peinture": "Paint",
+        "numerique": "Digital"
+      },
+      "usage": {
+        "cadeau": "Gift",
+        "decoration": "Decoration",
+        "professionnel": "Professional use"
+      },
+      "level": {
+        "debutant": "Beginner",
+        "intermediaire": "Intermediate",
+        "avance": "Advanced"
+      },
+      "paymentPlan": {
+        "surPlace": "In full, on site",
+        "echelonne": "In instalments"
+      },
+      "nature": {
+        "etude": "Study",
+        "suivi": "Site supervision",
+        "conseil": "Advice",
+        "assistance": "Assistance"
+      },
+      "urgency": {
+        "normale": "Normal",
+        "urgente": "Urgent"
+      },
+      "preferredContact": {
+        "whatsapp": "WhatsApp",
+        "appel": "Phone call",
+        "email": "E-mail"
+      },
+      "receptionMode": {
+        "retrait": "Pick-up",
+        "livraison": "Delivery",
+        "surSite": "On-site work"
+      },
+      "paymentMode": {
+        "especes": "Cash",
+        "mobileMoney": "Mobile money",
+        "virement": "Bank transfer",
+        "aLaLivraison": "On delivery",
+        "surPlace": "On site"
+      }
+    },
+    "submit": "Send my request",
+    "sending": "Sending…",
+    "draftRestored": "Your draft has been restored.",
+    "confirmation": {
+      "title": "Request received",
+      "number": "Your request number",
+      "text": "We will contact you within 2 working days to confirm price and timing.",
+      "email": "A summary has been sent to you by e-mail.",
+      "whatsapp": "Also send on WhatsApp",
+      "whatsappHint": "WhatsApp opens with the summary: just press “Send”.",
+      "another": "Make another request"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "This text is too long.",
+      "number": "Enter a valid number.",
+      "date": "Enter a valid date.",
+      "choice": "Choose an option from the list.",
+      "name": "Enter your name (at least 2 characters).",
+      "phone": "Enter a valid number with country code (8 to 15 digits).",
+      "email": "This e-mail address is not valid.",
+      "consent": "Your consent is needed to process the request.",
+      "files": "Too many attachments.",
+      "fileType": "This file type is not accepted.",
+      "fileSize": "A file is larger than 10 MB.",
+      "cart": "Your cart is empty or contains an unavailable product.",
+      "session": "This session is no longer available.",
+      "invalid": "Some fields need correcting.",
+      "rateLimit": "Too many requests in a short time. Try again in a few minutes.",
+      "server": "The request could not be saved. Try again or write to us on WhatsApp."
+    },
+    "whatsappIntro": "Hello ARCHI-DESIGN, here is my request {number}:"
+  },
+  "Print": {
+    "metaTitle": "Online printing",
+    "metaDescription": "Order your prints in Conakry: textiles, posters, banners, business cards, stickers and stamps. Indicative price calculated live.",
+    "eyebrow": "Online printing",
+    "title": "Order your print",
+    "intro": "Choose the medium, size and quantity: the indicative price appears instantly. Attach your file and we send you a proof before printing.",
+    "estimate": "Indicative price",
+    "estimateDetail": "{quantity} × {unit}",
+    "discount": "Quantity discount: {percent}%",
+    "setupFee": "Setup fee included",
+    "area": "Area: {area} m² per piece",
+    "missingSize": "Enter width and height to calculate the price.",
+    "belowMinimum": "Minimum quantity: {min}.",
+    "unknownSupport": "Price on quote for this medium.",
+    "disclaimer": "Indicative price, confirmed by the team with the proof. No online payment."
+  },
+  "Shop": {
+    "metaTitle": "Shop",
+    "metaDescription": "Paints, renders, building materials and printing tools in Conakry. Order online, pay on delivery or on site.",
+    "eyebrow": "Shop",
+    "title": "Paint, building and printing supplies",
+    "intro": "The products we use on our sites. Add them to your cart: the order reaches us by e-mail and WhatsApp, you pay on delivery or on site.",
+    "all": "All products",
+    "categories": {
+      "peinture": "Paints",
+      "enduit": "Renders",
+      "materiel": "Building materials",
+      "impression": "Printing tools"
+    },
+    "price": "Indicative price",
+    "per": "per {unit}",
+    "inStock": "In stock",
+    "onOrder": "Made to order",
+    "reference": "Ref. {reference}",
+    "addToCart": "Add to cart",
+    "added": "Added to cart",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "cart": "Cart",
+    "cartCount": "{count, plural, =0 {Empty cart} one {Cart, # item} other {Cart, # items}}",
+    "viewCart": "View cart",
+    "emptyCart": "Your cart is empty.",
+    "continue": "Continue shopping",
+    "remove": "Remove {name}",
+    "subtotal": "Subtotal",
+    "total": "Indicative total",
+    "checkout": "Place order",
+    "technicalSheet": "Technical sheet",
+    "noPayment": "No online payment: the team confirms price and availability before delivery.",
+    "color": "Colour"
+  },
+  "Training": {
+    "metaTitle": "Training",
+    "metaDescription": "Training in painting, architectural design, AutoCAD, SketchUp and Revit in Conakry. Session calendar and online enrolment.",
+    "eyebrow": "Training",
+    "title": "Learn the trades of space",
+    "intro": "Hands-on training on site and in the workshop, led by our professionals. Enrol online, pay directly with us.",
+    "calendar": "Upcoming sessions",
+    "noSessions": "No session scheduled yet. Enrol to be told about the next one.",
+    "duration": "Duration",
+    "price": "Fee",
+    "free": "Free",
+    "onQuote": "Contact us",
+    "level": "Level",
+    "trainer": "Trainer",
+    "certificate": "Certificate issued",
+    "program": "Programme",
+    "enroll": "Enrol",
+    "sessionsTitle": "Sessions",
+    "seats": "{count, plural, one {# seat} other {# seats}}",
+    "full": "Full",
+    "from": "from {start} to {end}",
+    "on": "on {start}",
+    "levels": {
+      "debutant": "Beginner",
+      "intermediaire": "Intermediate",
+      "avance": "Advanced",
+      "tous": "All levels"
+    },
+    "nextSession": "Next session",
+    "waitingList": "Be notified of the next session"
+  }
+}

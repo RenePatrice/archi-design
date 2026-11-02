@@ -1,0 +1,587 @@
+{
+  "Metadata": {
+    "title": "ARCHI-DESIGN Guinée · Architecture, design et métiers créatifs",
+    "titleTemplate": "%s · ARCHI-DESIGN Guinée",
+    "description": "Architecte à Conakry : conception, construction, peinture bâtiment, calligraphie, sérigraphie et formation. De la conception à l’identité visuelle de vos espaces."
+  },
+  "Common": {
+    "skipToContent": "Aller au contenu",
+    "requestQuote": "Demander un devis",
+    "learnMore": "En savoir plus",
+    "comingSoon": "Bientôt disponible",
+    "seeProjects": "Voir nos réalisations",
+    "writeWhatsApp": "Écrire sur WhatsApp",
+    "breadcrumb": "Fil d’Ariane",
+    "home": "Accueil"
+  },
+  "Nav": {
+    "label": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "projects": "Réalisations",
+    "training": "Formations",
+    "shop": "Boutique",
+    "contact": "Contact",
+    "quote": "Devis"
+  },
+  "Theme": {
+    "label": "Thème d’affichage",
+    "system": "Automatique",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "Language": {
+    "label": "Langue",
+    "fr": "Français",
+    "en": "English"
+  },
+  "WhatsApp": {
+    "button": "Écrire sur WhatsApp",
+    "defaultMessage": "Bonjour ARCHI-DESIGN, je vous contacte depuis votre site web."
+  },
+  "Footer": {
+    "rights": "Tous droits réservés.",
+    "poles": "Nos pôles",
+    "contact": "Nous joindre",
+    "legal": "Informations"
+  },
+  "Poles": {
+    "architecture": "Architecture et design",
+    "peinture": "Peinture",
+    "calligraphie": "Calligraphie",
+    "serigraphie": "Sérigraphie et impression",
+    "dessin": "Dessin d’art",
+    "formation": "Formation",
+    "commerce": "Commerce général",
+    "prestation": "Prestation de services"
+  },
+  "Home": {
+    "eyebrow": "Conakry · Guinée",
+    "title": "De la conception à l’identité visuelle de vos espaces",
+    "intro": "Architecture, BTP, peinture, calligraphie, sérigraphie et formation : huit savoir-faire réunis dans une seule équipe, enracinée dans les matériaux et la culture de la Guinée.",
+    "figuresTitle": "ARCHI-DESIGN en chiffres",
+    "polesEyebrow": "Huit pôles",
+    "polesTitle": "Un interlocuteur pour tout votre projet",
+    "chainEyebrow": "Chaîne de valeur",
+    "chainTitle": "Une seule équipe, toute la chaîne",
+    "chainIntro": "Chaque étape prolonge la précédente. Choisissez une étape pour voir ce que nous faisons et ce que vous gagnez à l’enchaîner avec la suivante.",
+    "featuredEyebrow": "Réalisations",
+    "featuredTitle": "Projets phares",
+    "allProjects": "Toutes les réalisations",
+    "testimonialsTitle": "Ils nous ont confié leur projet",
+    "partnersTitle": "Ils nous font confiance",
+    "ctaTitle": "Un projet en tête ?",
+    "ctaText": "Décrivez-le en quelques lignes : nous vous répondons sous 48 heures ouvrées, par téléphone ou sur WhatsApp."
+  },
+  "Chain": {
+    "label": "Étapes de la chaîne de valeur",
+    "pack": "Pack intégré",
+    "open": "Découvrir ce pôle",
+    "steps": {
+      "architecture": {
+        "name": "Architecture",
+        "text": "Plans, permis, maquette 3D : nous concevons des bâtiments adaptés au climat, ventilés naturellement et protégés du soleil.",
+        "pack": "Conception + suivi de chantier : un seul responsable du premier croquis à la remise des clés."
+      },
+      "interieur": {
+        "name": "Design intérieur",
+        "text": "Aménagement, circulation, lumière et choix des matériaux, pensés dès les plans pour éviter les reprises.",
+        "pack": "Plans et intérieur dessinés ensemble : prises, éclairage et mobilier trouvent leur place avant le coulage."
+      },
+      "peinture": {
+        "name": "Peinture",
+        "text": "Peinture bâtiment intérieure et extérieure, enduits, finitions et peinture décorative.",
+        "pack": "Les teintes choisies avec l’architecte, les produits fournis par notre boutique : un prix et une garantie."
+      },
+      "signaletique": {
+        "name": "Signalétique",
+        "text": "Enseignes, plaques, orientation intérieure : votre bâtiment se repère et porte votre identité.",
+        "pack": "Signalétique dessinée avec la façade : fixations prévues, rendu cohérent."
+      },
+      "decoration": {
+        "name": "Décoration",
+        "text": "Fresques, calligraphie murale, œuvres sur commande : des murs qui racontent une histoire.",
+        "pack": "Calligraphes et peintres interviennent sur des murs déjà préparés par nos équipes."
+      },
+      "mobilier": {
+        "name": "Mobilier",
+        "text": "Mobilier sur mesure, dessiné pour l’espace et fabriqué avec des artisans locaux.",
+        "pack": "Mobilier dimensionné sur les plans réels, livré et posé par la même équipe."
+      },
+      "communication": {
+        "name": "Communication visuelle",
+        "text": "Identité visuelle, supports imprimés, bâches et panneaux de chantier.",
+        "pack": "Votre identité déclinée de l’enseigne aux cartes de visite, sans changer de prestataire."
+      },
+      "serigraphie": {
+        "name": "Sérigraphie",
+        "text": "Textile, objets promotionnels, cachets et tampons pour équiper vos équipes.",
+        "pack": "Tenues et objets aux couleurs du lieu, prêts pour l’inauguration."
+      }
+    }
+  },
+  "Services": {
+    "metaTitle": "Nos services",
+    "metaDescription": "Architecture, peinture, calligraphie, sérigraphie, dessin d’art et assistance à maîtrise d’ouvrage à Conakry et en Guinée.",
+    "eyebrow": "Services",
+    "title": "Nos pôles de services",
+    "intro": "Chaque pôle a ses spécialistes. Ensemble, ils couvrent toute la vie d’un espace, de sa conception à son identité visuelle.",
+    "whatWeDo": "Nos prestations",
+    "relatedProjects": "Réalisations de ce pôle",
+    "next": "Étape suivante",
+    "askQuote": "Demander un devis {pole}",
+    "askWhatsApp": "En parler sur WhatsApp"
+  },
+  "Projects": {
+    "metaTitle": "Réalisations",
+    "metaDescription": "Portfolio d’ARCHI-DESIGN Guinée : villas, bureaux, commerces, rénovations, peintures décoratives et signalétique à Conakry et en Guinée.",
+    "eyebrow": "Portfolio",
+    "title": "Nos réalisations",
+    "intro": "Filtrez par pôle, type, ville ou année. Chaque fiche détaille la surface, la durée, les matériaux et le budget indicatif.",
+    "filters": "Filtres",
+    "allPoles": "Tous les pôles",
+    "allTypes": "Tous les types",
+    "allCities": "Toutes les villes",
+    "allYears": "Toutes les années",
+    "pole": "Pôle",
+    "type": "Type",
+    "city": "Ville",
+    "year": "Année",
+    "reset": "Effacer les filtres",
+    "count": "{count, plural, =0 {Aucun projet} one {# projet} other {# projets}}",
+    "empty": "Aucun projet ne correspond à ces filtres. Essayez d’en retirer un.",
+    "sheet": "Fiche technique",
+    "location": "Lieu",
+    "surface": "Surface",
+    "duration": "Durée",
+    "budget": "Budget indicatif",
+    "materials": "Matériaux",
+    "gallery": "Galerie",
+    "openImage": "Agrandir l’image {index}",
+    "close": "Fermer",
+    "previous": "Image précédente",
+    "nextImage": "Image suivante",
+    "imageOf": "Image {index} sur {total}",
+    "beforeAfter": "Avant / après",
+    "before": "Avant",
+    "after": "Après",
+    "sliderLabel": "Comparer avant et après",
+    "related": "Autres réalisations",
+    "similarQuote": "Un projet similaire ?",
+    "clientWord": "Le mot du client"
+  },
+  "ProjectTypes": {
+    "residentiel": "Résidentiel",
+    "commercial": "Commercial",
+    "institutionnel": "Institutionnel",
+    "renovation": "Rénovation",
+    "interieur": "Intérieur",
+    "mobilier": "Mobilier",
+    "decoratif": "Décoration et art",
+    "signaletique": "Signalétique"
+  },
+  "About": {
+    "metaTitle": "À propos",
+    "metaDescription": "ARCHI-DESIGN Guinée SARL : vision, mission, valeurs et équipe d’une entreprise guinéenne d’architecture, de BTP et de métiers créatifs.",
+    "eyebrow": "À propos",
+    "title": "Construire mieux avec les ressources et les réalités de notre territoire",
+    "vision": "Vision",
+    "mission": "Mission",
+    "values": "Nos valeurs",
+    "history": "Notre histoire",
+    "team": "L’équipe",
+    "commitments": "Engagement local et durable"
+  },
+  "Contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contactez ARCHI-DESIGN Guinée à Conakry : formulaire, WhatsApp, téléphone, adresse et horaires.",
+    "eyebrow": "Contact",
+    "title": "Parlons de votre projet",
+    "intro": "Le plus rapide : WhatsApp. Sinon, laissez-nous un message, nous vous rappelons sous 48 heures ouvrées.",
+    "formTitle": "Envoyer un message",
+    "details": "Coordonnées",
+    "hours": "Horaires",
+    "address": "Adresse",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "map": "Plan d’accès",
+    "openMap": "Ouvrir dans OpenStreetMap",
+    "loadMap": "Afficher la carte",
+    "mapNotice": "La carte charge des données depuis OpenStreetMap.",
+    "fields": {
+      "name": "Nom complet",
+      "phone": "Téléphone / WhatsApp",
+      "phoneHint": "Format international, ex. +224 620 00 00 00",
+      "email": "E-mail",
+      "city": "Ville",
+      "pole": "Votre demande concerne",
+      "polePlaceholder": "Choisir un pôle",
+      "preferredContact": "Comment préférez-vous être recontacté ?",
+      "subject": "Objet",
+      "message": "Message",
+      "consent": "J’accepte qu’ARCHI-DESIGN utilise ces informations pour répondre à ma demande.",
+      "privacyLink": "Politique de confidentialité",
+      "website": "Ne pas remplir ce champ"
+    },
+    "contactOptions": {
+      "whatsapp": "WhatsApp",
+      "appel": "Appel téléphonique",
+      "email": "E-mail"
+    },
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours…",
+    "draftRestored": "Votre brouillon a été restauré.",
+    "success": "Message reçu. Nous vous répondons sous 48 heures ouvrées.",
+    "successWhatsApp": "Envoyer aussi sur WhatsApp",
+    "errors": {
+      "name": "Indiquez votre nom (2 caractères minimum).",
+      "phone": "Indiquez un numéro valide, avec l’indicatif (8 à 15 chiffres).",
+      "email": "Cette adresse e-mail n’est pas valide.",
+      "subject": "Indiquez l’objet de votre message.",
+      "message": "Votre message doit faire au moins 10 caractères.",
+      "consent": "Votre accord est nécessaire pour traiter la demande.",
+      "rateLimit": "Trop d’envois en peu de temps. Réessayez dans quelques minutes.",
+      "server": "Le message n’a pas pu être enregistré. Réessayez ou écrivez-nous sur WhatsApp.",
+      "invalid": "Certains champs sont à corriger."
+    }
+  },
+  "NotFound": {
+    "title": "Page introuvable",
+    "text": "Cette page n’existe pas ou a été déplacée.",
+    "back": "Retour à l’accueil"
+  },
+  "Offline": {
+    "title": "Vous êtes hors ligne",
+    "text": "La connexion est coupée. Les pages déjà consultées restent disponibles."
+  },
+  "Form": {
+    "required": "Obligatoire",
+    "optional": "Facultatif"
+  },
+  "DesignSystem": {
+    "title": "Design system",
+    "intro": "Couleurs, typographies et composants de base du site. Page interne, non référencée."
+  },
+  "Requests": {
+    "metaTitle": "Demander un devis",
+    "metaDescription": "Décrivez votre projet d’architecture, de peinture, de calligraphie, d’impression, de dessin ou d’étude : réponse sous 48 heures ouvrées.",
+    "eyebrow": "Devis gratuit",
+    "title": "Demander un devis",
+    "intro": "Choisissez le service concerné. Le formulaire ne prend que quelques minutes et aucun paiement n’est demandé en ligne.",
+    "choose": "Choisir ce service",
+    "services": {
+      "architecture": {
+        "title": "Projet d’architecture ou de construction",
+        "intro": "Villa, immeuble, commerce, rénovation ou intérieur : décrivez votre projet, joignez vos plans ou photos."
+      },
+      "peinture": {
+        "title": "Devis peinture",
+        "intro": "Intérieur ou extérieur, indiquez la surface et l’état des murs. Des photos nous aident à chiffrer juste."
+      },
+      "calligraphie": {
+        "title": "Commande de calligraphie",
+        "intro": "Tableau, enseigne, mural ou cérémonie : donnez le texte à réaliser et le format souhaité."
+      },
+      "serigraphie": {
+        "title": "Commande d’impression",
+        "intro": "Textile, affiche, bâche, cartes, autocollants ou cachets. Le prix indicatif se calcule en direct."
+      },
+      "dessin": {
+        "title": "Commande de dessin",
+        "intro": "Portrait, illustration ou dessin d’architecture, d’après vos photos de référence."
+      },
+      "formation": {
+        "title": "Inscription à une formation",
+        "intro": "Choisissez la session. Le règlement se fait directement avec nous, sur place ou en plusieurs fois."
+      },
+      "boutique": {
+        "title": "Commande boutique",
+        "intro": "Vérifiez votre panier et indiquez comment recevoir vos produits."
+      },
+      "prestation": {
+        "title": "Demande de prestation",
+        "intro": "Étude, suivi de chantier, conseil ou assistance, y compris à distance pour la diaspora."
+      },
+      "contact": {
+        "title": "Contact",
+        "intro": ""
+      }
+    },
+    "sections": {
+      "request": "Votre demande",
+      "customer": "Vos coordonnées",
+      "reception": "Réception et règlement"
+    },
+    "common": {
+      "name": "Nom complet",
+      "phone": "Téléphone / WhatsApp",
+      "phoneHint": "Format international, ex. +224 620 00 00 00",
+      "email": "E-mail",
+      "emailHint": "Pour recevoir l’accusé de réception. Facultatif.",
+      "city": "Ville",
+      "address": "Adresse ou quartier",
+      "preferredContact": "Comment préférez-vous être recontacté ?",
+      "receptionMode": "Mode de réception souhaité",
+      "paymentMode": "Mode de règlement prévu (indicatif)",
+      "message": "Précisions",
+      "consent": "J’accepte qu’ARCHI-DESIGN utilise ces informations pour traiter ma demande.",
+      "privacyLink": "Politique de confidentialité",
+      "website": "Ne pas remplir ce champ",
+      "choose": "Choisir…"
+    },
+    "fields": {
+      "projectType": "Type de projet",
+      "location": "Localisation du projet",
+      "surface": "Surface approximative (m²)",
+      "budget": "Budget estimatif",
+      "deadline": "Délai souhaité",
+      "deliverables": "Prestations souhaitées",
+      "files": "Fichiers joints",
+      "surfaceType": "Type de travaux",
+      "area": "Surface à peindre (m²)",
+      "rooms": "Nombre de pièces",
+      "wallCondition": "État des murs",
+      "products": "Produits et teintes souhaités",
+      "startDate": "Date de début souhaitée",
+      "kind": "Type",
+      "script": "Écriture",
+      "text": "Texte à réaliser",
+      "dimensions": "Dimensions",
+      "support": "Support",
+      "style": "Style",
+      "deliveryDate": "Date de livraison souhaitée",
+      "width": "Largeur (cm)",
+      "height": "Hauteur (cm)",
+      "quantity": "Quantité",
+      "colors": "Couleurs",
+      "proof": "Je souhaite valider un bon à tirer (BAT) avant impression",
+      "format": "Format",
+      "technique": "Technique",
+      "usage": "Usage",
+      "session": "Session",
+      "level": "Votre niveau",
+      "profession": "Profession",
+      "goal": "Objectif de la formation",
+      "paymentPlan": "Modalité de règlement",
+      "nature": "Nature de la prestation",
+      "description": "Description",
+      "urgency": "Urgence"
+    },
+    "fileHint": "{max, plural, one {# fichier} other {jusqu’à # fichiers}}, 10 Mo maximum chacun (JPG, PNG, PDF).",
+    "printFileHint": "PDF, AI, SVG, PNG, JPG ou ZIP, 10 Mo maximum chacun.",
+    "options": {
+      "projectType": {
+        "villa": "Villa / maison",
+        "immeuble": "Immeuble",
+        "commerce": "Commerce",
+        "institutionnel": "Bâtiment institutionnel",
+        "renovation": "Rénovation",
+        "interieur": "Architecture d’intérieur",
+        "mobilier": "Mobilier"
+      },
+      "deliverables": {
+        "plans": "Plans",
+        "modele3d": "Maquette 3D",
+        "suivi": "Suivi de chantier",
+        "realisation": "Réalisation des travaux"
+      },
+      "surfaceType": {
+        "interieur": "Intérieur",
+        "exterieur": "Extérieur",
+        "interieurExterieur": "Intérieur et extérieur"
+      },
+      "wallCondition": {
+        "bon": "Bon état",
+        "moyen": "Quelques fissures ou taches",
+        "degrade": "Dégradé (humidité, écaillage)"
+      },
+      "kind": {
+        "tableau": "Tableau",
+        "enseigne": "Enseigne",
+        "mural": "Décoration murale",
+        "ceremonie": "Cérémonie",
+        "portrait": "Portrait",
+        "illustration": "Illustration",
+        "architecture": "Dessin d’architecture"
+      },
+      "script": {
+        "arabe": "Arabe",
+        "latin": "Latin"
+      },
+      "support": {
+        "textile": "Textile (t-shirt, polo…)",
+        "affiche": "Affiche",
+        "bache": "Bâche",
+        "carte": "Cartes de visite",
+        "autocollant": "Autocollants",
+        "cachet": "Cachet / tampon"
+      },
+      "technique": {
+        "fusain": "Fusain",
+        "crayon": "Crayon",
+        "aquarelle": "Aquarelle",
+        "peinture": "Peinture",
+        "numerique": "Numérique"
+      },
+      "usage": {
+        "cadeau": "Cadeau",
+        "decoration": "Décoration",
+        "professionnel": "Usage professionnel"
+      },
+      "level": {
+        "debutant": "Débutant",
+        "intermediaire": "Intermédiaire",
+        "avance": "Avancé"
+      },
+      "paymentPlan": {
+        "surPlace": "En une fois, sur place",
+        "echelonne": "En plusieurs fois"
+      },
+      "nature": {
+        "etude": "Étude",
+        "suivi": "Suivi de chantier",
+        "conseil": "Conseil",
+        "assistance": "Assistance"
+      },
+      "urgency": {
+        "normale": "Normale",
+        "urgente": "Urgente"
+      },
+      "preferredContact": {
+        "whatsapp": "WhatsApp",
+        "appel": "Appel téléphonique",
+        "email": "E-mail"
+      },
+      "receptionMode": {
+        "retrait": "Retrait sur place",
+        "livraison": "Livraison",
+        "surSite": "Intervention sur site"
+      },
+      "paymentMode": {
+        "especes": "Espèces",
+        "mobileMoney": "Mobile money",
+        "virement": "Virement",
+        "aLaLivraison": "À la livraison",
+        "surPlace": "Sur place"
+      }
+    },
+    "submit": "Envoyer ma demande",
+    "sending": "Envoi en cours…",
+    "draftRestored": "Votre brouillon a été restauré.",
+    "confirmation": {
+      "title": "Demande bien reçue",
+      "number": "Numéro de votre demande",
+      "text": "Nous vous contactons sous 48 heures ouvrées pour confirmer le prix et le délai.",
+      "email": "Un récapitulatif vous a été envoyé par e-mail.",
+      "whatsapp": "Envoyer aussi sur WhatsApp",
+      "whatsappHint": "WhatsApp s’ouvre avec le récapitulatif : il vous reste à appuyer sur « Envoyer ».",
+      "another": "Faire une autre demande"
+    },
+    "errors": {
+      "required": "Ce champ est obligatoire.",
+      "tooLong": "Ce texte est trop long.",
+      "number": "Indiquez un nombre valide.",
+      "date": "Indiquez une date valide.",
+      "choice": "Choisissez une option dans la liste.",
+      "name": "Indiquez votre nom (2 caractères minimum).",
+      "phone": "Indiquez un numéro valide, avec l’indicatif (8 à 15 chiffres).",
+      "email": "Cette adresse e-mail n’est pas valide.",
+      "consent": "Votre accord est nécessaire pour traiter la demande.",
+      "files": "Trop de fichiers joints.",
+      "fileType": "Ce type de fichier n’est pas accepté.",
+      "fileSize": "Un fichier dépasse 10 Mo.",
+      "cart": "Votre panier est vide ou contient un produit indisponible.",
+      "session": "Cette session n’est plus disponible.",
+      "invalid": "Certains champs sont à corriger.",
+      "rateLimit": "Trop d’envois en peu de temps. Réessayez dans quelques minutes.",
+      "server": "La demande n’a pas pu être enregistrée. Réessayez ou écrivez-nous sur WhatsApp."
+    },
+    "whatsappIntro": "Bonjour ARCHI-DESIGN, voici ma demande {number} :"
+  },
+  "Print": {
+    "metaTitle": "Impression en ligne",
+    "metaDescription": "Commandez vos impressions à Conakry : textile, affiches, bâches, cartes de visite, autocollants et cachets. Prix indicatif calculé en direct.",
+    "eyebrow": "Impression en ligne",
+    "title": "Commandez votre impression",
+    "intro": "Choisissez le support, les dimensions et la quantité : le prix indicatif s’affiche aussitôt. Joignez votre fichier, nous vous envoyons un bon à tirer avant impression.",
+    "estimate": "Prix indicatif",
+    "estimateDetail": "{quantity} × {unit}",
+    "discount": "Remise quantité : {percent} %",
+    "setupFee": "Frais de préparation inclus",
+    "area": "Surface : {area} m² par pièce",
+    "missingSize": "Indiquez la largeur et la hauteur pour calculer le prix.",
+    "belowMinimum": "Quantité minimale : {min}.",
+    "unknownSupport": "Prix sur devis pour ce support.",
+    "disclaimer": "Prix indicatif, confirmé par l’équipe avec le bon à tirer. Aucun paiement en ligne."
+  },
+  "Shop": {
+    "metaTitle": "Boutique",
+    "metaDescription": "Peintures, enduits, matériel de construction et outils d’impression à Conakry. Commande en ligne, règlement à la livraison ou sur place.",
+    "eyebrow": "Boutique",
+    "title": "Produits de peinture, construction et impression",
+    "intro": "Les produits utilisés sur nos chantiers. Ajoutez-les au panier : la commande nous parvient par e-mail et WhatsApp, vous réglez à la livraison ou sur place.",
+    "all": "Tous les produits",
+    "categories": {
+      "peinture": "Peintures",
+      "enduit": "Enduits",
+      "materiel": "Matériel de construction",
+      "impression": "Outils d’impression"
+    },
+    "price": "Prix indicatif",
+    "per": "par {unit}",
+    "inStock": "En stock",
+    "onOrder": "Sur commande",
+    "reference": "Réf. {reference}",
+    "addToCart": "Ajouter au panier",
+    "added": "Ajouté au panier",
+    "quantity": "Quantité",
+    "decrease": "Diminuer la quantité",
+    "increase": "Augmenter la quantité",
+    "cart": "Panier",
+    "cartCount": "{count, plural, =0 {Panier vide} one {Panier, # article} other {Panier, # articles}}",
+    "viewCart": "Voir le panier",
+    "emptyCart": "Votre panier est vide.",
+    "continue": "Continuer mes achats",
+    "remove": "Retirer {name}",
+    "subtotal": "Sous-total",
+    "total": "Total indicatif",
+    "checkout": "Valider la commande",
+    "technicalSheet": "Fiche technique",
+    "noPayment": "Aucun paiement en ligne : l’équipe vous confirme le prix et la disponibilité avant livraison.",
+    "color": "Teinte"
+  },
+  "Training": {
+    "metaTitle": "Formations",
+    "metaDescription": "Formations en peinture, conception architecturale, AutoCAD, SketchUp et Revit à Conakry. Calendrier des sessions et inscription en ligne.",
+    "eyebrow": "Formations",
+    "title": "Apprendre les métiers de l’espace",
+    "intro": "Des formations pratiques, sur chantier et en atelier, encadrées par nos professionnels. Inscription en ligne, règlement directement avec nous.",
+    "calendar": "Prochaines sessions",
+    "noSessions": "Aucune session programmée pour le moment. Inscrivez-vous pour être prévenu de la prochaine.",
+    "duration": "Durée",
+    "price": "Tarif",
+    "free": "Gratuit",
+    "onQuote": "Nous consulter",
+    "level": "Niveau",
+    "trainer": "Formateur",
+    "certificate": "Certificat délivré",
+    "program": "Programme",
+    "enroll": "S’inscrire",
+    "sessionsTitle": "Sessions",
+    "seats": "{count, plural, one {# place} other {# places}}",
+    "full": "Complète",
+    "from": "du {start} au {end}",
+    "on": "le {start}",
+    "levels": {
+      "debutant": "Débutant",
+      "intermediaire": "Intermédiaire",
+      "avance": "Avancé",
+      "tous": "Tous niveaux"
+    },
+    "nextSession": "Prochaine session",
+    "waitingList": "Être prévenu de la prochaine session"
+  }
+}
