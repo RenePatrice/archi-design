@@ -22,7 +22,8 @@
     "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "icons": "node scripts/generate-icons.mjs",
     "format": "prettier --write .",
-    "postinstall": "node scripts/copy-vendor.mjs"
+    "postinstall": "node scripts/copy-vendor.mjs",
+    "vercel-build": "npm run migrate && npm run build"
   },
   "dependencies": {
     "@google/model-viewer": "4.4.0",
@@ -30,6 +31,7 @@
     "@payloadcms/email-nodemailer": "3.91.0",
     "@payloadcms/next": "3.91.0",
     "@payloadcms/richtext-lexical": "3.91.0",
+    "@payloadcms/storage-vercel-blob": "3.91.0",
     "@payloadcms/translations": "3.91.0",
     "@payloadcms/ui": "3.91.0",
     "@react-email/components": "1.0.12",

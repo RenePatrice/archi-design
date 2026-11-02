@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
-import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { hasLocale } from 'next-intl'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
+import { ClientMessages } from '@/components/i18n/client-messages'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { SiteHeader } from '@/components/layout/site-header'
 import { ThemeScript } from '@/components/layout/theme-script'
@@ -107,7 +108,8 @@ export default async function SiteLayout({ children, params }: Props) {
         <ThemeScript />
       </head>
       <body className="flex min-h-dvh flex-col">
-        <NextIntlClientProvider>
+        {/* Seulement les textes de l'en-tête, du panier et de WhatsApp ; chaque rubrique ajoute les siens */}
+        <ClientMessages namespaces={['Nav', 'Theme', 'Language', 'WhatsApp', 'Shop']}>
           <CartProvider>
           <a
             href="#contenu"
@@ -124,7 +126,7 @@ export default async function SiteLayout({ children, params }: Props) {
           <WhatsAppButton number={settings.whatsappNumber ?? null} />
           <ServiceWorkerRegister />
           </CartProvider>
-        </NextIntlClientProvider>
+        </ClientMessages>
       </body>
     </html>
   )

@@ -163,6 +163,14 @@ Le client est prévenu par e-mail d’une nouvelle actualité, d’un document m
 
 Le seed crée un client de démonstration si `SEED_CLIENT_EMAIL` et `SEED_CLIENT_PASSWORD` sont renseignés dans `.env`.
 
+## Mise en ligne
+
+- **Guide pas à pas** (Vercel + Neon, puis serveur LWS) : [`docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md)
+- **Checklist de recette** : [`docs/RECETTE.md`](docs/RECETTE.md)
+- Sur Vercel, le script `vercel-build` applique les migrations (`src/migrations/`) avant le build.
+- Point de surveillance : `/health` (200 si le site et la base répondent).
+- GitHub Actions (`.github/workflows/ci.yml`) vérifie migrations, lint, types, tests et build à chaque push.
+
 ## Charte graphique
 
 Palette « Latérite & Leppi » et typographies (Archivo, Manrope, IBM Plex Mono), centralisées dans

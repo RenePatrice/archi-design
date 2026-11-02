@@ -20,6 +20,7 @@ export type RequestErrorKey =
   | 'files'
   | 'fileType'
   | 'fileSize'
+  | 'totalSize'
   | 'cart'
   | 'session'
 
@@ -116,6 +117,7 @@ export function validateFiles(
   files: File[],
   field: Extract<FieldDef, { type: 'files' }>,
   maxSize: number,
+  maxTotal = Number.POSITIVE_INFINITY,
 ): RequestErrorKey | null {
   const real = files.filter((f) => f.size > 0)
   if (field.required && real.length === 0) return 'required'
@@ -123,5 +125,6 @@ export function validateFiles(
   const accepted = field.accept.split(',')
   if (real.some((f) => !accepted.includes(f.type))) return 'fileType'
   if (real.some((f) => f.size > maxSize)) return 'fileSize'
+  if (real.reduce((sum, f) => sum + f.size, 0) > maxTotal) return 'totalSize'
   return null
 }

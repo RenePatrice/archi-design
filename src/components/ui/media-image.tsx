@@ -3,12 +3,23 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import type { Media } from '@/payload-types'
 
+const siteHost = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').host
+  } catch {
+    return 'localhost:3000'
+  }
+})()
+
 /**
- * Payload renvoie des adresses absolues (http://site/api/media/…) quand l'URL du site est configurée.
- * On garde le chemin seul : next/image l'optimise alors comme une image locale.
+ * Payload renvoie des adresses absolues (http://site/api/media/…) quand l'URL du site est configurée :
+ * on garde alors le chemin seul pour que next/image la traite comme une image locale.
+ * Une adresse externe (Vercel Blob) est conservée telle quelle.
  */
 export function mediaPath(url: string): string {
-  return url.startsWith('http') ? new URL(url).pathname : url
+  if (!url.startsWith('http')) return url
+  const parsed = new URL(url)
+  return parsed.host === siteHost || parsed.hostname === 'localhost' ? parsed.pathname : url
 }
 
 type Props = {

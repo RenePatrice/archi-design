@@ -263,8 +263,17 @@ export const CONTACT_MODES = ['whatsapp', 'appel', 'email'] as const
 
 export const ORDER_STATUSES = ['nouvelle', 'contactee', 'confirmee', 'livree', 'annulee'] as const
 
-/** Taille maximale d'un fichier joint (10 Mo) : un compromis entre fichiers d'impression et connexions lentes. */
-export const MAX_FILE_SIZE = 10 * 1024 * 1024
+/**
+ * Limites des fichiers joints, en Mo. 10 Mo par fichier par défaut (fichiers d'impression,
+ * connexions lentes). Sur Vercel, une requête ne peut pas dépasser 4,5 Mo : y régler
+ * NEXT_PUBLIC_UPLOAD_FILE_MB=4 et NEXT_PUBLIC_UPLOAD_TOTAL_MB=4.
+ */
+export const UPLOAD_LIMITS = {
+  fileMB: Number(process.env.NEXT_PUBLIC_UPLOAD_FILE_MB) || 10,
+  totalMB: Number(process.env.NEXT_PUBLIC_UPLOAD_TOTAL_MB) || 50,
+}
+export const MAX_FILE_SIZE = UPLOAD_LIMITS.fileMB * 1024 * 1024
+export const MAX_TOTAL_SIZE = UPLOAD_LIMITS.totalMB * 1024 * 1024
 
 export function isRequestService(value: unknown): value is RequestService {
   return typeof value === 'string' && (REQUEST_SERVICES as readonly string[]).includes(value)

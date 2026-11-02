@@ -2,6 +2,7 @@ import { ArrowRight, Calculator, MapPinned, MessageCircle, Palette } from 'lucid
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
+import { ClientMessages } from '@/components/i18n/client-messages'
 import { ProjectCard } from '@/components/projects/project-card'
 import { Counter } from '@/components/sections/counter'
 import { SectionHeading } from '@/components/sections/section-heading'
@@ -60,7 +61,7 @@ export default async function HomePage({ params }: Props) {
       <section className="container-site grid items-center gap-10 pt-10 pb-14 sm:pt-16 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
         <div className="flex flex-col gap-6">
           <p className="eyebrow hero-rise">{t('eyebrow')}</p>
-          <h1 className="hero-rise text-4xl font-extrabold tracking-tight [font-stretch:118%] sm:text-5xl xl:text-[4.5rem]">
+          <h1 className="text-4xl font-extrabold tracking-tight [font-stretch:118%] sm:text-5xl xl:text-[4.5rem]">
             {t('title')}
           </h1>
           <div className="frise-leppi hero-frise w-40" aria-hidden />
@@ -141,7 +142,9 @@ export default async function HomePage({ params }: Props) {
       <section className="border-y border-line bg-surface-sunken/60" aria-labelledby="chaine">
         <div className="container-site flex flex-col gap-8 py-16 sm:py-20">
           <SectionHeading id="chaine" eyebrow={t('chainEyebrow')} title={t('chainTitle')} intro={t('chainIntro')} />
-          <ValueChain poleSlugs={poleSlugs} />
+          <ClientMessages namespaces={['Chain']}>
+            <ValueChain poleSlugs={poleSlugs} />
+          </ClientMessages>
         </div>
       </section>
 

@@ -16,7 +16,7 @@ import { buildPreQuotePdf, loadSimulatorPricing } from '@/lib/simulator/prequote
 import { nextOrderNumber } from './numbering'
 import { estimatePrint, formatGNF } from './print-pricing'
 import { buildRequestSchema, formDataToObject, validateFiles, type RequestErrorKey } from './schema'
-import { isRequestService, MAX_FILE_SIZE, SERVICES, type FieldDef, type RequestService } from './services'
+import { isRequestService, MAX_FILE_SIZE, MAX_TOTAL_SIZE, SERVICES, type FieldDef, type RequestService } from './services'
 
 export type RequestState =
   | { status: 'idle' }
@@ -106,7 +106,7 @@ export async function processRequest(formData: FormData): Promise<RequestState> 
   const fileField = def.fields.find((f): f is Extract<FieldDef, { type: 'files' }> => f.type === 'files')
   const uploads = fileField ? formData.getAll(fileField.name).filter((v): v is File => v instanceof File && v.size > 0) : []
   if (fileField) {
-    const fileError = validateFiles(uploads, fileField, MAX_FILE_SIZE)
+    const fileError = validateFiles(uploads, fileField, MAX_FILE_SIZE, MAX_TOTAL_SIZE)
     if (fileError) fieldErrors[fileField.name] = fileError
   }
 
@@ -173,15 +173,18 @@ export async function processRequest(formData: FormData): Promise<RequestState> 
     // 7. Fichiers dans le stockage privé. Payload vérifie leur contenu réel :
     //    un fichier corrompu ou déguisé est refusé avec un message sur le champ concerné.
     const files: OrderFile[] = []
+    // Contenu gardé en mémoire pour les pièces jointes des e-mails (le stockage peut être distant : Vercel Blob)
+    const contents = new Map<number, Buffer>()
     for (const file of uploads) {
       try {
-        files.push(
-          await payload.create({
-            collection: 'order-files',
-            data: {},
-            file: { data: Buffer.from(await file.arrayBuffer()), mimetype: file.type, name: file.name, size: file.size },
-          }),
-        )
+        const data = Buffer.from(await file.arrayBuffer())
+        const created = await payload.create({
+          collection: 'order-files',
+          data: {},
+          file: { data, mimetype: file.type, name: file.name, size: file.size },
+        })
+        files.push(created)
+        contents.set(created.id, data)
       } catch (error) {
         payload.logger.warn(`[demande] Fichier refusé (${file.name}) : ${error instanceof Error ? error.message : error}`)
         await Promise.all(files.map((f) => payload.delete({ collection: 'order-files', id: f.id }).catch(() => {})))
@@ -274,7 +277,7 @@ export async function processRequest(formData: FormData): Promise<RequestState> 
         customerEmail: data.email ? String(data.email) : null,
         typeLabel: typeLabel?.toLowerCase(),
         trainingLabel: sessionDoc?.label ?? undefined,
-        files: files.map((f) => ({ filename: f.filename!, filesize: f.filesize, mimeType: f.mimeType })),
+        files: files.map((f) => ({ filename: f.filename!, filesize: f.filesize, mimeType: f.mimeType, content: contents.get(f.id) })),
         // Le PDF de pré-devis porte le numéro de la demande et le nom du client
         generatedAttachments: simInput
           ? async () => {

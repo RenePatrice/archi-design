@@ -401,8 +401,8 @@
       "simFinish": "Finish",
       "simZone": "Location"
     },
-    "fileHint": "{max, plural, one {# file} other {up to # files}}, 10 MB max each (JPG, PNG, PDF).",
-    "printFileHint": "PDF, AI, SVG, PNG, JPG or ZIP, 10 MB max each.",
+    "fileHint": "{max, plural, one {# file} other {up to # files}}, {size} MB max each (JPG, PNG, PDF).",
+    "printFileHint": "PDF, AI, SVG, PNG, JPG or ZIP, {size} MB max each.",
     "options": {
       "projectType": {
         "villa": "Villa / house",
@@ -541,12 +541,13 @@
       "consent": "Your consent is needed to process the request.",
       "files": "Too many attachments.",
       "fileType": "This file type is not accepted.",
-      "fileSize": "A file is larger than 10 MB.",
+      "fileSize": "A file is larger than {size} MB.",
       "cart": "Your cart is empty or contains an unavailable product.",
       "session": "This session is no longer available.",
       "invalid": "Some fields need correcting.",
       "rateLimit": "Too many requests in a short time. Try again in a few minutes.",
-      "server": "The request could not be saved. Try again or write to us on WhatsApp."
+      "server": "The request could not be saved. Try again or write to us on WhatsApp.",
+      "totalSize": "The files exceed {size} MB in total. Send fewer, or send them on WhatsApp after the request."
     },
     "whatsappIntro": "Hello ARCHI-DESIGN, here is my request {number}:"
   },

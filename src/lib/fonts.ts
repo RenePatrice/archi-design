@@ -7,7 +7,7 @@ import { Archivo, IBM_Plex_Mono, Manrope } from 'next/font/google'
 
 /** Titres : Archivo élargi, dans l'esprit des lettrages d'enseigne. */
 export const archivo = Archivo({
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'], // couvre le français (é, è, à, ç, œ…) ; latin-ext n'apporterait que du poids
   axes: ['wdth'],
   variable: '--font-archivo',
   display: 'swap',
@@ -15,7 +15,7 @@ export const archivo = Archivo({
 
 /** Texte courant. */
 export const manrope = Manrope({
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'], // couvre le français (é, è, à, ç, œ…) ; latin-ext n'apporterait que du poids
   variable: '--font-manrope',
   display: 'swap',
 })

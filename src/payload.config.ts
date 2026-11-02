@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
@@ -112,5 +113,28 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    /*
+     * Stockage des fichiers sur Vercel Blob quand BLOB_READ_WRITE_TOKEN est défini (hébergement Vercel).
+     * Sans jeton (développement, serveur LWS), les fichiers restent sur le disque du serveur.
+     */
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      // Même schéma de base avec ou sans Blob : les migrations restent valables partout
+      alwaysInsertFields: true,
+      // Envoi direct du navigateur vers Blob depuis le back-office (contourne la limite de 4,5 Mo de Vercel)
+      clientUploads: true,
+      collections: {
+        // Fichiers publics : servis directement par le CDN de Vercel
+        media: { disablePayloadAccessControl: true },
+        models: { disablePayloadAccessControl: true },
+        // Fichiers privés : toujours servis à travers Payload, qui vérifie les droits ;
+        // noms aléatoires pour que l'adresse de stockage soit impossible à deviner
+        'order-files': { prefix: 'prive/demandes' },
+        'client-files': { prefix: 'prive/clients' },
+      },
+      addRandomSuffix: true,
+    }),
+  ],
 })

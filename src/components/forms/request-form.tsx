@@ -10,7 +10,7 @@ import { Field, Input, Select, Textarea } from '@/components/ui/field'
 import { Link } from '@/i18n/navigation'
 import type { RequestState } from '@/lib/requests/process'
 import { estimatePrint, formatGNF, type PrintSupportPricing } from '@/lib/requests/print-pricing'
-import { CONTACT_MODES, PAYMENT_MODES, RECEPTION_MODES, SERVICES, type FieldDef, type RequestService } from '@/lib/requests/services'
+import { CONTACT_MODES, MAX_FILE_SIZE, MAX_TOTAL_SIZE, PAYMENT_MODES, RECEPTION_MODES, SERVICES, UPLOAD_LIMITS, type FieldDef, type RequestService } from '@/lib/requests/services'
 import { buildWhatsAppLink } from '@/lib/whatsapp'
 
 type Props = {
@@ -47,6 +47,20 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
   const [state, action, pending] = useActionState<RequestState, FormData>(submitRequest, { status: 'idle' })
   const [draftRestored, setDraftRestored] = useState(false)
   const [printInput, setPrintInput] = useState({ support: '', width: '', height: '', quantity: '' })
+  const [localErrors, setLocalErrors] = useState<Record<string, string>>({})
+
+  // Vérifie la taille des fichiers AVANT l'envoi : une requête trop lourde serait refusée par l'hébergeur
+  // avec une page d'erreur incompréhensible pour le visiteur
+  const checkFileSizes = (event: React.FormEvent<HTMLFormElement>) => {
+    const found: Record<string, string> = {}
+    for (const input of event.currentTarget.querySelectorAll<HTMLInputElement>('input[type=file]')) {
+      const list = Array.from(input.files ?? [])
+      if (list.some((f) => f.size > MAX_FILE_SIZE)) found[input.name] = 'fileSize'
+      else if (list.reduce((sum, f) => sum + f.size, 0) > MAX_TOTAL_SIZE) found[input.name] = 'totalSize'
+    }
+    setLocalErrors(found)
+    if (Object.keys(found).length) event.preventDefault()
+  }
 
   const readPrintInput = () => {
     const node = formRef.current
@@ -147,8 +161,9 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
   }
 
   /* ───────── Formulaire ───────── */
-  const errors = state.status === 'error' ? state.fieldErrors : {}
-  const errorFor = (name: string) => (errors[name] ? t(`errors.${errors[name]}`) : undefined)
+  const errors: Record<string, string> = { ...(state.status === 'error' ? state.fieldErrors : {}), ...localErrors }
+  const errorFor = (name: string) =>
+    errors[name] ? t(`errors.${errors[name]}`, { size: errors[name] === 'totalSize' ? UPLOAD_LIMITS.totalMB : UPLOAD_LIMITS.fileMB }) : undefined
   const required = { required: true, requiredLabel: form('required') }
   const id = (name: string) => `${service}-${name}`
 
@@ -224,7 +239,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
             key={field.name}
             id={id(field.name)}
             label={label}
-            hint={service === 'serigraphie' ? t('printFileHint') : t('fileHint', { max: field.maxFiles })}
+            hint={service === 'serigraphie' ? t('printFileHint', { size: UPLOAD_LIMITS.fileMB }) : t('fileHint', { max: field.maxFiles, size: UPLOAD_LIMITS.fileMB })}
             error={errorFor(field.name)}
             className="sm:col-span-2"
             {...('required' in field && field.required ? required : {})}
@@ -256,7 +271,15 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
       : null
 
   return (
-    <form ref={formRef} action={action} onInput={onInput} onChange={onInput} noValidate className="flex flex-col gap-10">
+    <form
+      ref={formRef}
+      action={action}
+      onInput={onInput}
+      onChange={onInput}
+      onSubmit={checkFileSizes}
+      noValidate
+      className="flex flex-col gap-10"
+    >
       <input type="hidden" name="service" value={service} />
       <input type="hidden" name="locale" value={locale} />
 

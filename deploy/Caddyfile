@@ -1,0 +1,10 @@
+# Caddy (serveur LWS) : HTTPS automatique (Let's Encrypt) devant le site Node.js.
+# Remplacer le domaine, copier dans /etc/caddy/Caddyfile puis : sudo systemctl reload caddy
+archidesignguinee.com, www.archidesignguinee.com {
+	encode zstd gzip
+	# Fichiers envoyés par l'équipe (vidéos, plans) : jusqu'à 60 Mo
+	request_body {
+		max_size 60MB
+	}
+	reverse_proxy 127.0.0.1:3000
+}

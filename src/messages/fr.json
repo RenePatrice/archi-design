@@ -401,8 +401,8 @@
       "simFinish": "Finition",
       "simZone": "Localisation"
     },
-    "fileHint": "{max, plural, one {# fichier} other {jusqu’à # fichiers}}, 10 Mo maximum chacun (JPG, PNG, PDF).",
-    "printFileHint": "PDF, AI, SVG, PNG, JPG ou ZIP, 10 Mo maximum chacun.",
+    "fileHint": "{max, plural, one {# fichier} other {jusqu’à # fichiers}}, {size} Mo maximum chacun (JPG, PNG, PDF).",
+    "printFileHint": "PDF, AI, SVG, PNG, JPG ou ZIP, {size} Mo maximum chacun.",
     "options": {
       "projectType": {
         "villa": "Villa / maison",
@@ -541,12 +541,13 @@
       "consent": "Votre accord est nécessaire pour traiter la demande.",
       "files": "Trop de fichiers joints.",
       "fileType": "Ce type de fichier n’est pas accepté.",
-      "fileSize": "Un fichier dépasse 10 Mo.",
+      "fileSize": "Un fichier dépasse {size} Mo.",
       "cart": "Votre panier est vide ou contient un produit indisponible.",
       "session": "Cette session n’est plus disponible.",
       "invalid": "Certains champs sont à corriger.",
       "rateLimit": "Trop d’envois en peu de temps. Réessayez dans quelques minutes.",
-      "server": "La demande n’a pas pu être enregistrée. Réessayez ou écrivez-nous sur WhatsApp."
+      "server": "La demande n’a pas pu être enregistrée. Réessayez ou écrivez-nous sur WhatsApp.",
+      "totalSize": "Les fichiers dépassent {size} Mo au total. Envoyez-en moins, ou envoyez-les sur WhatsApp après la demande."
     },
     "whatsappIntro": "Bonjour ARCHI-DESIGN, voici ma demande {number} :"
   },

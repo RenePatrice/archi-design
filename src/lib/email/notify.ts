@@ -31,7 +31,8 @@ export type NotifyInput = {
   typeLabel?: string
   /** Valeur de {formation} dans l'objet */
   trainingLabel?: string
-  files?: { filename: string; filesize?: number | null; mimeType?: string | null }[]
+  /** Fichiers joints par le client ; `content` évite de relire un stockage distant (Vercel Blob) */
+  files?: { filename: string; filesize?: number | null; mimeType?: string | null; content?: Buffer }[]
   /** Documents générés (ex. PDF de pré-devis), joints à l'e-mail de l'entreprise ET à l'accusé de réception */
   generatedAttachments?: () => Promise<{ filename: string; content: Buffer; contentType: string }[]>
   ackLabels: { number: string; summary: string; whatsapp: string; product: string; qty: string; unitPrice: string; subtotal: string; total: string }
@@ -85,7 +86,11 @@ export async function notifyRequest(input: NotifyInput): Promise<void> {
     const generated = input.generatedAttachments ? await input.generatedAttachments() : []
     const attachments = [
       ...(totalSize <= MAX_ATTACHMENTS_BYTES
-        ? files.map((f) => ({ filename: f.filename, path: path.resolve(process.cwd(), 'private-uploads', f.filename), contentType: f.mimeType ?? undefined }))
+        ? files.map((f) =>
+            f.content
+              ? { filename: f.filename, content: f.content, contentType: f.mimeType ?? undefined }
+              : { filename: f.filename, path: path.resolve(process.cwd(), 'private-uploads', f.filename), contentType: f.mimeType ?? undefined },
+          )
         : []),
       ...generated,
     ]

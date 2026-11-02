@@ -296,6 +296,8 @@ export interface Media {
    */
   alt: string;
   caption?: string | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -450,6 +452,8 @@ export interface Training {
  */
 export interface OrderFile {
   id: number;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -694,6 +698,8 @@ export interface Model {
    * e.g. 35deg 70deg auto
    */
   cameraOrbit?: string | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -738,6 +744,8 @@ export interface ClientFile {
    * For important documents.
    */
   notifyClient?: boolean | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1081,6 +1089,8 @@ export interface ContactMessagesSelect<T extends boolean = true> {
  * via the `definition` "order-files_select".
  */
 export interface OrderFilesSelect<T extends boolean = true> {
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1170,6 +1180,8 @@ export interface ClientFilesSelect<T extends boolean = true> {
   kind?: T;
   visibleToClient?: T;
   notifyClient?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1346,6 +1358,8 @@ export interface PagesSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1400,6 +1414,8 @@ export interface ModelsSelect<T extends boolean = true> {
   title?: T;
   poster?: T;
   cameraOrbit?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
