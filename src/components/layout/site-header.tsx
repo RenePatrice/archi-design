@@ -7,28 +7,32 @@ import { Link } from '@/i18n/navigation'
 import { mainNav } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
+import { HeaderShell } from './header-shell'
 import { LanguageSwitcher } from './language-switcher'
 import { MobileMenu } from './mobile-menu'
 import { ThemeToggle } from './theme-toggle'
 import { Wordmark } from './wordmark'
 
-/** En-tête collant : marque, menu, langue, thème et appel à l'action. */
+/** En-tête collant : marque, menu, langue, thème et appel à l'action. Transparent sur l'accueil. */
 export async function SiteHeader() {
   const t = await getTranslations('Nav')
   const common = await getTranslations('Common')
 
   return (
-    <header className="sticky top-[env(safe-area-inset-top,0px)] z-50 border-b border-line bg-bg/95 backdrop-blur-sm">
-      <div className="container-site flex h-16 items-center justify-between gap-4">
+    <HeaderShell>
+      <div className="container-site flex h-20 items-center justify-between gap-4">
         <Link href="/" aria-label={t('home')} className="flex min-h-11 items-center">
           <Wordmark />
         </Link>
 
         <nav aria-label={t('label')} className="hidden lg:block">
-          <ul className="flex items-center gap-5 text-sm font-semibold">
+          <ul className="flex items-center gap-7 text-[0.6875rem] font-semibold tracking-[0.2em] uppercase">
             {mainNav.map((item) => (
               <li key={item.key}>
-                <Link href={item.href} className="inline-flex min-h-11 items-center hover:text-accent">
+                <Link
+                  href={item.href}
+                  className="relative inline-flex min-h-11 items-center after:absolute after:bottom-2.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-[width] after:duration-300 hover:after:w-full"
+                >
                   {t(item.key)}
                 </Link>
               </li>
@@ -49,12 +53,12 @@ export async function SiteHeader() {
           >
             <UserRound aria-hidden />
           </Link>
-          <Link href="/devis" className={cn(buttonVariants({ size: 'sm' }), 'hidden sm:inline-flex')}>
+          <Link href="/devis" className={cn(buttonVariants({ size: 'sm' }), 'ml-2 hidden sm:inline-flex')}>
             {common('requestQuote')}
           </Link>
           <MobileMenu />
         </div>
       </div>
-    </header>
+    </HeaderShell>
   )
 }

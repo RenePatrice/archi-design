@@ -15,7 +15,7 @@ export async function Breadcrumbs({ locale, items }: { locale: Locale; items: Cr
 
   return (
     <>
-      <nav aria-label={t('breadcrumb')} className="font-mono text-xs text-muted">
+      <nav aria-label={t('breadcrumb')} className="text-[0.6875rem] tracking-[0.14em] uppercase text-muted">
         <ol className="flex flex-wrap items-center gap-1">
           {all.map((crumb, index) => {
             const last = index === all.length - 1

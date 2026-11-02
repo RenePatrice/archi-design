@@ -1,12 +1,13 @@
 'use client'
 
-import { CheckCircle2, MessageCircle } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useActionState, useEffect, useRef, useState } from 'react'
 
 import { submitContact } from '@/app/(site)/[locale]/contact/actions'
 import { Button, buttonVariants } from '@/components/ui/button'
+import { SuccessMark } from '@/components/ui/success-mark'
 import { Field, Input, Select, Textarea } from '@/components/ui/field'
 import { Link } from '@/i18n/navigation'
 import type { ContactState } from '@/lib/schemas/contact'
@@ -82,9 +83,9 @@ export function ContactForm({ poles, whatsappNumber, privacySlug }: Props) {
   if (state.status === 'success') {
     const whatsapp = state.whatsappText ? buildWhatsAppLink(whatsappNumber, state.whatsappText) : null
     return (
-      <div role="status" className="flex flex-col items-start gap-4 rounded-md border border-success/40 bg-surface p-6">
-        <CheckCircle2 className="size-8 text-success" aria-hidden />
-        <p className="text-lg font-semibold">{t('success')}</p>
+      <div role="status" className="fade-up flex flex-col items-start gap-5 py-6">
+        <SuccessMark />
+        <p className="font-display text-3xl">{t('success')}</p>
         {whatsapp && (
           <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'secondary' })}>
             <MessageCircle aria-hidden />
@@ -100,7 +101,7 @@ export function ContactForm({ poles, whatsappNumber, privacySlug }: Props) {
   const required = { required: true, requiredLabel: form('required') }
 
   return (
-    <form ref={formRef} action={action} onInput={saveDraft} noValidate className="flex flex-col gap-5">
+    <form ref={formRef} action={action} onInput={saveDraft} noValidate className="form-ui flex flex-col gap-6">
       <input type="hidden" name="locale" value={locale} />
 
       {draftRestored && <p className="rounded-md bg-surface-sunken px-4 py-2 text-sm text-muted">{t('draftRestored')}</p>}
@@ -170,7 +171,7 @@ export function ContactForm({ poles, whatsappNumber, privacySlug }: Props) {
             required
             aria-invalid={error('consent') ? true : undefined}
             aria-describedby={error('consent') ? 'contact-consent-error' : undefined}
-            className="mt-0.5 size-5 shrink-0 accent-[var(--accent)]"
+            className="mt-0.5"
           />
           <span>
             {t('fields.consent')}{' '}
@@ -188,7 +189,8 @@ export function ContactForm({ poles, whatsappNumber, privacySlug }: Props) {
         )}
       </div>
 
-      <Button type="submit" size="lg" disabled={pending} className="self-start">
+      <Button type="submit" size="lg" disabled={pending} className="w-full sm:w-auto sm:self-start">
+        {pending && <span className="spinner" aria-hidden />}
         {pending ? t('sending') : t('submit')}
       </Button>
     </form>

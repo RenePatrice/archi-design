@@ -1,15 +1,16 @@
-import { Archivo, IBM_Plex_Mono, Manrope } from 'next/font/google'
+import { Cormorant_Garamond, IBM_Plex_Mono, Manrope } from 'next/font/google'
 
 /*
  * Polices téléchargées au moment du build et servies par le site lui-même
  * (aucune requête vers Google côté visiteur).
  */
 
-/** Titres : Archivo élargi, dans l'esprit des lettrages d'enseigne. */
-export const archivo = Archivo({
+/** Titres : Cormorant Garamond, serif fin des studios d'architecture (romain et italique). */
+export const cormorant = Cormorant_Garamond({
   subsets: ['latin'], // couvre le français (é, è, à, ç, œ…) ; latin-ext n'apporterait que du poids
-  axes: ['wdth'],
-  variable: '--font-archivo',
+  weight: ['500'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
   display: 'swap',
 })
 
@@ -29,4 +30,4 @@ export const plexMono = IBM_Plex_Mono({
   preload: false,
 })
 
-export const fontVariables = `${archivo.variable} ${manrope.variable} ${plexMono.variable}`
+export const fontVariables = `${cormorant.variable} ${manrope.variable} ${plexMono.variable}`

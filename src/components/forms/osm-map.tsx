@@ -20,7 +20,7 @@ export function OsmMap({ latitude, longitude, label }: { latitude: number; longi
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line bg-surface-sunken">
+      <div className="dot-grid relative aspect-[4/3] max-h-[420px] w-full overflow-hidden border border-line bg-surface-sunken sm:aspect-[21/9]">
         {loaded ? (
           <iframe src={embed} title={label} className="absolute inset-0 h-full w-full border-0" loading="lazy" />
         ) : (

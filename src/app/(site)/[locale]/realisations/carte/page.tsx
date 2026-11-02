@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import type { MapPoint } from '@/components/map/map-canvas'
 import { ProjectMap } from '@/components/map/project-map'
 import { SectionHeading } from '@/components/sections/section-heading'
-import { Link } from '@/i18n/navigation'
+import { mediaPath } from '@/components/ui/media-image'
 import type { Locale } from '@/i18n/routing'
 import { getProjects, projectPole } from '@/lib/queries'
 import { localizedPath, pageMetadata } from '@/lib/seo'
@@ -38,43 +38,28 @@ export default async function MapPage({ params }: Props) {
       href: localizedPath(locale, `/realisations/${p.slug}`),
       lat: p.latitude!,
       lng: p.longitude!,
+      image: typeof p.coverImage === 'object' && p.coverImage?.url ? mediaPath(p.coverImage.sizes?.card?.url ?? p.coverImage.url) : null,
     }))
 
-  // Regroupement par ville pour la liste
-  const byCity = Object.entries(
-    points.reduce<Record<string, MapPoint[]>>((acc, p) => ((acc[p.city] ??= []).push(p), acc), {}),
-  ).sort((a, b) => b[1].length - a[1].length)
+  const stats = [
+    [points.length, t('stats.projects')],
+    [new Set(points.map((p) => p.city)).size, t('stats.cities')],
+    [new Set(points.map((p) => p.pole).filter(Boolean)).size, t('stats.poles')],
+  ] as const
 
   return (
     <div className="container-site flex flex-col gap-10 py-10 sm:py-14">
       <Breadcrumbs locale={locale} items={[{ label: portfolio('metaTitle'), href: '/realisations' }, { label: t('metaTitle') }]} />
       <SectionHeading as="h1" eyebrow={t('eyebrow')} title={t('title')} intro={t('intro')} />
+      <dl className="grid grid-cols-3 border-y border-line">
+        {stats.map(([value, label]) => (
+          <div key={label} className="flex flex-col-reverse gap-1 py-6 not-first:border-l not-first:border-line not-first:pl-6">
+            <dt className="text-[0.625rem] font-semibold tracking-[0.2em] text-muted uppercase">{label}</dt>
+            <dd className="font-display text-5xl leading-none">{value}</dd>
+          </div>
+        ))}
+      </dl>
       <ProjectMap points={points} />
-
-      <section aria-labelledby="liste-carte" className="flex flex-col gap-5">
-        <h2 id="liste-carte" className="flex flex-wrap items-baseline gap-3 text-2xl font-bold">
-          {t('list')} <span className="font-mono text-sm font-normal text-muted">{t('count', { count: points.length })}</span>
-        </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {byCity.map(([city, cityPoints]) => (
-            <div key={city} className="flex flex-col gap-2">
-              <h3 className="font-mono text-xs tracking-[0.12em] text-accent uppercase [font-stretch:100%]">
-                {city} · {cityPoints.length}
-              </h3>
-              <ul className="flex flex-col divide-y divide-line border-y border-line">
-                {cityPoints.map((p) => (
-                  <li key={p.id}>
-                    <Link href={`/realisations/${p.slug}`} className="flex min-h-11 items-center justify-between gap-3 py-2 hover:text-accent">
-                      <span className="font-medium">{p.title}</span>
-                      <span className="font-mono text-xs text-muted">{p.year}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   )
 }

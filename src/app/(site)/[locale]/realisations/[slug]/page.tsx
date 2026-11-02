@@ -117,7 +117,7 @@ export default async function ProjectPage({ params }: Props) {
       </header>
 
       <div className="container-site">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-surface-sunken">
+        <div className="relative aspect-[16/10] max-h-[560px] w-full overflow-hidden bg-surface-sunken sm:aspect-[21/9]">
           <MediaImage media={project.coverImage} sizes="(min-width: 1216px) 1216px, 100vw" priority />
         </div>
       </div>

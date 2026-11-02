@@ -49,19 +49,19 @@ export function MobileMenu() {
       {open && (
         <div
           id="menu-mobile"
-          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-line bg-bg pb-[env(safe-area-inset-bottom)]"
+          className="fixed inset-x-0 top-20 bottom-0 z-40 overflow-y-auto border-t border-line bg-bg pb-[env(safe-area-inset-bottom)]"
         >
           <nav aria-label={t('label')} className="container-site flex flex-col py-4">
             {mainNav.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
-                className="flex min-h-13 items-center border-b border-line font-display text-xl font-bold"
+                className="flex min-h-16 items-center border-b border-line font-display text-3xl"
               >
                 {t(item.key)}
               </Link>
             ))}
-            <Link href="/espace-client" className="flex min-h-13 items-center border-b border-line font-display text-xl font-bold text-accent">
+            <Link href="/espace-client" className="flex min-h-16 items-center border-b border-line font-display text-3xl text-accent">
               {t('clientArea')}
             </Link>
             <LanguageSwitcher className="mt-4" />

@@ -7,12 +7,15 @@ import { getPayload } from 'payload'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { JsonLd } from '@/components/seo/json-ld'
 import { AddToCart } from '@/components/shop/add-to-cart'
-import { Badge } from '@/components/ui/card'
+import { ProductCard, type CatalogProduct } from '@/components/shop/product-catalog'
+import { ProductGallery } from '@/components/shop/product-gallery'
+import { TrustBar } from '@/components/shop/trust-bar'
+import { Reveal } from '@/components/ui/reveal'
 import { Link } from '@/i18n/navigation'
-import { MediaImage, mediaPath } from '@/components/ui/media-image'
+import { mediaPath } from '@/components/ui/media-image'
 import { RichText } from '@/components/ui/rich-text'
 import { routing, type Locale } from '@/i18n/routing'
-import { getProductBySlug } from '@/lib/queries'
+import { getProductBySlug, getProducts } from '@/lib/queries'
 import { formatGNF } from '@/lib/requests/print-pricing'
 import { absoluteUrl, pageMetadata, siteUrl } from '@/lib/seo'
 import type { Media } from '@/payload-types'
@@ -41,7 +44,28 @@ export default async function ProductPage({ params }: Props) {
   setRequestLocale(locale)
   const product = await getProductBySlug(locale, slug)
   if (!product) notFound()
-  const [t, configurator] = await Promise.all([getTranslations('Shop'), getTranslations('Configurator')])
+  const [t, configurator, all] = await Promise.all([getTranslations('Shop'), getTranslations('Configurator'), getProducts(locale)])
+
+  // Produits associés : même catégorie d'abord, puis le reste du catalogue
+  const toCard = (p: (typeof all)[number]): CatalogProduct => {
+    const img = (p.images?.[0] && typeof p.images[0] === 'object' ? p.images[0] : null) as Media | null
+    return {
+      id: p.id,
+      slug: p.slug,
+      name: p.name,
+      reference: p.reference,
+      category: p.category,
+      price: p.price,
+      unit: p.unit,
+      inStock: (p.stock ?? 0) > 0,
+      image: img?.url ? mediaPath(img.sizes?.card?.url ?? img.url) : null,
+      imageAlt: img?.alt ?? '',
+      colorHex: p.colorHex,
+    }
+  }
+  const related = [...all.filter((p) => p.id !== product.id && p.category === product.category), ...all.filter((p) => p.id !== product.id && p.category !== product.category)]
+    .slice(0, 4)
+    .map(toCard)
 
   const images = (product.images ?? []).filter((m): m is Media => typeof m === 'object' && m !== null)
   const inStock = (product.stock ?? 0) > 0
@@ -51,51 +75,46 @@ export default async function ProductPage({ params }: Props) {
     <article className="container-site flex flex-col gap-8 py-10 sm:py-14">
       <Breadcrumbs locale={locale} items={[{ label: t('metaTitle'), href: '/boutique' }, { label: product.name }]} />
 
-      <div className="grid gap-10 lg:grid-cols-2">
-        <div className="flex flex-col gap-3">
-          <div className="relative aspect-square overflow-hidden rounded-md bg-surface-sunken">
-            <MediaImage media={cover} sizes="(min-width: 1024px) 50vw, 100vw" priority />
-          </div>
-          {images.length > 1 && (
-            <ul className="grid grid-cols-4 gap-2">
-              {images.slice(1, 5).map((image) => (
-                <li key={image.id} className="relative aspect-square overflow-hidden rounded-md bg-surface-sunken">
-                  <MediaImage media={image} sizes="12vw" />
-                </li>
-              ))}
-            </ul>
-          )}
+      <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <ProductGallery
+            images={images.filter((m) => m.url).map((m) => ({ url: mediaPath(m.url!), alt: m.alt }))}
+            labels={images.map((_, i) => t('photo', { n: i + 1 }))}
+          />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-wrap gap-2">
-            <Badge tone="accent">{t(`categories.${product.category}`)}</Badge>
-            <Badge tone={inStock ? 'deep' : 'neutral'}>{inStock ? t('inStock') : t('onOrder')}</Badge>
-          </div>
-          <h1 className="text-3xl font-extrabold sm:text-4xl">{product.name}</h1>
-          <p className="font-mono text-sm text-muted">{t('reference', { reference: product.reference })}</p>
-          {product.summary && <p className="text-lg text-muted">{product.summary}</p>}
-
-          {product.colorHex && (
-            <Link href="/configurateur" className="text-sm font-semibold text-accent underline underline-offset-4">
-              {configurator('metaTitle')}
-            </Link>
-          )}
-          {product.colorHex && (
-            <p className="flex items-center gap-3">
-              <span className="size-10 rounded-md border border-line" style={{ backgroundColor: product.colorHex }} aria-hidden />
-              <span className="text-sm">
-                {t('color')} <span className="font-mono">{product.colorHex.toUpperCase()}</span>
-              </span>
-            </p>
-          )}
-
-          <p className="flex flex-col gap-0.5 border-y border-line py-4">
-            <span className="text-sm text-muted">{t('price')}</span>
-            <span className="font-display text-3xl font-extrabold tabular-nums [font-stretch:112%]">
-              {formatGNF(product.price, locale)} <span className="text-base font-normal text-muted">{t('per', { unit: product.unit })}</span>
+        <div className="flex flex-col gap-6">
+          <p className="eyebrow">{t(`categories.${product.category}`)}</p>
+          <h1 className="font-display text-4xl leading-[1.05] sm:text-5xl">{product.name}</h1>
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
+            <span className="tracking-[0.12em] uppercase">{t('reference', { reference: product.reference })}</span>
+            <span className={inStock ? 'flex items-center gap-2 font-medium text-success' : 'flex items-center gap-2'}>
+              <span className={inStock ? 'pulse-ring size-2 rounded-full bg-success text-success' : 'size-2 rounded-full bg-muted'} aria-hidden />
+              {inStock ? t('inStock') : t('onOrder')}
             </span>
           </p>
+
+          <p className="flex flex-wrap items-baseline gap-x-2 border-y border-line py-6">
+            <span className="sr-only">{t('price')}</span>
+            <span className="font-display text-5xl leading-none tabular-nums">{formatGNF(product.price, locale)}</span>
+            <span className="text-muted">{t('per', { unit: product.unit })}</span>
+          </p>
+
+          {product.summary && <p className="text-lg leading-relaxed text-muted">{product.summary}</p>}
+
+          {product.colorHex && (
+            <div className="flex items-center gap-4 bg-surface p-4">
+              <span className="size-12 shrink-0 rounded-full border-4 border-bg shadow-md ring-1 ring-line" style={{ backgroundColor: product.colorHex }} aria-hidden />
+              <span className="flex flex-col">
+                <span className="text-sm">
+                  {t('color')} <span className="font-mono">{product.colorHex.toUpperCase()}</span>
+                </span>
+                <Link href="/configurateur" className="text-xs font-semibold tracking-[0.14em] text-accent uppercase underline-offset-4 hover:underline">
+                  {configurator('metaTitle')} →
+                </Link>
+              </span>
+            </div>
+          )}
 
           <AddToCart
             product={{
@@ -109,17 +128,38 @@ export default async function ProductPage({ params }: Props) {
             }}
           />
           <p className="text-sm text-muted">{t('noPayment')}</p>
+          <TrustBar compact />
 
           {product.technicalSheet && (
-            <section aria-labelledby="fiche-produit" className="flex flex-col gap-3 pt-4">
-              <h2 id="fiche-produit" className="text-xl font-bold">
-                {t('technicalSheet')}
-              </h2>
-              <RichText data={product.technicalSheet} />
-            </section>
+            <details className="group border-b border-line" open>
+              <summary className="flex cursor-pointer list-none items-center justify-between py-5 font-display text-2xl [&::-webkit-details-marker]:hidden">
+                <h2 id="fiche-produit">{t('technicalSheet')}</h2>
+                <span className="text-2xl text-accent transition-transform duration-500 ease-expo group-open:rotate-45" aria-hidden>
+                  +
+                </span>
+              </summary>
+              <div className="pb-6">
+                <RichText data={product.technicalSheet} />
+              </div>
+            </details>
           )}
         </div>
       </div>
+
+      {related.length > 0 && (
+        <section aria-labelledby="associes" className="flex flex-col gap-8 border-t border-line pt-16">
+          <h2 id="associes" className="font-display text-4xl">
+            {t('related')}
+          </h2>
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
+            {related.map((p, i) => (
+              <Reveal as="li" key={p.id} delay={i * 80}>
+                <ProductCard product={p} />
+              </Reveal>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <JsonLd
         data={{

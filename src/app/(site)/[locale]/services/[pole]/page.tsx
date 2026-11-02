@@ -79,7 +79,7 @@ export default async function PolePage({ params }: Props) {
               )}
             </div>
           </div>
-          <div className="relative aspect-[3/2] overflow-hidden rounded-md bg-surface-sunken">
+          <div className="relative aspect-[3/2] max-h-[440px] w-full overflow-hidden bg-surface-sunken">
             <MediaImage media={pole.image} sizes="(min-width: 1024px) 45vw, 100vw" priority />
           </div>
         </div>

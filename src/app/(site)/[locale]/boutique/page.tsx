@@ -6,6 +6,7 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { SectionHeading } from '@/components/sections/section-heading'
 import { mediaPath } from '@/components/ui/media-image'
 import { ProductCatalog, type CatalogProduct } from '@/components/shop/product-catalog'
+import { TrustBar } from '@/components/shop/trust-bar'
 import { PRODUCT_CATEGORIES } from '@/collections/Products'
 import type { Locale } from '@/i18n/routing'
 import { getProducts } from '@/lib/queries'
@@ -39,6 +40,10 @@ export default async function ShopPage({ params }: Props) {
       unit: p.unit,
       inStock: (p.stock ?? 0) > 0,
       image: image?.url ? mediaPath(image.sizes?.card?.url ?? image.url) : null,
+      imageHover: (() => {
+        const second = (p.images?.[1] && typeof p.images[1] === 'object' ? p.images[1] : null) as Media | null
+        return second?.url ? mediaPath(second.sizes?.card?.url ?? second.url) : null
+      })(),
       imageAlt: image?.alt ?? '',
       colorHex: p.colorHex,
     }
@@ -49,6 +54,7 @@ export default async function ShopPage({ params }: Props) {
     <div className="container-site flex flex-col gap-10 py-10 sm:py-14">
       <Breadcrumbs locale={locale} items={[{ label: t('metaTitle') }]} />
       <SectionHeading as="h1" eyebrow={t('eyebrow')} title={t('title')} intro={t('intro')} />
+      <TrustBar />
       <Suspense>
         <ProductCatalog products={catalog} categories={[...categories]} />
       </Suspense>

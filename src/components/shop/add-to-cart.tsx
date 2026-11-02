@@ -22,6 +22,7 @@ export function AddToCart({ product }: { product: Omit<CartItem, 'quantity'> }) 
         <QuantityInput value={quantity} onChange={setQuantity} id={`qte-${product.id}`} />
         <Button
           size="lg"
+          className={added ? 'flex-1 bg-success hover:bg-success' : 'flex-1'}
           onClick={() => {
             add(product, quantity)
             setAdded(true)
@@ -46,12 +47,12 @@ export function AddToCart({ product }: { product: Omit<CartItem, 'quantity'> }) 
 export function QuantityInput({ value, onChange, id, label }: { value: number; onChange: (n: number) => void; id: string; label?: string }) {
   const t = useTranslations('Shop')
   return (
-    <div className="flex items-center rounded-md border border-line bg-surface">
+    <div className="flex min-h-14 items-center border border-line bg-surface">
       <button
         type="button"
         onClick={() => onChange(Math.max(1, value - 1))}
         aria-label={t('decrease')}
-        className="flex size-11 items-center justify-center hover:bg-surface-sunken"
+        className="flex size-12 items-center justify-center transition-colors hover:bg-surface-sunken"
       >
         <Minus className="size-4" aria-hidden />
       </button>
@@ -66,13 +67,13 @@ export function QuantityInput({ value, onChange, id, label }: { value: number; o
         max={9999}
         value={value}
         onChange={(e) => onChange(Math.max(1, Math.min(9999, Number(e.target.value) || 1)))}
-        className="h-11 w-14 border-x border-line bg-transparent text-center font-mono tabular-nums [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+        className="h-12 w-14 border-x border-line bg-transparent text-center tabular-nums [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
       />
       <button
         type="button"
         onClick={() => onChange(Math.min(9999, value + 1))}
         aria-label={t('increase')}
-        className="flex size-11 items-center justify-center hover:bg-surface-sunken"
+        className="flex size-12 items-center justify-center transition-colors hover:bg-surface-sunken"
       >
         <Plus className="size-4" aria-hidden />
       </button>

@@ -53,7 +53,11 @@
     "poles": "Our divisions",
     "contact": "Get in touch",
     "legal": "Information",
-    "tools": "Plan your project"
+    "tools": "Plan your project",
+    "ctaTitle": "Let’s talk about your project",
+    "ctaText": "Answer within 2 working days, by phone or WhatsApp.",
+    "backToTop": "Back to top",
+    "follow": "Follow us"
   },
   "Poles": {
     "architecture": "Architecture and design",
@@ -97,7 +101,75 @@
         "title": "Project map",
         "text": "Our projects across Guinea, from Conakry to Kankan."
       }
-    }
+    },
+    "prev": "Previous project",
+    "next": "Next project",
+    "featuredLabel": "Featured project",
+    "scroll": "Scroll",
+    "studioEyebrow": "The studio",
+    "studioTitle": "Designing places <em>that last</em>, rooted in the earth, light and culture of Guinea.",
+    "studioText": "From the first sketches to the last coat of paint, one team carries your project: fewer intermediaries, deadlines kept and consistency from start to finish.",
+    "discover": "Discover the studio",
+    "allServices": "All services",
+    "testimonialsEyebrow": "Testimonials",
+    "ctaEyebrow": "Your project",
+    "tabs": {
+      "architecture": "Architecture",
+      "painting": "Painting",
+      "training": "Training",
+      "shop": "Shop",
+      "simulator": "Simulator"
+    },
+    "heroSlides": "Slideshow selection",
+    "badge": "ARCHI·DESIGN ✦ CONAKRY ✦ GUINEA ✦ ",
+    "slides": {
+      "architecture": {
+        "title": "From design to|the visual identity|of your *spaces*",
+        "cta": "Request a quote",
+        "stat": "projects delivered"
+      },
+      "painting": {
+        "eyebrow": "Painting & decoration",
+        "title": "Colours that|withstand *sun*|and rain",
+        "text": "Interior and façade paints, decorative plasters, murals: try our shades online on a room or on a photo of your wall.",
+        "cta": "Try our colours",
+        "stat": "painting projects"
+      },
+      "training": {
+        "eyebrow": "ARCHI-DESIGN Academy",
+        "title": "Learn the|trades of|*space*",
+        "text": "Painting, architectural design, AutoCAD, SketchUp, Revit: hands-on courses in the workshop and on site, with a certificate.",
+        "cta": "See the courses",
+        "stat": "next session",
+        "statNone": "sessions all year round"
+      },
+      "shop": {
+        "eyebrow": "Online shop",
+        "title": "Paints, plasters|and equipment,|*delivered* in Conakry",
+        "text": "The products we use on our sites, at indicative prices. Order online, pay on delivery or in store.",
+        "cta": "Visit the shop",
+        "stat": "products available"
+      },
+      "simulator": {
+        "eyebrow": "Free simulator",
+        "title": "Your budget|estimated in|*one minute*",
+        "text": "Project type, surface, finishes: get a cost and time range, then download your PDF pre-quote.",
+        "cta": "Start the simulator",
+        "statValue": "1 min",
+        "stat": "for a PDF pre-quote"
+      }
+    },
+    "ticker": [
+      "Architecture & construction",
+      "Painting & decoration",
+      "Calligraphy",
+      "Screen printing",
+      "Fine art drawing",
+      "Certified training",
+      "Free quote within 2 days",
+      "Pay on delivery",
+      "Conakry · Guinea"
+    ]
   },
   "Chain": {
     "label": "Value chain steps",
@@ -549,7 +621,17 @@
       "server": "The request could not be saved. Try again or write to us on WhatsApp.",
       "totalSize": "The files exceed {size} MB in total. Send fewer, or send them on WhatsApp after the request."
     },
-    "whatsappIntro": "Hello ARCHI-DESIGN, here is my request {number}:"
+    "whatsappIntro": "Hello ARCHI-DESIGN, here is my request {number}:",
+    "process": {
+      "title": "How it works",
+      "steps": [
+        "You describe your project in a few minutes.",
+        "We call you back within 2 working days, by phone or WhatsApp.",
+        "Site visit or study if needed, then a detailed, no-obligation quote."
+      ],
+      "free": "Free and without obligation",
+      "noPayment": "No online payment"
+    }
   },
   "Print": {
     "metaTitle": "Online printing",
@@ -601,7 +683,36 @@
     "checkout": "Place order",
     "technicalSheet": "Technical sheet",
     "noPayment": "No online payment: the team confirms price and availability before delivery.",
-    "color": "Colour"
+    "color": "Colour",
+    "add": "Add",
+    "quickAdd": "Add {name} to cart",
+    "related": "You may also like",
+    "photo": "Photo {n}",
+    "sort": {
+      "label": "Sort",
+      "featured": "Featured",
+      "priceAsc": "Price, low to high",
+      "priceDesc": "Price, high to low",
+      "name": "Name (A → Z)"
+    },
+    "trust": {
+      "delivery": {
+        "title": "Delivery in Conakry",
+        "text": "Or pick up at our workshop"
+      },
+      "payment": {
+        "title": "Pay on delivery",
+        "text": "Cash, Orange Money, transfer"
+      },
+      "advice": {
+        "title": "Free colour advice",
+        "text": "From our painters and decorators"
+      },
+      "quality": {
+        "title": "Tested on our sites",
+        "text": "Products suited to the climate"
+      }
+    }
   },
   "Training": {
     "metaTitle": "Training",
@@ -632,7 +743,31 @@
       "tous": "All levels"
     },
     "nextSession": "Next session",
-    "waitingList": "Be notified of the next session"
+    "waitingList": "Be notified of the next session",
+    "certified": "Certified",
+    "modules": "{count, plural, one {# module} other {# modules}}",
+    "nextOn": "Session on {date}",
+    "allCourses": "All courses",
+    "browse": "Browse courses",
+    "catalog": "Course catalogue",
+    "stats": {
+      "courses": "courses",
+      "sessions": "upcoming sessions",
+      "group": "learners per group",
+      "certified": "certified courses"
+    },
+    "learn": "What you will learn",
+    "about": "Overview",
+    "instructor": "Your trainer",
+    "instructorText": "They lead the course in the workshop and on site.",
+    "includes": "This course includes",
+    "includesItems": [
+      "A certificate of completion",
+      "Workshop and on-site sessions",
+      "Course materials and exercises",
+      "Small groups, personal follow-up"
+    ],
+    "enrollNow": "Enrol now"
   },
   "Simulator": {
     "metaTitle": "Quote simulator",
@@ -761,7 +896,15 @@
     "list": "Project list",
     "open": "See the project",
     "count": "{count, plural, one {# located project} other {# located projects}}",
-    "attribution": "Basemap © OpenStreetMap, OpenFreeMap"
+    "attribution": "Basemap © OpenStreetMap, OpenFreeMap",
+    "search": "Search a project or a city",
+    "filter": "Filter by division",
+    "all": "All",
+    "stats": {
+      "projects": "mapped projects",
+      "cities": "cities",
+      "poles": "divisions"
+    }
   },
   "Model3D": {
     "title": "3D model",

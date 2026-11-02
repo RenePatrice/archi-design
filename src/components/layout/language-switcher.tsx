@@ -13,7 +13,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const pathname = usePathname()
 
   return (
-    <nav aria-label={t('label')} className={cn('flex items-center font-mono text-sm', className)}>
+    <nav aria-label={t('label')} className={cn('flex items-center text-[0.6875rem] font-semibold tracking-[0.18em]', className)}>
       {routing.locales.map((code, index) => (
         <span key={code} className="flex items-center">
           {index > 0 && <span className="px-1 text-muted" aria-hidden>/</span>}

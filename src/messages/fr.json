@@ -53,7 +53,11 @@
     "poles": "Nos pôles",
     "contact": "Nous joindre",
     "legal": "Informations",
-    "tools": "Préparer son projet"
+    "tools": "Préparer son projet",
+    "ctaTitle": "Parlons de votre projet",
+    "ctaText": "Réponse sous 48 heures ouvrées, par téléphone ou sur WhatsApp.",
+    "backToTop": "Haut de page",
+    "follow": "Nous suivre"
   },
   "Poles": {
     "architecture": "Architecture et design",
@@ -97,7 +101,75 @@
         "title": "Carte des réalisations",
         "text": "Nos projets en Guinée, de Conakry à Kankan."
       }
-    }
+    },
+    "prev": "Projet précédent",
+    "next": "Projet suivant",
+    "featuredLabel": "Projet à la une",
+    "scroll": "Défiler",
+    "studioEyebrow": "Le studio",
+    "studioTitle": "Concevoir des lieux <em>qui durent</em>, ancrés dans la terre, la lumière et la culture de la Guinée.",
+    "studioText": "Des premières esquisses à la dernière couche de peinture, une même équipe porte votre projet : moins d’intermédiaires, des délais tenus et une cohérence de bout en bout.",
+    "discover": "Découvrir le studio",
+    "allServices": "Tous les services",
+    "testimonialsEyebrow": "Témoignages",
+    "ctaEyebrow": "Votre projet",
+    "tabs": {
+      "architecture": "Architecture",
+      "painting": "Peinture",
+      "training": "Formation",
+      "shop": "Boutique",
+      "simulator": "Simulateur"
+    },
+    "heroSlides": "Sélection du diaporama",
+    "badge": "ARCHI·DESIGN ✦ CONAKRY ✦ GUINÉE ✦ ",
+    "slides": {
+      "architecture": {
+        "title": "De la conception à|l’identité visuelle|de vos *espaces*",
+        "cta": "Demander un devis",
+        "stat": "projets livrés"
+      },
+      "painting": {
+        "eyebrow": "Peinture & décoration",
+        "title": "Des couleurs qui|résistent au *soleil*|et aux pluies",
+        "text": "Peintures intérieures et façades, enduits décoratifs, fresques : essayez nos teintes en ligne sur une pièce ou sur la photo de votre mur.",
+        "cta": "Essayer nos teintes",
+        "stat": "chantiers de peinture"
+      },
+      "training": {
+        "eyebrow": "Académie ARCHI-DESIGN",
+        "title": "Apprenez les|métiers de|*l’espace*",
+        "text": "Peinture, conception architecturale, AutoCAD, SketchUp, Revit : des formations pratiques en atelier et sur chantier, avec certificat.",
+        "cta": "Voir les formations",
+        "stat": "prochaine session",
+        "statNone": "sessions toute l’année"
+      },
+      "shop": {
+        "eyebrow": "Boutique en ligne",
+        "title": "Peintures, enduits|et matériel,|*livrés* à Conakry",
+        "text": "Les produits de nos chantiers, au prix indicatif. Commandez en ligne, réglez à la livraison ou sur place.",
+        "cta": "Visiter la boutique",
+        "stat": "produits disponibles"
+      },
+      "simulator": {
+        "eyebrow": "Simulateur gratuit",
+        "title": "Votre budget|estimé en|*une minute*",
+        "text": "Type de projet, surface, finitions : obtenez une fourchette de coût et de délai, puis téléchargez votre pré-devis PDF.",
+        "cta": "Lancer le simulateur",
+        "statValue": "1 min",
+        "stat": "pour un pré-devis PDF"
+      }
+    },
+    "ticker": [
+      "Architecture & BTP",
+      "Peinture & décoration",
+      "Calligraphie",
+      "Sérigraphie & impression",
+      "Dessin d’art",
+      "Formations certifiantes",
+      "Devis gratuit sous 48 h",
+      "Paiement à la livraison",
+      "Conakry · Guinée"
+    ]
   },
   "Chain": {
     "label": "Étapes de la chaîne de valeur",
@@ -549,7 +621,17 @@
       "server": "La demande n’a pas pu être enregistrée. Réessayez ou écrivez-nous sur WhatsApp.",
       "totalSize": "Les fichiers dépassent {size} Mo au total. Envoyez-en moins, ou envoyez-les sur WhatsApp après la demande."
     },
-    "whatsappIntro": "Bonjour ARCHI-DESIGN, voici ma demande {number} :"
+    "whatsappIntro": "Bonjour ARCHI-DESIGN, voici ma demande {number} :",
+    "process": {
+      "title": "Comment ça se passe",
+      "steps": [
+        "Vous décrivez votre projet en quelques minutes.",
+        "Nous vous rappelons sous 48 heures ouvrées, par téléphone ou WhatsApp.",
+        "Visite ou étude si besoin, puis devis détaillé et sans engagement."
+      ],
+      "free": "Gratuit et sans engagement",
+      "noPayment": "Aucun paiement en ligne"
+    }
   },
   "Print": {
     "metaTitle": "Impression en ligne",
@@ -601,7 +683,36 @@
     "checkout": "Valider la commande",
     "technicalSheet": "Fiche technique",
     "noPayment": "Aucun paiement en ligne : l’équipe vous confirme le prix et la disponibilité avant livraison.",
-    "color": "Teinte"
+    "color": "Teinte",
+    "add": "Ajouter",
+    "quickAdd": "Ajouter {name} au panier",
+    "related": "Vous aimerez aussi",
+    "photo": "Photo {n}",
+    "sort": {
+      "label": "Trier",
+      "featured": "Sélection",
+      "priceAsc": "Prix croissant",
+      "priceDesc": "Prix décroissant",
+      "name": "Nom (A → Z)"
+    },
+    "trust": {
+      "delivery": {
+        "title": "Livraison à Conakry",
+        "text": "Ou retrait à notre atelier"
+      },
+      "payment": {
+        "title": "Réglez à la livraison",
+        "text": "Espèces, Orange Money, virement"
+      },
+      "advice": {
+        "title": "Conseil couleur offert",
+        "text": "Avec nos peintres et décorateurs"
+      },
+      "quality": {
+        "title": "Testé sur nos chantiers",
+        "text": "Des produits adaptés au climat"
+      }
+    }
   },
   "Training": {
     "metaTitle": "Formations",
@@ -632,7 +743,31 @@
       "tous": "Tous niveaux"
     },
     "nextSession": "Prochaine session",
-    "waitingList": "Être prévenu de la prochaine session"
+    "waitingList": "Être prévenu de la prochaine session",
+    "certified": "Certifiante",
+    "modules": "{count, plural, one {# module} other {# modules}}",
+    "nextOn": "Session le {date}",
+    "allCourses": "Toutes les formations",
+    "browse": "Voir les formations",
+    "catalog": "Catalogue des formations",
+    "stats": {
+      "courses": "formations",
+      "sessions": "sessions à venir",
+      "group": "apprenants par groupe",
+      "certified": "formations certifiantes"
+    },
+    "learn": "Ce que vous apprendrez",
+    "about": "Présentation",
+    "instructor": "Votre formateur",
+    "instructorText": "Il encadre la formation en atelier et sur chantier.",
+    "includes": "Cette formation comprend",
+    "includesItems": [
+      "Un certificat de fin de formation",
+      "Cours en atelier et sur chantier",
+      "Supports de cours et exercices",
+      "Petits groupes, suivi personnalisé"
+    ],
+    "enrollNow": "S’inscrire maintenant"
   },
   "Simulator": {
     "metaTitle": "Simulateur de devis",
@@ -761,7 +896,15 @@
     "list": "Liste des projets",
     "open": "Voir le projet",
     "count": "{count, plural, one {# projet localisé} other {# projets localisés}}",
-    "attribution": "Fond de carte © OpenStreetMap, OpenFreeMap"
+    "attribution": "Fond de carte © OpenStreetMap, OpenFreeMap",
+    "search": "Rechercher un projet ou une ville",
+    "filter": "Filtrer par pôle",
+    "all": "Tous",
+    "stats": {
+      "projects": "projets localisés",
+      "cities": "villes",
+      "poles": "pôles représentés"
+    }
   },
   "Model3D": {
     "title": "Maquette 3D",

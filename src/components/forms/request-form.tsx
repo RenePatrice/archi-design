@@ -1,12 +1,13 @@
 'use client'
 
-import { CheckCircle2, MessageCircle } from 'lucide-react'
+import { ArrowRight, MessageCircle } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useActionState, useEffect, useRef, useState, type ReactNode } from 'react'
 
 import { submitRequest } from '@/app/(site)/[locale]/devis/actions'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Field, Input, Select, Textarea } from '@/components/ui/field'
+import { SuccessMark } from '@/components/ui/success-mark'
 import { Link } from '@/i18n/navigation'
 import type { RequestState } from '@/lib/requests/process'
 import { estimatePrint, formatGNF, type PrintSupportPricing } from '@/lib/requests/print-pricing'
@@ -134,9 +135,9 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
   if (state.status === 'success') {
     const whatsapp = state.whatsappText ? buildWhatsAppLink(whatsappNumber, state.whatsappText) : null
     return (
-      <div role="status" className="flex flex-col items-start gap-5 rounded-md border border-success/40 bg-surface p-6 sm:p-8">
-        <CheckCircle2 className="size-10 text-success" aria-hidden />
-        <h2 className="text-2xl font-bold">{t('confirmation.title')}</h2>
+      <div role="status" className="fade-up flex flex-col items-start gap-5 border border-line bg-surface p-6 shadow-[0_40px_80px_-50px_rgba(18,17,16,0.45)] sm:p-10">
+        <SuccessMark />
+        <h2 className="font-display text-4xl">{t('confirmation.title')}</h2>
         {state.number && (
           <p className="flex flex-col gap-1">
             <span className="text-sm text-muted">{t('confirmation.number')}</span>
@@ -215,11 +216,11 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
       case 'checkboxes':
         return (
           <fieldset key={field.name} className="flex flex-col gap-2 sm:col-span-2">
-            <legend className="mb-2 text-sm font-semibold">{label}</legend>
-            <div className="flex flex-wrap gap-x-6 gap-y-1">
+            <legend className="mb-3 text-[0.6875rem] font-semibold tracking-[0.16em] uppercase">{label}</legend>
+            <div className="flex flex-wrap gap-2">
               {field.options.map((o) => (
-                <label key={o} className="flex min-h-11 items-center gap-2.5">
-                  <input type="checkbox" name={field.name} value={o} className="size-5 accent-[var(--accent)]" />
+                <label key={o} className="choice-chip text-sm">
+                  <input type="checkbox" name={field.name} value={o} />
                   {t(`options.${field.name}.${o}`)}
                 </label>
               ))}
@@ -229,7 +230,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
       case 'checkbox':
         return (
           <label key={field.name} className="flex min-h-11 items-center gap-2.5 sm:col-span-2">
-            <input type="checkbox" name={field.name} className="size-5 shrink-0 accent-[var(--accent)]" />
+            <input type="checkbox" name={field.name} />
             {label}
           </label>
         )
@@ -251,7 +252,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
                 type="file"
                 multiple={field.maxFiles > 1}
                 accept={field.accept}
-                className="block w-full cursor-pointer rounded-md border border-dashed border-line bg-surface p-3 text-sm file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-md file:border-0 file:bg-surface-sunken file:px-4 file:font-semibold file:text-ink"
+                className="block text-sm text-muted"
               />
             )}
           </Field>
@@ -278,7 +279,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
       onChange={onInput}
       onSubmit={checkFileSizes}
       noValidate
-      className="flex flex-col gap-10"
+      className="form-ui flex flex-col gap-6"
     >
       <input type="hidden" name="service" value={service} />
       <input type="hidden" name="locale" value={locale} />
@@ -294,8 +295,8 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
       {children}
 
       {(def.fields.some((f) => !f.hidden) || sessions) && (
-        <fieldset className="flex flex-col gap-5">
-          <legend className="mb-5 font-display text-xl font-bold [font-stretch:110%]">{t('sections.request')}</legend>
+        <fieldset className="form-step flex flex-col gap-5">
+          <legend>{t('sections.request')}</legend>
           <div className="grid gap-5 sm:grid-cols-2">
             {sessions && (
               <Field id={id('session')} label={t('fields.session')} error={errorFor('session')} className="sm:col-span-2" {...required}>
@@ -320,8 +321,8 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
         </fieldset>
       )}
 
-      <fieldset className="flex flex-col gap-5">
-        <legend className="mb-5 font-display text-xl font-bold [font-stretch:110%]">{t('sections.customer')}</legend>
+      <fieldset className="form-step flex flex-col gap-5">
+        <legend>{t('sections.customer')}</legend>
         <div className="grid gap-5 sm:grid-cols-2">
           <Field id={id('name')} label={t('common.name')} error={errorFor('name')} {...required}>
             {(aria) => <Input {...aria} name="name" autoComplete="name" maxLength={120} />}
@@ -352,8 +353,8 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
         </div>
       </fieldset>
 
-      <fieldset className="flex flex-col gap-5">
-        <legend className="mb-5 font-display text-xl font-bold [font-stretch:110%]">{t('sections.reception')}</legend>
+      <fieldset className="form-step flex flex-col gap-5">
+        <legend>{t('sections.reception')}</legend>
         <div className="grid gap-5 sm:grid-cols-2">
           {def.reception && (
             <Field id={id('receptionMode')} label={t('common.receptionMode')}>
@@ -403,7 +404,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
             required
             aria-invalid={errorFor('consent') ? true : undefined}
             aria-describedby={errorFor('consent') ? id('consent-error') : undefined}
-            className="mt-0.5 size-5 shrink-0 accent-[var(--accent)]"
+            className="mt-0.5"
           />
           <span>
             {t('common.consent')}{' '}
@@ -421,8 +422,10 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
         )}
       </div>
 
-      <Button type="submit" size="lg" disabled={pending || disabled} className="self-start">
+      <Button type="submit" size="lg" disabled={pending || disabled} className="w-full sm:w-auto sm:self-start">
+        {pending && <span className="spinner" aria-hidden />}
         {pending ? t('sending') : t('submit')}
+        {!pending && <ArrowRight aria-hidden />}
       </Button>
     </form>
   )
@@ -440,11 +443,11 @@ function PrintEstimatePanel({
 }) {
   const t = useTranslations('Print')
   return (
-    <div aria-live="polite" className="flex flex-col gap-1 rounded-md border-l-4 border-accent bg-surface-sunken p-4">
+    <div aria-live="polite" className="flex flex-col gap-1 border-l-2 border-accent bg-surface-sunken p-5">
       <p className="eyebrow">{t('estimate')}</p>
       {estimate.ok ? (
         <>
-          <p className="font-display text-3xl font-extrabold tabular-nums [font-stretch:115%]" data-testid="prix-indicatif">
+          <p className="font-display text-4xl tabular-nums" data-testid="prix-indicatif">
             {formatGNF(estimate.total, locale)}
           </p>
           <p className="font-mono text-sm text-muted">
