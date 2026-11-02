@@ -55,12 +55,9 @@ if (!process.env.PAYLOAD_SECRET && process.env.VERCEL) {
   const similar = Object.keys(process.env).filter((k) => /payload|secret/i.test(k) && !k.startsWith('npm_'))
   throw new Error(
     'Clé secrète absente : ajoutez PAYLOAD_SECRET dans Vercel › Settings › Environment Variables ' +
-      '(environnements Production, Preview et Development), puis relancez le déploiement.
-' +
-      `  Environnement de ce déploiement : ${process.env.VERCEL_ENV ?? 'inconnu'}
-` +
-      `  Projet Vercel : ${process.env.VERCEL_PROJECT_ID ?? 'inconnu'}
-` +
+      '(environnements Production, Preview et Development), puis relancez le déploiement.\n' +
+      `  Environnement de ce déploiement : ${process.env.VERCEL_ENV ?? 'inconnu'}\n` +
+      `  Projet Vercel : ${process.env.VERCEL_PROJECT_ID ?? 'inconnu'}\n` +
       `  Variables au nom proche reçues : ${similar.length ? similar.map((k) => JSON.stringify(k)).join(', ') : 'aucune'}`,
   )
 }
