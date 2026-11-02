@@ -50,6 +50,13 @@ if (!databaseUrl && process.env.VERCEL) {
   )
 }
 
+if (!process.env.PAYLOAD_SECRET && process.env.VERCEL) {
+  throw new Error(
+    'Clé secrète absente : ajoutez PAYLOAD_SECRET dans Vercel › Settings › Environment Variables ' +
+      '(environnements Production, Preview et Development), puis relancez le déploiement.',
+  )
+}
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
