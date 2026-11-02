@@ -8,6 +8,7 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { JsonLd } from '@/components/seo/json-ld'
 import { AddToCart } from '@/components/shop/add-to-cart'
 import { Badge } from '@/components/ui/card'
+import { Link } from '@/i18n/navigation'
 import { MediaImage, mediaPath } from '@/components/ui/media-image'
 import { RichText } from '@/components/ui/rich-text'
 import { routing, type Locale } from '@/i18n/routing'
@@ -40,7 +41,7 @@ export default async function ProductPage({ params }: Props) {
   setRequestLocale(locale)
   const product = await getProductBySlug(locale, slug)
   if (!product) notFound()
-  const t = await getTranslations('Shop')
+  const [t, configurator] = await Promise.all([getTranslations('Shop'), getTranslations('Configurator')])
 
   const images = (product.images ?? []).filter((m): m is Media => typeof m === 'object' && m !== null)
   const inStock = (product.stock ?? 0) > 0
@@ -75,6 +76,11 @@ export default async function ProductPage({ params }: Props) {
           <p className="font-mono text-sm text-muted">{t('reference', { reference: product.reference })}</p>
           {product.summary && <p className="text-lg text-muted">{product.summary}</p>}
 
+          {product.colorHex && (
+            <Link href="/configurateur" className="text-sm font-semibold text-accent underline underline-offset-4">
+              {configurator('metaTitle')}
+            </Link>
+          )}
           {product.colorHex && (
             <p className="flex items-center gap-3">
               <span className="size-10 rounded-md border border-line" style={{ backgroundColor: product.colorHex }} aria-hidden />

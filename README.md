@@ -94,6 +94,10 @@ Tout le contenu du site se modifie dans `/admin`, sans toucher au code :
 | Formations, Sessions de formation | Catalogue, calendrier et formulaire d’inscription |
 | Tarifs impression | Prix par support (à la pièce ou au m²), minimums, remises : calcul en direct sur `/impression` |
 
+| Grille du simulateur | Prix au m² par type et finition, coefficients par zone : simulateur et PDF de pré-devis |
+| Maquettes 3D | Fichiers `.glb` reliés à une réalisation (champ « Maquette 3D » de la fiche) |
+| Page « Impact » | Indicateurs animés, récits de terrain |
+
 `npm run seed` remplit un **contenu de démonstration** : 12 réalisations, témoignages, équipe et
 partenaires **fictifs**, avec des visuels générés (« Visuel de démonstration »). Remplacez-les par
 les vrais au fil de l’eau ; le seed ne recrée ni n’écrase jamais un élément existant.
@@ -128,6 +132,20 @@ EMAIL_FROM_NAME=ARCHI-DESIGN Guinée
 Port 587 : mettre `SMTP_SECURE=false`. Pour éviter les spams, vérifier dans la zone DNS LWS que **SPF, DKIM et DMARC** sont actifs pour le domaine.
 
 **Sans `SMTP_HOST`** (développement), aucun e-mail ne part : chaque message est enregistré en HTML dans `.emails/` pour être ouvert dans un navigateur.
+
+## Outils en ligne (phase 4)
+
+| Page | Fonction |
+| --- | --- |
+| `/simulateur` | Fourchette de coût et de délai en direct ; PDF de pré-devis (`/pdf/pre-devis`) ; envoi à l’équipe avec le PDF joint |
+| `/configurateur` | Teintes des peintures de la boutique sur une pièce type ou sur la photo du visiteur (traitée dans le navigateur, jamais envoyée) |
+| Fiche projet | Maquette 3D (rotation, zoom, réalité augmentée), téléchargée seulement à la demande |
+| `/realisations/carte` | Carte des réalisations (MapLibre + OpenFreeMap, gratuit et sans clé), chargée à la demande |
+| `/impact` | Indicateurs du back-office en compteurs animés, réalisations par ville |
+
+**Maquettes 3D** : exporter en `.glb` depuis SketchUp, Revit ou Blender, viser moins de 5 Mo (textures réduites, compression Draco), puis l’ajouter dans « Maquettes 3D » et la relier à la réalisation.
+
+**Carte** : le « worker » de MapLibre est copié dans `public/vendor/` par `npm install` (script `postinstall`).
 
 ## Charte graphique
 

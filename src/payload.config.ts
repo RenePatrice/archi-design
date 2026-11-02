@@ -11,6 +11,7 @@ import sharp from 'sharp'
 import { ContactMessages } from './collections/ContactMessages'
 import { EmailTemplates } from './collections/EmailTemplates'
 import { Media } from './collections/Media'
+import { Models3D } from './collections/Models3D'
 import { OrderFiles } from './collections/OrderFiles'
 import { Orders } from './collections/Orders'
 import { Pages } from './collections/Pages'
@@ -24,8 +25,10 @@ import { Trainings } from './collections/Trainings'
 import { TrainingSessions } from './collections/TrainingSessions'
 import { Users } from './collections/Users'
 import { AboutPage } from './globals/AboutPage'
+import { ImpactPage } from './globals/ImpactPage'
 import { KeyFigures } from './globals/KeyFigures'
 import { PrintPricing } from './globals/PrintPricing'
+import { SimulatorPricing } from './globals/SimulatorPricing'
 import { SiteSettings } from './globals/SiteSettings'
 import { emailFrom, getTransporter, smtpConfigured } from './lib/email/transport'
 
@@ -70,12 +73,13 @@ export default buildConfig({
     Partners,
     Pages,
     Media,
+    Models3D,
     Products,
     Trainings,
     TrainingSessions,
     Users,
   ],
-  globals: [SiteSettings, KeyFigures, AboutPage, PrintPricing],
+  globals: [SiteSettings, KeyFigures, AboutPage, ImpactPage, PrintPricing, SimulatorPricing],
   // E-mails du back-office (mot de passe oublié…) par le même serveur SMTP que les demandes
   ...(smtpConfigured
     ? {

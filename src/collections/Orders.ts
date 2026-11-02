@@ -12,6 +12,7 @@ const serviceLabels: Record<string, { fr: string; en: string }> = {
   formation: { fr: 'Inscription formation', en: 'Training enrolment' },
   boutique: { fr: 'Commande boutique', en: 'Shop order' },
   prestation: { fr: 'Prestation de services', en: 'Consulting' },
+  simulateur: { fr: 'Simulateur (pré-devis)', en: 'Simulator (pre-quote)' },
   contact: { fr: 'Contact', en: 'Contact' },
 }
 

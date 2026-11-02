@@ -78,6 +78,7 @@ export interface Config {
     partners: Partner;
     pages: Page;
     media: Media;
+    models: Model;
     products: Product;
     trainings: Training;
     'training-sessions': TrainingSession;
@@ -100,6 +101,7 @@ export interface Config {
     partners: PartnersSelect<false> | PartnersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    models: ModelsSelect<false> | ModelsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     trainings: TrainingsSelect<false> | TrainingsSelect<true>;
     'training-sessions': TrainingSessionsSelect<false> | TrainingSessionsSelect<true>;
@@ -117,13 +119,17 @@ export interface Config {
     'site-settings': SiteSetting;
     'key-figures': KeyFigure;
     'about-page': AboutPage;
+    'impact-page': ImpactPage;
     'print-pricing': PrintPricing;
+    'simulator-pricing': SimulatorPricing;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'key-figures': KeyFiguresSelect<false> | KeyFiguresSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'impact-page': ImpactPageSelect<false> | ImpactPageSelect<true>;
     'print-pricing': PrintPricingSelect<false> | PrintPricingSelect<true>;
+    'simulator-pricing': SimulatorPricingSelect<false> | SimulatorPricingSelect<true>;
   };
   locale: 'fr' | 'en';
   widgets: {
@@ -170,6 +176,7 @@ export interface Order {
     | 'formation'
     | 'boutique'
     | 'prestation'
+    | 'simulateur'
     | 'contact';
   pole?: (number | null) | Pole;
   internalNotes?: string | null;
@@ -480,6 +487,7 @@ export interface EmailTemplate {
     | 'formation'
     | 'boutique'
     | 'prestation'
+    | 'simulateur'
     | 'contact';
   /**
    * Empty: default inbox from site settings.
@@ -565,11 +573,42 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional.
+   */
+  model?: (number | null) | Model;
   beforeImage?: (number | null) | Media;
   afterImage?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "models".
+ */
+export interface Model {
+  id: number;
+  title: string;
+  /**
+   * Shown before the model loads.
+   */
+  poster?: (number | null) | Media;
+  /**
+   * e.g. 35deg 70deg auto
+   */
+  cameraOrbit?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -747,6 +786,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'models';
+        value: number | Model;
       } | null)
     | ({
         relationTo: 'products';
@@ -975,6 +1018,7 @@ export interface ProjectsSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  model?: T;
   beforeImage?: T;
   afterImage?: T;
   updatedAt?: T;
@@ -1083,6 +1127,26 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "models_select".
+ */
+export interface ModelsSelect<T extends boolean = true> {
+  title?: T;
+  poster?: T;
+  cameraOrbit?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1304,6 +1368,34 @@ export interface AboutPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "impact-page".
+ */
+export interface ImpactPage {
+  id: number;
+  intro?: string | null;
+  figures?:
+    | {
+        value: number;
+        suffix?: string | null;
+        axis?: ('emploi' | 'formation' | 'durable' | 'territoire') | null;
+        label: string;
+        detail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  stories?:
+    | {
+        title: string;
+        text?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "print-pricing".
  */
 export interface PrintPricing {
@@ -1325,6 +1417,44 @@ export interface PrintPricing {
               id?: string | null;
             }[]
           | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Prices per m² used by the quote simulator.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "simulator-pricing".
+ */
+export interface SimulatorPricing {
+  id: number;
+  types?:
+    | {
+        key: 'villa' | 'immeuble' | 'commerce' | 'bureaux' | 'renovation' | 'interieur';
+        economiqueMin: number;
+        economiqueMax: number;
+        standardMin: number;
+        standardMax: number;
+        hautDeGammeMin: number;
+        hautDeGammeMax: number;
+        baseMonths: number;
+        monthsPer100m2: number;
+        minSurface?: number | null;
+        maxSurface?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  zones?:
+    | {
+        key: 'conakry' | 'interieur' | 'sousRegion';
+        /**
+         * 1 = base price
+         */
+        coefficient: number;
+        extraMonths?: number | null;
         id?: string | null;
       }[]
     | null;
@@ -1412,6 +1542,34 @@ export interface AboutPageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "impact-page_select".
+ */
+export interface ImpactPageSelect<T extends boolean = true> {
+  intro?: T;
+  figures?:
+    | T
+    | {
+        value?: T;
+        suffix?: T;
+        axis?: T;
+        label?: T;
+        detail?: T;
+        id?: T;
+      };
+  stories?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "print-pricing_select".
  */
 export interface PrintPricingSelect<T extends boolean = true> {
@@ -1430,6 +1588,39 @@ export interface PrintPricingSelect<T extends boolean = true> {
               percent?: T;
               id?: T;
             };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "simulator-pricing_select".
+ */
+export interface SimulatorPricingSelect<T extends boolean = true> {
+  types?:
+    | T
+    | {
+        key?: T;
+        economiqueMin?: T;
+        economiqueMax?: T;
+        standardMin?: T;
+        standardMax?: T;
+        hautDeGammeMin?: T;
+        hautDeGammeMax?: T;
+        baseMonths?: T;
+        monthsPer100m2?: T;
+        minSurface?: T;
+        maxSurface?: T;
+        id?: T;
+      };
+  zones?:
+    | T
+    | {
+        key?: T;
+        coefficient?: T;
+        extraMonths?: T;
         id?: T;
       };
   updatedAt?: T;

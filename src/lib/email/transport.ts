@@ -51,7 +51,8 @@ export type OutgoingEmail = {
   html: string
   text: string
   replyTo?: string
-  attachments?: { filename: string; path: string; contentType?: string }[]
+  /** Fichier sur disque (path) ou contenu généré en mémoire (content), ex. un PDF */
+  attachments?: ({ filename: string; contentType?: string } & ({ path: string } | { content: Buffer }))[]
 }
 
 /** Envoie un e-mail ; en développement sans SMTP, l'écrit dans .emails/ à la place. */
@@ -64,6 +65,10 @@ export async function sendEmail(email: OutgoingEmail): Promise<void> {
     const file = path.join(dir, `${new Date().toISOString().replace(/[:.]/g, '-')}_${safe}.html`)
     const header = `<!-- À : ${[email.to].flat().join(', ')} | Objet : ${email.subject} | Pièces jointes : ${email.attachments?.map((a) => a.filename).join(', ') || 'aucune'} -->\n`
     await writeFile(file, header + email.html, 'utf8')
+    // Les documents générés (PDF…) sont enregistrés à côté, pour les ouvrir comme le destinataire
+    for (const attachment of email.attachments ?? []) {
+      if ('content' in attachment) await writeFile(file.replace(/\.html$/, `_${attachment.filename}`), attachment.content)
+    }
     console.info(`[e-mail] SMTP non configuré : aperçu enregistré dans ${file}`)
     return
   }

@@ -32,6 +32,8 @@ export type NotifyInput = {
   /** Valeur de {formation} dans l'objet */
   trainingLabel?: string
   files?: { filename: string; filesize?: number | null; mimeType?: string | null }[]
+  /** Documents générés (ex. PDF de pré-devis), joints à l'e-mail de l'entreprise ET à l'accusé de réception */
+  generatedAttachments?: () => Promise<{ filename: string; content: Buffer; contentType: string }[]>
   ackLabels: { number: string; summary: string; whatsapp: string; product: string; qty: string; unitPrice: string; subtotal: string; total: string }
   /** Commande à mettre à jour avec le résultat de l'envoi */
   orderId?: number
@@ -80,10 +82,13 @@ export async function notifyRequest(input: NotifyInput): Promise<void> {
     // Pièces jointes : fichiers enregistrés dans private-uploads/
     const files = input.files ?? []
     const totalSize = files.reduce((sum, f) => sum + (f.filesize ?? 0), 0)
-    const attachments =
-      totalSize <= MAX_ATTACHMENTS_BYTES
+    const generated = input.generatedAttachments ? await input.generatedAttachments() : []
+    const attachments = [
+      ...(totalSize <= MAX_ATTACHMENTS_BYTES
         ? files.map((f) => ({ filename: f.filename, path: path.resolve(process.cwd(), 'private-uploads', f.filename), contentType: f.mimeType ?? undefined }))
-        : []
+        : []),
+      ...generated,
+    ]
 
     // 1. E-mail à l'entreprise
     const phoneDigits = input.companyData.customerPhone.replace(/\D/g, '')
@@ -131,6 +136,7 @@ export async function notifyRequest(input: NotifyInput): Promise<void> {
           html: await render(ackElement),
           text: await render(ackElement, { plainText: true }),
           replyTo: recipients[0],
+          attachments: generated,
         }),
       )
     }

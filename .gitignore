@@ -50,3 +50,6 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Copié par « npm install » (scripts/copy-vendor.mjs)
+/public/vendor

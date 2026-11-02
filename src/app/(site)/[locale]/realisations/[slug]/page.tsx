@@ -7,6 +7,7 @@ import { getPayload } from 'payload'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { BeforeAfter } from '@/components/projects/before-after'
 import { Gallery, type GalleryImage } from '@/components/projects/gallery'
+import { ModelViewer } from '@/components/projects/model-viewer'
 import { ProjectCard } from '@/components/projects/project-card'
 import { JsonLd } from '@/components/seo/json-ld'
 import { buttonVariants } from '@/components/ui/button'
@@ -18,7 +19,7 @@ import { routing, type Locale } from '@/i18n/routing'
 import { quoteHref } from '@/lib/navigation'
 import { getProjectBySlug, getProjects, projectPole } from '@/lib/queries'
 import { absoluteUrl, pageMetadata, siteUrl } from '@/lib/seo'
-import type { Media } from '@/payload-types'
+import type { Media, Model } from '@/payload-types'
 
 export const revalidate = 3600
 
@@ -82,6 +83,11 @@ export default async function ProjectPage({ params }: Props) {
       height: m.height ?? 1200,
     }))
 
+  // Maquette 3D éventuelle (relation chargée grâce à depth: 2)
+  const model = project.model && typeof project.model === 'object' ? (project.model as Model) : null
+  const modelPoster = model?.poster && typeof model.poster === 'object' ? (model.poster as Media) : asMedia(project.coverImage)
+  const model3d = await getTranslations('Model3D')
+
   const before = asMedia(project.beforeImage)
   const after = asMedia(project.afterImage)
 
@@ -125,6 +131,21 @@ export default async function ProjectPage({ params }: Props) {
               <figcaption className="eyebrow">{t('clientWord')}</figcaption>
               <blockquote className="text-xl leading-relaxed">« {project.clientQuote} »</blockquote>
             </figure>
+          )}
+
+          {model?.url && (
+            <section aria-labelledby="maquette" className="flex flex-col gap-4">
+              <h2 id="maquette" className="text-2xl font-bold">
+                {model3d('title')}
+              </h2>
+              <ModelViewer
+                src={mediaPath(model.url)}
+                poster={modelPoster?.url ? mediaPath(modelPoster.sizes?.card?.url ?? modelPoster.url) : null}
+                alt={model.title}
+                cameraOrbit={model.cameraOrbit}
+                sizeLabel={`${((model.filesize ?? 0) / 1_048_576).toLocaleString(locale, { maximumFractionDigits: 1 })} Mo`}
+              />
+            </section>
           )}
 
           {before?.url && after?.url && (

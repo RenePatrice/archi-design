@@ -43,6 +43,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
   const def = SERVICES[service]
   const formRef = useRef<HTMLFormElement>(null)
   const draftKey = `archi-design:brouillon-${service}`
+  const hiddenFields = new Set(def.fields.filter((f) => f.hidden).map((f) => f.name))
   const [state, action, pending] = useActionState<RequestState, FormData>(submitRequest, { status: 'idle' })
   const [draftRestored, setDraftRestored] = useState(false)
   const [printInput, setPrintInput] = useState({ support: '', width: '', height: '', quantity: '' })
@@ -68,6 +69,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
       if (!draft) return
       let restored = false
       for (const [name, value] of Object.entries(draft)) {
+        if (hiddenFields.has(name)) continue
         const elements = node.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${CSS.escape(name)}"]`)
         elements.forEach((el) => {
           if (el instanceof HTMLInputElement && (el.type === 'checkbox' || el.type === 'radio')) {
@@ -104,7 +106,8 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
     const draft: Record<string, string | string[]> = {}
     const data = new FormData(node)
     for (const key of new Set(data.keys())) {
-      if (['website', 'service', 'locale', 'cart', 'consent'].includes(key)) continue
+      // Champs techniques et champs remplis par la page (simulateur) : jamais dans le brouillon
+      if (['website', 'service', 'locale', 'cart', 'consent'].includes(key) || hiddenFields.has(key)) continue
       const values = data.getAll(key).filter((v): v is string => typeof v === 'string')
       if (values.length) draft[key] = values.length > 1 ? values : values[0]
     }
@@ -150,6 +153,8 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
   const id = (name: string) => `${service}-${name}`
 
   const renderField = (field: FieldDef) => {
+    // Champ rempli par un composant de la page (ex. le simulateur) : rien à afficher ici
+    if (field.hidden) return null
     const label = t(`fields.${field.name}`)
     const req = 'required' in field && field.required ? required : {}
     switch (field.type) {
@@ -265,7 +270,7 @@ export function RequestForm({ service, whatsappNumber, privacySlug, sessions, de
 
       {children}
 
-      {(def.fields.length > 0 || sessions) && (
+      {(def.fields.some((f) => !f.hidden) || sessions) && (
         <fieldset className="flex flex-col gap-5">
           <legend className="mb-5 font-display text-xl font-bold [font-stretch:110%]">{t('sections.request')}</legend>
           <div className="grid gap-5 sm:grid-cols-2">

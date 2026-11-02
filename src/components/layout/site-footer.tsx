@@ -18,12 +18,14 @@ const linkClass = 'underline-offset-4 hover:underline'
 /** Pied de page en vert Fouta : pôles, coordonnées, pages légales et signature. */
 export async function SiteFooter({ settings, poles, pages }: Props) {
   const t = await getTranslations('Footer')
+  const nav = await getTranslations('Nav')
+  const print = await getTranslations('Print')
   const year = new Date().getFullYear()
 
   return (
     <footer className="mt-24 bg-fouta text-kaolin">
       <div className="frise-leppi" aria-hidden />
-      <div className="container-site grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="container-site grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
         <div className="flex flex-col gap-4 [&_.text-muted]:text-kaolin/70">
           <Wordmark />
           {settings.tagline && <p className="max-w-sm text-kaolin/85">{settings.tagline}</p>}
@@ -61,6 +63,30 @@ export async function SiteFooter({ settings, poles, pages }: Props) {
             {settings.openingHours && <span className="text-kaolin/70">{settings.openingHours}</span>}
           </address>
         </div>
+
+        <nav aria-labelledby="footer-outils" className="flex flex-col gap-3">
+          <h2 id="footer-outils" className={headingClass}>
+            {t('tools')}
+          </h2>
+          <ul className="flex flex-col gap-1.5 text-sm">
+            {(
+              [
+                ['/devis', nav('quote')],
+                ['/simulateur', nav('simulator')],
+                ['/configurateur', nav('configurator')],
+                ['/impression', print('metaTitle')],
+                ['/realisations/carte', nav('map')],
+                ['/impact', nav('impact')],
+              ] as const
+            ).map(([href, label]) => (
+              <li key={href}>
+                <Link href={href} className={linkClass}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {pages.length > 0 && (
           <nav aria-labelledby="footer-legal" className="flex flex-col gap-3">

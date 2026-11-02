@@ -10,6 +10,8 @@ import { routing, type Locale } from '@/i18n/routing'
 import type { OrderFile } from '@/payload-types'
 import { notifyRequest } from '@/lib/email/notify'
 import { isRateLimited } from '@/lib/rate-limit'
+import { simulate } from '@/lib/simulator/estimate'
+import { buildPreQuotePdf, loadSimulatorPricing } from '@/lib/simulator/prequote'
 
 import { nextOrderNumber } from './numbering'
 import { estimatePrint, formatGNF } from './print-pricing'
@@ -160,6 +162,14 @@ export async function processRequest(formData: FormData): Promise<RequestState> 
     }
     if (service === 'boutique') estimatedTotal = lines.reduce((sum, l) => sum + l.subtotal, 0)
 
+    // Simulateur : fourchette recalculée avec la grille en base
+    const simInput =
+      service === 'simulateur'
+        ? { type: String(data.simType), surface: Number(data.simSurface), finish: String(data.simFinish), zone: String(data.simZone) }
+        : null
+    const simulation = simInput ? simulate(await loadSimulatorPricing(), simInput) : null
+    if (simulation && !simulation.ok) return fail('invalid', { simSurface: 'number' })
+
     // 7. Fichiers dans le stockage privé. Payload vérifie leur contenu réel :
     //    un fichier corrompu ou déguisé est refusé avec un message sur le champ concerné.
     const files: OrderFile[] = []
@@ -187,6 +197,11 @@ export async function processRequest(formData: FormData): Promise<RequestState> 
       for (const field of def.fields) {
         const value = formatValue(field, data[field.name], t, lang)
         if (value) rows.push({ label: t(`fields.${field.name}`), value })
+      }
+      if (simulation?.ok) {
+        const sim = (await getTranslations({ locale: lang, namespace: 'Simulator' })) as unknown as Translator
+        rows.push({ label: sim('budget'), value: `${formatGNF(simulation.costMin, lang)} – ${formatGNF(simulation.costMax, lang)}` })
+        rows.push({ label: sim('duration'), value: sim('months', { min: simulation.monthsMin, max: simulation.monthsMax }) })
       }
       if (service === 'serigraphie' && estimatedTotal !== undefined)
         rows.push({ label: lang === 'fr' ? 'Prix indicatif' : 'Indicative price', value: formatGNF(estimatedTotal, lang) })
@@ -260,6 +275,13 @@ export async function processRequest(formData: FormData): Promise<RequestState> 
         typeLabel: typeLabel?.toLowerCase(),
         trainingLabel: sessionDoc?.label ?? undefined,
         files: files.map((f) => ({ filename: f.filename!, filesize: f.filesize, mimeType: f.mimeType })),
+        // Le PDF de pré-devis porte le numéro de la demande et le nom du client
+        generatedAttachments: simInput
+          ? async () => {
+              const built = await buildPreQuotePdf(simInput, locale, { reference: order.number, customerName: String(data.name) })
+              return built ? [{ filename: `pre-devis-${order.number}.pdf`, content: built.pdf, contentType: 'application/pdf' }] : []
+            }
+          : undefined,
         companyData: {
           number: order.number,
           serviceLabel: serviceTitle(fr.t),

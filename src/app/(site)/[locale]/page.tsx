@@ -1,4 +1,4 @@
-import { ArrowRight, MessageCircle } from 'lucide-react'
+import { ArrowRight, Calculator, MapPinned, MessageCircle, Palette } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
@@ -143,6 +143,31 @@ export default async function HomePage({ params }: Props) {
           <SectionHeading id="chaine" eyebrow={t('chainEyebrow')} title={t('chainTitle')} intro={t('chainIntro')} />
           <ValueChain poleSlugs={poleSlugs} />
         </div>
+      </section>
+
+      {/* Outils en ligne : simulateur, configurateur, carte */}
+      <section className="container-site flex flex-col gap-8 pt-16 sm:pt-20" aria-labelledby="outils">
+        <SectionHeading id="outils" eyebrow={t('toolsEyebrow')} title={t('toolsTitle')} />
+        <ul className="grid gap-4 md:grid-cols-3">
+          {(
+            [
+              { key: 'simulator', href: '/simulateur', icon: Calculator, tone: 'bg-laterite text-white' },
+              { key: 'configurator', href: '/configurateur', icon: Palette, tone: 'bg-leppi text-kaolin' },
+              { key: 'map', href: '/realisations/carte', icon: MapPinned, tone: 'bg-fouta text-kaolin' },
+            ] as const
+          ).map(({ key, href, icon: Icon, tone }) => (
+            <li key={key} className={cn('group relative flex flex-col gap-3 rounded-md p-6', tone)}>
+              <Icon className="size-8 opacity-90" aria-hidden />
+              <h3 className="text-xl font-bold">
+                <Link href={href} className="after:absolute after:inset-0">
+                  {t(`tools.${key}.title`)}
+                </Link>
+              </h3>
+              <p className="text-sm opacity-90">{t(`tools.${key}.text`)}</p>
+              <ArrowRight className="mt-auto size-6 transition-transform group-hover:translate-x-1" aria-hidden />
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Projets phares */}

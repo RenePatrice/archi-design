@@ -22,6 +22,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Génération des PDF côté serveur : bibliothèque chargée telle quelle par Node.js
+  serverExternalPackages: ['@react-pdf/renderer'],
   experimental: {
     // Fichiers joints aux demandes : jusqu'à 5 fichiers de 10 Mo
     serverActions: { bodySizeLimit: '55mb' },

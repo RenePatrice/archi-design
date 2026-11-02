@@ -21,9 +21,11 @@
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "icons": "node scripts/generate-icons.mjs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "postinstall": "node scripts/copy-vendor.mjs"
   },
   "dependencies": {
+    "@google/model-viewer": "4.4.0",
     "@payloadcms/db-postgres": "3.91.0",
     "@payloadcms/email-nodemailer": "3.91.0",
     "@payloadcms/next": "3.91.0",
@@ -32,12 +34,14 @@
     "@payloadcms/ui": "3.91.0",
     "@react-email/components": "1.0.12",
     "@react-email/render": "2.2.0",
+    "@react-pdf/renderer": "4.9.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
     "lucide-react": "1.66.0",
+    "maplibre-gl": "6.14.0",
     "next": "16.3.3",
     "next-intl": "4.14.9",
     "nodemailer": "10.3.1",
@@ -47,6 +51,7 @@
     "server-only": "0.0.1",
     "sharp": "0.35.4",
     "tailwind-merge": "3.7.0",
+    "three": "0.183.2",
     "zod": "4.6.7"
   },
   "devDependencies": {

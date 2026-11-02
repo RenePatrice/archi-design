@@ -10,6 +10,8 @@ import { getPayload } from 'payload'
 
 import { aboutSeed, figureSeeds, pageSeeds, partnerSeeds, poleSeeds, projectSeeds, teamSeeds, testimonialSeeds } from './data'
 import { emailTemplateSeeds, printPricingSeed, productSeeds, trainingSeeds } from './data-phase3'
+import { impactSeed, simulatorEmailTemplate, simulatorPricingSeed } from './data-phase4'
+import { buildDemoVillaGlb } from './glb'
 import { demoImage } from './images'
 import { richText } from './lexical'
 
@@ -386,6 +388,74 @@ for (const [index, seed] of trainingSeeds.entries()) {
     })
   }
   log(`Formation créée : ${seed.title.fr}`)
+}
+
+/* ───────────── 11. Simulateur : grille et modèle d'e-mail ───────────── */
+const simulator = await payload.findGlobal({ slug: 'simulator-pricing' })
+if (!simulator.types?.length) {
+  await payload.updateGlobal({
+    slug: 'simulator-pricing',
+    data: { types: simulatorPricingSeed.types.map((t) => ({ ...t })), zones: simulatorPricingSeed.zones.map((z) => ({ ...z })) },
+  })
+  log('Grille du simulateur de démonstration créée.')
+}
+{
+  const t = simulatorEmailTemplate
+  const found = await payload.find({ collection: 'email-templates', where: { service: { equals: t.service } }, limit: 1 })
+  if (!found.docs[0]) {
+    const doc = await payload.create({
+      collection: 'email-templates',
+      locale: 'fr',
+      data: { service: t.service, name: t.name, subject: t.subject, intro: t.intro, ackSubject: t.ackSubject.fr, ackIntro: t.ackIntro.fr, ackDelay: t.ackDelay.fr, ackOutro: t.ackOutro.fr },
+    })
+    await payload.update({
+      collection: 'email-templates',
+      id: doc.id,
+      locale: 'en',
+      data: { ackSubject: t.ackSubject.en, ackIntro: t.ackIntro.en, ackDelay: t.ackDelay.en, ackOutro: t.ackOutro.en },
+    })
+    log('Modèle d’e-mail du simulateur créé.')
+  }
+}
+
+/* ───────────── 12. Page « Impact » ───────────── */
+const impact = await payload.findGlobal({ slug: 'impact-page', locale: 'fr' })
+if (!impact.figures?.length) {
+  const storyImages = await Promise.all(impactSeed.stories.map((_, i) => media(600 + i, `impact-recit-${i + 1}`, impactSeed.stories[i].title)))
+  const doc = await payload.updateGlobal({
+    slug: 'impact-page',
+    locale: 'fr',
+    data: {
+      intro: impactSeed.intro.fr,
+      figures: impactSeed.figures.map((f) => ({ value: f.value, suffix: f.suffix, axis: f.axis as 'emploi', label: f.label.fr, detail: f.detail.fr })),
+      stories: impactSeed.stories.map((s, i) => ({ title: s.title.fr, text: s.text.fr, image: storyImages[i] })),
+    },
+  })
+  await payload.updateGlobal({
+    slug: 'impact-page',
+    locale: 'en',
+    data: {
+      intro: impactSeed.intro.en,
+      figures: withIds(doc.figures, impactSeed.figures.map((f) => ({ value: f.value, suffix: f.suffix, axis: f.axis as 'emploi', label: f.label.en, detail: f.detail.en }))),
+      stories: withIds(doc.stories, impactSeed.stories.map((s, i) => ({ title: s.title.en, text: s.text.en, image: storyImages[i] }))),
+    },
+  })
+  log('Page « Impact » remplie.')
+}
+
+/* ───────────── 13. Maquette 3D de démonstration (villa de Kipé) ───────────── */
+const villa = (await payload.find({ collection: 'projects', where: { slug: { equals: 'villa-bioclimatique-kipe' } }, limit: 1, depth: 0 })).docs[0]
+if (villa && !villa.model) {
+  const glb = buildDemoVillaGlb()
+  const model = await payload.create({
+    collection: 'models',
+    locale: 'fr',
+    data: { title: 'Villa bioclimatique à Kipé (maquette de démonstration)', poster: typeof villa.coverImage === 'number' ? villa.coverImage : undefined },
+    file: { data: glb, mimetype: 'model/gltf-binary', name: 'villa-kipe-demo.glb', size: glb.length },
+  })
+  await payload.update({ collection: 'models', id: model.id, locale: 'en', data: { title: 'Bioclimatic villa in Kipé (demo model)' } })
+  await payload.update({ collection: 'projects', id: villa.id, data: { model: model.id, _status: 'published' } })
+  log(`Maquette 3D créée (${Math.round(glb.length / 1024)} Ko) et reliée à la villa de Kipé.`)
 }
 
 log('Seed terminé.')

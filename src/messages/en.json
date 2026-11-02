@@ -25,7 +25,12 @@
     "training": "Training",
     "shop": "Shop",
     "contact": "Contact",
-    "quote": "Quote"
+    "quote": "Quote",
+    "tools": "Tools",
+    "simulator": "Simulator",
+    "configurator": "Colours",
+    "map": "Map",
+    "impact": "Impact"
   },
   "Theme": {
     "label": "Display theme",
@@ -46,7 +51,8 @@
     "rights": "All rights reserved.",
     "poles": "Our divisions",
     "contact": "Get in touch",
-    "legal": "Information"
+    "legal": "Information",
+    "tools": "Plan your project"
   },
   "Poles": {
     "architecture": "Architecture and design",
@@ -74,7 +80,23 @@
     "testimonialsTitle": "They trusted us with their project",
     "partnersTitle": "They trust us",
     "ctaTitle": "Have a project in mind?",
-    "ctaText": "Describe it in a few lines: we reply within 2 working days, by phone or on WhatsApp."
+    "ctaText": "Describe it in a few lines: we reply within 2 working days, by phone or on WhatsApp.",
+    "toolsEyebrow": "Before you call us",
+    "toolsTitle": "Plan your project online",
+    "tools": {
+      "simulator": {
+        "title": "Quote simulator",
+        "text": "Cost and time range in one minute, with a PDF pre-quote to keep."
+      },
+      "configurator": {
+        "title": "Colour configurator",
+        "text": "Try our colours on a sample room or on a photo of your own wall."
+      },
+      "map": {
+        "title": "Project map",
+        "text": "Our projects across Guinea, from Conakry to Kankan."
+      }
+    }
   },
   "Chain": {
     "label": "Value chain steps",
@@ -308,6 +330,10 @@
       "contact": {
         "title": "Contact",
         "intro": ""
+      },
+      "simulateur": {
+        "title": "Simulator pre-quote",
+        "intro": ""
       }
     },
     "sections": {
@@ -368,7 +394,11 @@
       "paymentPlan": "Payment plan",
       "nature": "Type of service",
       "description": "Description",
-      "urgency": "Urgency"
+      "urgency": "Urgency",
+      "simType": "Project type",
+      "simSurface": "Area",
+      "simFinish": "Finish",
+      "simZone": "Location"
     },
     "fileHint": "{max, plural, one {# file} other {up to # files}}, 10 MB max each (JPG, PNG, PDF).",
     "printFileHint": "PDF, AI, SVG, PNG, JPG or ZIP, 10 MB max each.",
@@ -466,6 +496,24 @@
         "virement": "Bank transfer",
         "aLaLivraison": "On delivery",
         "surPlace": "On site"
+      },
+      "simType": {
+        "villa": "Villa / house",
+        "immeuble": "Apartment building",
+        "commerce": "Shop",
+        "bureaux": "Offices",
+        "renovation": "Renovation",
+        "interieur": "Interior fit-out"
+      },
+      "simFinish": {
+        "economique": "Basic",
+        "standard": "Standard",
+        "hautDeGamme": "Premium"
+      },
+      "simZone": {
+        "conakry": "Greater Conakry",
+        "interieur": "Inland Guinea",
+        "sousRegion": "West Africa"
       }
     },
     "submit": "Send my request",
@@ -583,5 +631,157 @@
     },
     "nextSession": "Next session",
     "waitingList": "Be notified of the next session"
+  },
+  "Simulator": {
+    "metaTitle": "Quote simulator",
+    "metaDescription": "Estimate the cost and time of your construction or renovation in Guinea: price range per m², works duration and free PDF pre-quote.",
+    "eyebrow": "Simulator",
+    "title": "How much will your project cost?",
+    "intro": "Four choices give you a realistic range, based on our recent projects. The result updates with every change.",
+    "type": "Project type",
+    "surface": "Area",
+    "surfaceUnit": "m²",
+    "finish": "Finish level",
+    "zone": "Location",
+    "types": {
+      "villa": "Villa / house",
+      "immeuble": "Apartment building",
+      "commerce": "Shop",
+      "bureaux": "Offices",
+      "renovation": "Renovation",
+      "interieur": "Interior fit-out"
+    },
+    "finishes": {
+      "economique": "Basic",
+      "standard": "Standard",
+      "hautDeGamme": "Premium"
+    },
+    "finishHints": {
+      "economique": "Simple local materials, plain finishes",
+      "standard": "Tiles, aluminium joinery, quality paint",
+      "hautDeGamme": "Fine materials, home automation, custom finishes"
+    },
+    "zones": {
+      "conakry": "Greater Conakry",
+      "interieur": "Inland Guinea",
+      "sousRegion": "West Africa"
+    },
+    "result": "Estimate",
+    "budget": "Estimated budget",
+    "perM2": "i.e. {min} to {max} per m²",
+    "duration": "Estimated duration",
+    "months": "{min} to {max} months",
+    "budgetHint": "Excluding land and utility connections",
+    "durationHint": "Studies, permit and works",
+    "surfaceError": "Area between {min} and {max} m² for this project type.",
+    "download": "Download the PDF pre-quote",
+    "sendTitle": "Get the pre-quote and a call back",
+    "sendIntro": "Leave your details: we e-mail you this pre-quote and an architect calls you to refine it.",
+    "disclaimer": "Indicative estimate based on average prices. It does not replace a quote: the actual price depends on the land, plans and choice of materials.",
+    "pdf": {
+      "eyebrow": "Indicative pre-quote",
+      "title": "Your project estimate",
+      "subtitle": "Document generated by the ARCHI-DESIGN Guinea online simulator.",
+      "preparedFor": "Prepared for {name}",
+      "reference": "Ref.",
+      "date": "On",
+      "details": "Your project",
+      "steps": "What ARCHI-DESIGN support includes",
+      "disclaimer": "This pre-quote is an indicative estimate based on average prices per m² observed on our projects. It is neither a quote nor a contractual commitment. The final price will be set after a site visit, review of the plans and choice of materials, then confirmed in writing. No online payment is required.",
+      "pricePerM2": "Price per m²"
+    },
+    "steps": {
+      "construction": [
+        "Site visit and feasibility study",
+        "Plans, 3D model and building permit file",
+        "Structural and finishing works with our teams",
+        "Finishes, painting and signage",
+        "Works acceptance and handover"
+      ],
+      "renovation": [
+        "Survey of the existing building (structure, damp, networks)",
+        "Renovation plans and choice of materials",
+        "Repairs, upgrades and finishes",
+        "Painting, decoration and acceptance"
+      ],
+      "interieur": [
+        "Survey and needs assessment",
+        "Layout plans and material board",
+        "Custom furniture, lighting and painting",
+        "Installation and acceptance"
+      ]
+    }
+  },
+  "Configurator": {
+    "metaTitle": "Colour configurator",
+    "metaDescription": "Try our paint colours on a sample room or on a photo of your wall, right in your browser.",
+    "eyebrow": "Configurator",
+    "title": "Try our colours at home",
+    "intro": "Choose a sample room or upload a photo of your wall, then tap a colour. Everything happens on your device: your photo is never uploaded.",
+    "modeLabel": "Surface",
+    "modes": {
+      "room": "Sample room",
+      "photo": "My photo"
+    },
+    "rooms": {
+      "salon": "Living room",
+      "chambre": "Bedroom",
+      "facade": "Façade"
+    },
+    "surfaces": {
+      "walls": "Walls",
+      "accent": "Accent wall",
+      "facade": "Façade",
+      "trim": "Trims"
+    },
+    "surfaceLabel": "Area to paint",
+    "palette": "Colour chart",
+    "selected": "Selected colour",
+    "seeProduct": "See the product",
+    "addToCart": "Add to cart",
+    "photoPick": "Choose a photo",
+    "photoHint": "Tap the wall on the photo to paint it with the selected colour. Adjust tolerance if the area spills over.",
+    "tolerance": "Tolerance",
+    "undo": "Undo",
+    "reset": "Start over",
+    "photoEmpty": "No photo yet. Take your wall well lit, facing it.",
+    "noColors": "The colour chart will be available once paints have a colour in the back office.",
+    "disclaimer": "Indicative rendering: the actual colour depends on lighting and surface. Ask for a sample in store."
+  },
+  "Map": {
+    "metaTitle": "Project map",
+    "metaDescription": "Interactive map of ARCHI-DESIGN Guinea projects in Conakry and across Guinea.",
+    "eyebrow": "Map",
+    "title": "Our projects on the map",
+    "intro": "Each dot is a completed project. Tap it to see the details.",
+    "load": "Show the interactive map",
+    "loadHint": "The map loads about 300 KB of map data (OpenStreetMap).",
+    "list": "Project list",
+    "open": "See the project",
+    "count": "{count, plural, one {# located project} other {# located projects}}",
+    "attribution": "Basemap © OpenStreetMap, OpenFreeMap"
+  },
+  "Model3D": {
+    "title": "3D model",
+    "load": "Show the 3D model",
+    "loadHint": "{size} model. Rotate it with your finger, zoom, or place it in your room with augmented reality.",
+    "ar": "View in my space (AR)",
+    "loading": "Loading the model…",
+    "error": "The model could not be loaded."
+  },
+  "Impact": {
+    "metaTitle": "Our impact",
+    "metaDescription": "Jobs created, young people trained, sustainable projects: the impact of ARCHI-DESIGN Guinea on its territory.",
+    "eyebrow": "Impact",
+    "title": "What our projects leave behind",
+    "axes": {
+      "emploi": "Jobs and talent",
+      "formation": "Training",
+      "durable": "Sustainable building",
+      "territoire": "Territory"
+    },
+    "stories": "On the ground",
+    "byCity": "Our projects by city",
+    "seeMap": "See the map"
   }
 }

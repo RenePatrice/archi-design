@@ -32,6 +32,7 @@ const eslintConfig = defineConfig([
     'src/app/(payload)/',
     'src/migrations/',
     'playwright-report/',
+    'public/vendor/',
     'test-results/',
   ]),
 ])

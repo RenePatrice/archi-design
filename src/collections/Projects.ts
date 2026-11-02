@@ -158,6 +158,13 @@ export const Projects: CollectionConfig = {
               fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
             },
             {
+              name: 'model',
+              type: 'relationship',
+              relationTo: 'models',
+              label: { fr: 'Maquette 3D (.glb)', en: '3D model (.glb)' },
+              admin: { description: { fr: 'Facultatif : maquette consultable en 3D et en réalité augmentée.', en: 'Optional.' } },
+            },
+            {
               type: 'row',
               fields: [
                 { name: 'beforeImage', type: 'upload', relationTo: 'media', label: { fr: 'Avant', en: 'Before' } },

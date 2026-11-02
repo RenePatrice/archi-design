@@ -25,7 +25,12 @@
     "training": "Formations",
     "shop": "Boutique",
     "contact": "Contact",
-    "quote": "Devis"
+    "quote": "Devis",
+    "tools": "Outils",
+    "simulator": "Simulateur",
+    "configurator": "Couleurs",
+    "map": "Carte",
+    "impact": "Impact"
   },
   "Theme": {
     "label": "Thème d’affichage",
@@ -46,7 +51,8 @@
     "rights": "Tous droits réservés.",
     "poles": "Nos pôles",
     "contact": "Nous joindre",
-    "legal": "Informations"
+    "legal": "Informations",
+    "tools": "Préparer son projet"
   },
   "Poles": {
     "architecture": "Architecture et design",
@@ -74,7 +80,23 @@
     "testimonialsTitle": "Ils nous ont confié leur projet",
     "partnersTitle": "Ils nous font confiance",
     "ctaTitle": "Un projet en tête ?",
-    "ctaText": "Décrivez-le en quelques lignes : nous vous répondons sous 48 heures ouvrées, par téléphone ou sur WhatsApp."
+    "ctaText": "Décrivez-le en quelques lignes : nous vous répondons sous 48 heures ouvrées, par téléphone ou sur WhatsApp.",
+    "toolsEyebrow": "Avant de nous appeler",
+    "toolsTitle": "Préparez votre projet en ligne",
+    "tools": {
+      "simulator": {
+        "title": "Simulateur de devis",
+        "text": "Fourchette de coût et de délai en une minute, avec un pré-devis PDF à garder."
+      },
+      "configurator": {
+        "title": "Configurateur de couleurs",
+        "text": "Essayez nos teintes sur une pièce type ou sur la photo de votre mur."
+      },
+      "map": {
+        "title": "Carte des réalisations",
+        "text": "Nos projets en Guinée, de Conakry à Kankan."
+      }
+    }
   },
   "Chain": {
     "label": "Étapes de la chaîne de valeur",
@@ -308,6 +330,10 @@
       "contact": {
         "title": "Contact",
         "intro": ""
+      },
+      "simulateur": {
+        "title": "Pré-devis du simulateur",
+        "intro": ""
       }
     },
     "sections": {
@@ -368,7 +394,11 @@
       "paymentPlan": "Modalité de règlement",
       "nature": "Nature de la prestation",
       "description": "Description",
-      "urgency": "Urgence"
+      "urgency": "Urgence",
+      "simType": "Type de projet",
+      "simSurface": "Surface",
+      "simFinish": "Finition",
+      "simZone": "Localisation"
     },
     "fileHint": "{max, plural, one {# fichier} other {jusqu’à # fichiers}}, 10 Mo maximum chacun (JPG, PNG, PDF).",
     "printFileHint": "PDF, AI, SVG, PNG, JPG ou ZIP, 10 Mo maximum chacun.",
@@ -466,6 +496,24 @@
         "virement": "Virement",
         "aLaLivraison": "À la livraison",
         "surPlace": "Sur place"
+      },
+      "simType": {
+        "villa": "Villa / maison",
+        "immeuble": "Immeuble",
+        "commerce": "Commerce",
+        "bureaux": "Bureaux",
+        "renovation": "Rénovation",
+        "interieur": "Aménagement intérieur"
+      },
+      "simFinish": {
+        "economique": "Économique",
+        "standard": "Standard",
+        "hautDeGamme": "Haut de gamme"
+      },
+      "simZone": {
+        "conakry": "Grand Conakry",
+        "interieur": "Intérieur de la Guinée",
+        "sousRegion": "Afrique de l’Ouest"
       }
     },
     "submit": "Envoyer ma demande",
@@ -583,5 +631,157 @@
     },
     "nextSession": "Prochaine session",
     "waitingList": "Être prévenu de la prochaine session"
+  },
+  "Simulator": {
+    "metaTitle": "Simulateur de devis",
+    "metaDescription": "Estimez le coût et le délai de votre construction ou rénovation en Guinée : fourchette au m², durée des travaux et pré-devis PDF gratuit.",
+    "eyebrow": "Simulateur",
+    "title": "Combien coûtera votre projet ?",
+    "intro": "Quatre choix suffisent pour obtenir une fourchette réaliste, calculée sur nos chantiers récents. Le résultat se met à jour à chaque modification.",
+    "type": "Type de projet",
+    "surface": "Surface",
+    "surfaceUnit": "m²",
+    "finish": "Niveau de finition",
+    "zone": "Localisation",
+    "types": {
+      "villa": "Villa / maison",
+      "immeuble": "Immeuble",
+      "commerce": "Commerce",
+      "bureaux": "Bureaux",
+      "renovation": "Rénovation",
+      "interieur": "Aménagement intérieur"
+    },
+    "finishes": {
+      "economique": "Économique",
+      "standard": "Standard",
+      "hautDeGamme": "Haut de gamme"
+    },
+    "finishHints": {
+      "economique": "Matériaux locaux simples, finitions sobres",
+      "standard": "Carrelage, menuiseries alu, peinture de qualité",
+      "hautDeGamme": "Matériaux nobles, domotique, finitions sur mesure"
+    },
+    "zones": {
+      "conakry": "Grand Conakry",
+      "interieur": "Intérieur de la Guinée",
+      "sousRegion": "Afrique de l’Ouest"
+    },
+    "result": "Estimation",
+    "budget": "Budget estimé",
+    "perM2": "soit {min} à {max} par m²",
+    "duration": "Durée estimée",
+    "months": "{min} à {max} mois",
+    "budgetHint": "Hors terrain et raccordements",
+    "durationHint": "Études, permis et travaux",
+    "surfaceError": "Surface entre {min} et {max} m² pour ce type de projet.",
+    "download": "Télécharger le pré-devis PDF",
+    "sendTitle": "Recevoir le pré-devis et être rappelé",
+    "sendIntro": "Laissez vos coordonnées : nous vous envoyons ce pré-devis par e-mail et un architecte vous rappelle pour l’affiner.",
+    "disclaimer": "Estimation indicative fondée sur des prix moyens constatés. Elle ne remplace pas un devis : le prix réel dépend du terrain, des plans et des choix de matériaux.",
+    "pdf": {
+      "eyebrow": "Pré-devis indicatif",
+      "title": "Estimation de votre projet",
+      "subtitle": "Document généré par le simulateur en ligne d’ARCHI-DESIGN Guinée.",
+      "preparedFor": "Préparé pour {name}",
+      "reference": "Réf.",
+      "date": "Le",
+      "details": "Votre projet",
+      "steps": "Ce que comprend l’accompagnement ARCHI-DESIGN",
+      "disclaimer": "Ce pré-devis est une estimation indicative fondée sur des prix moyens au m² constatés sur nos chantiers. Il ne constitue pas un devis ni un engagement contractuel. Le prix définitif sera établi après visite du terrain, étude des plans et choix des matériaux, puis confirmé par écrit. Aucun paiement n’est demandé en ligne.",
+      "pricePerM2": "Prix au m²"
+    },
+    "steps": {
+      "construction": [
+        "Visite du terrain et étude de faisabilité",
+        "Plans, maquette 3D et dossier de permis de construire",
+        "Gros œuvre et second œuvre avec nos équipes",
+        "Finitions, peinture et signalétique",
+        "Réception des travaux et remise des clés"
+      ],
+      "renovation": [
+        "Diagnostic de l’existant (structure, humidité, réseaux)",
+        "Plans de rénovation et choix des matériaux",
+        "Travaux de reprise, mise aux normes et finitions",
+        "Peinture, décoration et réception"
+      ],
+      "interieur": [
+        "Relevé des lieux et définition des besoins",
+        "Plans d’aménagement et planche de matériaux",
+        "Mobilier sur mesure, éclairage et peinture",
+        "Installation et réception"
+      ]
+    }
+  },
+  "Configurator": {
+    "metaTitle": "Configurateur de couleurs",
+    "metaDescription": "Testez les teintes de nos peintures sur une pièce type ou sur la photo de votre mur, directement dans votre navigateur.",
+    "eyebrow": "Configurateur",
+    "title": "Essayez nos couleurs chez vous",
+    "intro": "Choisissez une pièce type ou importez la photo de votre mur, puis touchez une teinte du nuancier. Tout se passe sur votre appareil : votre photo n’est envoyée nulle part.",
+    "modeLabel": "Support",
+    "modes": {
+      "room": "Pièce type",
+      "photo": "Ma photo"
+    },
+    "rooms": {
+      "salon": "Salon",
+      "chambre": "Chambre",
+      "facade": "Façade"
+    },
+    "surfaces": {
+      "walls": "Murs",
+      "accent": "Mur d’accent",
+      "facade": "Façade",
+      "trim": "Encadrements"
+    },
+    "surfaceLabel": "Zone à peindre",
+    "palette": "Nuancier",
+    "selected": "Teinte choisie",
+    "seeProduct": "Voir le produit",
+    "addToCart": "Ajouter au panier",
+    "photoPick": "Choisir une photo",
+    "photoHint": "Touchez le mur sur la photo pour le peindre avec la teinte choisie. Réglez la tolérance si la zone déborde.",
+    "tolerance": "Tolérance",
+    "undo": "Annuler",
+    "reset": "Recommencer",
+    "photoEmpty": "Aucune photo pour l’instant. Prenez votre mur bien éclairé, de face.",
+    "noColors": "Le nuancier sera disponible quand les peintures auront une teinte dans le back-office.",
+    "disclaimer": "Rendu indicatif : la teinte réelle dépend de l’éclairage et du support. Demandez un échantillon en boutique."
+  },
+  "Map": {
+    "metaTitle": "Carte des réalisations",
+    "metaDescription": "Carte interactive des réalisations d’ARCHI-DESIGN Guinée à Conakry et dans toute la Guinée.",
+    "eyebrow": "Carte",
+    "title": "Nos réalisations sur la carte",
+    "intro": "Chaque point est un projet livré. Touchez-le pour voir la fiche.",
+    "load": "Afficher la carte interactive",
+    "loadHint": "La carte charge environ 300 Ko de données cartographiques (OpenStreetMap).",
+    "list": "Liste des projets",
+    "open": "Voir le projet",
+    "count": "{count, plural, one {# projet localisé} other {# projets localisés}}",
+    "attribution": "Fond de carte © OpenStreetMap, OpenFreeMap"
+  },
+  "Model3D": {
+    "title": "Maquette 3D",
+    "load": "Afficher la maquette 3D",
+    "loadHint": "Maquette de {size}. Faites-la tourner du doigt, zoomez, ou placez-la chez vous en réalité augmentée.",
+    "ar": "Voir chez moi (réalité augmentée)",
+    "loading": "Chargement de la maquette…",
+    "error": "La maquette n’a pas pu être chargée."
+  },
+  "Impact": {
+    "metaTitle": "Notre impact",
+    "metaDescription": "Emplois créés, jeunes formés, projets durables : l’impact d’ARCHI-DESIGN Guinée sur son territoire.",
+    "eyebrow": "Impact",
+    "title": "Ce que nos chantiers laissent derrière eux",
+    "axes": {
+      "emploi": "Emplois et talents",
+      "formation": "Formation",
+      "durable": "Construction durable",
+      "territoire": "Territoire"
+    },
+    "stories": "Sur le terrain",
+    "byCity": "Nos réalisations par ville",
+    "seeMap": "Voir la carte"
   }
 }
