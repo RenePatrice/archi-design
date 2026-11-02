@@ -37,6 +37,19 @@ import { SimulatorPricing } from './globals/SimulatorPricing'
 import { SiteSettings } from './globals/SiteSettings'
 import { emailFrom, getTransporter, smtpConfigured } from './lib/email/transport'
 
+/**
+ * Connexion PostgreSQL. DATABASE_URL en priorité ; POSTGRES_URL est le nom utilisé par certaines
+ * intégrations Vercel (Neon, Vercel Postgres).
+ */
+const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL || ''
+if (!databaseUrl && process.env.VERCEL) {
+  // Message explicite plutôt qu'une tentative de connexion à 127.0.0.1 incompréhensible
+  throw new Error(
+    'Base de données non configurée : ajoutez DATABASE_URL dans Vercel › Settings › Environment Variables ' +
+      '(ou reliez une base Neon dans l’onglet Storage), puis relancez le déploiement.',
+  )
+}
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -106,7 +119,7 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL || '',
+      connectionString: databaseUrl,
     },
     // En développement, le schéma est synchronisé automatiquement ;
     // en production, on applique les migrations versionnées de ce dossier.
