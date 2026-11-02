@@ -36,7 +36,7 @@ export const ContactMessages: CollectionConfig = {
         { label: { fr: 'Contacté', en: 'Contacted' }, value: 'contacte' },
         { label: { fr: 'Traité', en: 'Closed' }, value: 'traite' },
       ],
-      admin: { position: 'sidebar' },
+      admin: { position: 'sidebar', components: { Cell: '/components/admin/status-cell#StatusCell' } },
     },
     {
       type: 'row',

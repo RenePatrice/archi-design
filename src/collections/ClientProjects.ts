@@ -52,7 +52,7 @@ export const ClientProjects: CollectionConfig = {
         { value: 'pause', label: { fr: 'En pause', en: 'On hold' } },
         { value: 'livre', label: { fr: 'Livré', en: 'Delivered' } },
       ],
-      admin: { position: 'sidebar' },
+      admin: { position: 'sidebar', components: { Cell: '/components/admin/status-cell#StatusCell' } },
     },
     {
       name: 'progress',

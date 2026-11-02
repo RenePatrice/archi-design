@@ -72,8 +72,17 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    dateFormat: 'dd/MM/yyyy HH:mm',
     meta: {
       titleSuffix: ' · ARCHI-DESIGN',
+    },
+    // Habillage du back-office : logo, monogramme et tableau de bord (indicateurs, graphiques, dernières demandes)
+    components: {
+      graphics: {
+        Logo: '/components/admin/graphics#AdminLogo',
+        Icon: '/components/admin/graphics#AdminIcon',
+      },
+      beforeDashboard: ['/components/admin/dashboard/AdminDashboard#AdminDashboard'],
     },
   },
   // Langue de l'interface d'administration : français par défaut

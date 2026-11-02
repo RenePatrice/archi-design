@@ -72,7 +72,7 @@ export const Orders: CollectionConfig = {
       required: true,
       defaultValue: 'nouvelle',
       options: ORDER_STATUSES.map((value) => ({ value, label: statusLabels[value] })),
-      admin: { position: 'sidebar' },
+      admin: { position: 'sidebar', components: { Cell: '/components/admin/status-cell#StatusCell' } },
     },
     {
       name: 'service',

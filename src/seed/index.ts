@@ -561,5 +561,44 @@ if (clientEmail && clientPassword) {
   log('Espace client de démonstration ignoré : renseignez SEED_CLIENT_EMAIL et SEED_CLIENT_PASSWORD dans .env.')
 }
 
+/* ───────────── 15. Demandes de démonstration (tableau de bord) ───────────── */
+// Développement uniquement : alimente les indicateurs et graphiques du back-office
+if (!isProduction && (await payload.count({ collection: 'orders' })).totalDocs === 0) {
+  const services = ['architecture', 'architecture', 'peinture', 'serigraphie', 'serigraphie', 'boutique', 'formation', 'simulateur', 'calligraphie', 'dessin', 'prestation'] as const
+  const statuses = ['nouvelle', 'contactee', 'confirmee', 'livree', 'livree', 'annulee'] as const
+  const names = ['Mamadou Bah', 'Fatoumata Camara', 'Ibrahima Sow', 'Aïssatou Diallo', 'Ousmane Barry', 'Kadiatou Condé', 'Alpha Touré', 'Mariama Sylla']
+  const now = new Date()
+  const perYear: Record<number, number> = {}
+  // Activité croissante sur 12 mois, déterministe (pas de Math.random : même résultat à chaque seed)
+  const orders: { date: Date; i: number }[] = []
+  let i = 0
+  for (let m = 11; m >= 0; m--) {
+    const count = 3 + Math.round((11 - m) * 0.6) + (m % 3)
+    for (let k = 0; k < count; k++) {
+      const d = new Date(now.getFullYear(), now.getMonth() - m, 1 + ((k * 7 + m * 3) % 27), 9 + (k % 8))
+      if (d <= now) orders.push({ date: d, i: i++ })
+    }
+  }
+  for (const { date, i: n } of orders) {
+    const year = date.getFullYear()
+    perYear[year] = (perYear[year] ?? 0) + 1
+    const recent = now.getTime() - date.getTime() < 10 * 86_400_000
+    await payload.create({
+      collection: 'orders',
+      context: { skipNotify: true },
+      data: {
+        number: `AD-${year}-${String(perYear[year]).padStart(4, '0')}`,
+        createdAt: date.toISOString(),
+        service: services[n % services.length],
+        status: recent ? 'nouvelle' : statuses[n % statuses.length],
+        customerName: `${names[n % names.length]} (démo)`,
+        customerPhone: `+224 62${String(1000000 + n * 7919).slice(-7)}`,
+        estimatedTotal: [2_500_000, 850_000, 12_000_000, 450_000, 6_800_000][n % 5],
+      },
+    })
+  }
+  log(`${orders.length} demandes de démonstration créées.`)
+}
+
 log('Seed terminé.')
 process.exit(0)
